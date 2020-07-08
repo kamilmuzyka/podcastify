@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const StyledButton = styled.button`
+    width: ${ props => props.fluid === true ? '100%' : 'auto'};
     padding: 0.5em 2em;
     background-color: var(--accent);
     border: none;
@@ -21,11 +22,12 @@ const StyledButton = styled.button`
 `;
 
 function Button(props) {
-    return <StyledButton type={props.type ? props.type : 'button'}>{ props.children }</StyledButton>;
+    return <StyledButton type={props.type} fluid={props.fluid}>{ props.children }</StyledButton>;
 }
 
 Button.propTypes = {
-    type: PropTypes.oneOf(['button', 'submit'])
+    type: PropTypes.oneOf(['button', 'submit']),
+    fluid: PropTypes.bool
 }
 
 export default Button;
