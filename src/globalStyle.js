@@ -25,8 +25,10 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
+        background-color: var(--primary);
         font-family: 'Montserrat', sans-serif;
         font-size: 16px;
+        color: var(--light);
     }
 `;
 

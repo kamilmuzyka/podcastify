@@ -22,7 +22,7 @@ const StyledButton = styled.button`
 `;
 
 function Button(props) {
-    return <StyledButton type={props.type} fluid={props.fluid}>{ props.children }</StyledButton>;
+    return <StyledButton type={props.type} fluid={props.fluid}>{props.children}</StyledButton>;
 }
 
 Button.propTypes = {
