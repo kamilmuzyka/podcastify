@@ -1,7 +1,13 @@
 import React, { useState, useEffect, Fragment } from 'react';
+import GlobalStyle from './globalStyle';
+import Button from './components/Button/Button'
 
-const App = () => {
-  return (<div></div>);
+function App() {
+  return (
+    <Fragment>
+      <GlobalStyle/>
+    </Fragment>
+  );
 }
 
 export default App;
