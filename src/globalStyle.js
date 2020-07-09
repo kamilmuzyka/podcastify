@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
         --secondary: #131313;
         --dark: #0F0F0F;
         --light: #FFFFFF;
+        --gray: #AAAAAA;
         --accent: #4BB043;
         --attention: #5AD54F;
 
@@ -27,6 +28,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         background-color: var(--primary);
         font-family: 'Montserrat', sans-serif;
+        line-height: 125%;
         font-size: 16px;
         color: var(--light);
     }
