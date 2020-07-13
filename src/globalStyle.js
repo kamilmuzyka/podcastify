@@ -27,6 +27,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
+        position: relative;
         background-color: var(--primary);
         font-family: 'Montserrat', sans-serif;
         line-height: 125%;

@@ -5,6 +5,7 @@ import Show from './Show/Show';
 const Element = styled.article`
     display grid;
     gap: 2em;
+    flex: 1;
     padding: 2em;
 
     @media (min-width: 500px) {
@@ -25,6 +26,13 @@ const Element = styled.article`
 function ShowList(props) {
     return (
         <Element>
+            <Show title="Lorem Ipsum" description="Lorem ipsum dolor sit amet"/>
+            <Show title="Lorem Ipsum" description="Lorem ipsum dolor sit amet"/>
+            <Show title="Lorem Ipsum" description="Lorem ipsum dolor sit amet"/>
+            <Show title="Lorem Ipsum" description="Lorem ipsum dolor sit amet"/>
+            <Show title="Lorem Ipsum" description="Lorem ipsum dolor sit amet"/>
+            <Show title="Lorem Ipsum" description="Lorem ipsum dolor sit amet"/>
+            <Show title="Lorem Ipsum" description="Lorem ipsum dolor sit amet"/>
             <Show title="Lorem Ipsum" description="Lorem ipsum dolor sit amet"/>
         </Element>
     );
