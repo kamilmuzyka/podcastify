@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 const Element = styled.nav`
     display: flex;
@@ -28,18 +29,27 @@ const List = styled.ul`
     @media (min-width: 1024px) {
         padding: 1.5em 0;
     }
+
+    @media (max-height: 400px) {
+        columns: 2;
+    }
 `;
 
 const Item = styled.li`
     padding: 1.5em 0;
 `;
 
-const Link = styled.a`
+const Link = styled(NavLink)`
+    position: relative;
     display: block;
     padding: 1em 2em;
-    position: relative;
     text-decoration: none;
-    color: ${props => props.active ? 'var(--accent)' : 'inherit'};
+    color: inherit;
+    transition: color 0.2s ease-in-out;
+
+    &.active {
+        color: var(--accent);
+    }
 
     @media (min-width: 1024px) {
         width: 100%;
@@ -47,15 +57,36 @@ const Link = styled.a`
 
         &::before {
             content: '';
-            display: ${props => props.active ? 'block' : 'none'};
-            width: 3px;
-            height: 100%;
             position: absolute;
             top: 0;
             left: 0;
+            opacity: 0;
+            visibility: hidden;
+            width: 3px;
+            height: 100%;
             background-color var(--accent);
+            transition: opacity 0.2s ease-in-out,
+                        visibility 0.2s ease-in-out
+        }
+
+        &.active::before {
+            opacity: 1;
+            visibility: visible;
         }
     }
+`;
+
+const Button = styled.button`
+    display: block;
+    padding: 1em 2em;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    background-color: transparent;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
 `;
 
 function Navigation(props) {
@@ -63,16 +94,16 @@ function Navigation(props) {
         <Element>
             <List>
                 <Item>
-                    <Link href="#" active>Shows</Link>
+                    <Link to="/shows" activeClassName="active">Shows</Link>
                 </Item>
                 <Item>
-                    <Link href="#">Episodes</Link>
+                    <Link to="/episodes">Episodes</Link>
                 </Item>
                 <Item>
-                    <Link href="#">Settings</Link>
+                    <Link to="/settings">Settings</Link>
                 </Item>
                 <Item>
-                    <Link href="#">Log Out</Link>
+                    <Button type="button">Log Out</Button>
                 </Item>
             </List>
         </Element>

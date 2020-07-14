@@ -1,8 +1,9 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import GlobalStyle from './globalStyle';
+import { Route } from 'react-router-dom';
 
 import Header from './components/Header/Header';
-import ShowList from './components/ShowList/ShowList';
+import Shows from './components/Shows/Shows';
 import Navigation from './components/Navigation/Navigation';
 import Workspace from './components/Workspace/Workspace';
 
@@ -13,7 +14,7 @@ function App() {
       <Header/>
       <Workspace>
         <Navigation/>
-        <ShowList/>
+        <Route path="/shows" exact component={Shows}/>
       </Workspace>
     </Fragment>
   );

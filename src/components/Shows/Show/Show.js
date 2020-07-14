@@ -77,7 +77,7 @@ function Show(props) {
         <section>
             <Outer>
                 <Inner>
-                    <img src="https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435_960_720.jpg"/>
+                    <img src={props.image}/>
                     <Hidden>
                         <Like scale={2} />
                     </Hidden>
