@@ -10,12 +10,13 @@ const Element = styled.article`
     max-height: calc(100vh - 83px);
     overflow-y: scroll;
     ::-webkit-scrollbar {
-        background: transparent;
-        width: 5px;
+        width: 10px;
+        background: var(--secondary);
     }
 
     ::-webkit-scrollbar-thumb {
-        background: var(--accent);
+        background-color: #414141;
+        border-radius: 5px;
     }
 
     @media (min-width: 500px) {
