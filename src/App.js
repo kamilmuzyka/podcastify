@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import GlobalStyle from './globalStyle';
 import { Route } from 'react-router-dom';
 import SearchContextProvider from './context/SearchProvider';

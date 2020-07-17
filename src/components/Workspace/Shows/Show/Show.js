@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Like from '../../Like/Like';
+import Like from '../../../Like/Like';
 
 const Outer = styled.div`
     position: relative;

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { SearchContext } from '../../context/SearchProvider';
+import { SearchContext } from '../../../context/SearchProvider';
 
 function SearchResults(props) {
     const { query } = useContext(SearchContext);

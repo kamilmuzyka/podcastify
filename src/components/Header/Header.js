@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Profile from '../Profile/Profile';
-import Search from '../Search/Search';
+import Profile from './Profile/Profile';
+import Search from './Search/Search';
 
 
 const Element = styled.header`
