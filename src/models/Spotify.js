@@ -18,6 +18,10 @@ class Spotify {
         }).toString();
         window.location.href = 'https://accounts.spotify.com/authorize?' + params;
     }
+
+    static async getPodcasts(query) {
+        return 'Search Results';
+    }
 }
 
 export default Spotify;

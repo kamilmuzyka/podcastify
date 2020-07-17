@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Profile from '../Profile/Profile';
-import Button from '../Button/Button';
+import Search from '../Search/Search';
 
 
 const Element = styled.header`
@@ -33,6 +33,7 @@ function Header(props) {
     return (
         <Element>
             <Profile name="john.doe" src="https://cdn.pixabay.com/photo/2016/03/09/15/10/man-1246508_960_720.jpg"/>
+            <Search/>
         </Element>
     );
 }
