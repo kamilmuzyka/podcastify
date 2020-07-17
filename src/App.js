@@ -3,10 +3,10 @@ import GlobalStyle from './globalStyle';
 import { Route } from 'react-router-dom';
 import SearchContextProvider from './context/SearchProvider';
 import Header from './components/Header/Header';
-import Shows from './components/Shows/Shows';
+import Shows from './components/Workspace/Shows/Shows';
 import Navigation from './components/Navigation/Navigation';
 import Workspace from './components/Workspace/Workspace';
-import SearchResults from './components/SearchResults/SearchResults';
+import SearchResults from './components/Workspace/SearchResults/SearchResults';
 
 function App() {
   return (
