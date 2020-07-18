@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { withRouter } from 'react-router';
 import styled from 'styled-components';
-import { SearchContext } from '../../../context/SearchProvider';
+import { SearchContext } from '../../../contexts/SearchProvider';
 
 const Element = styled.input`
     padding: 0.5em 1em;
