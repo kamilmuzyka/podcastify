@@ -1,9 +1,9 @@
 import React from 'react';
-import Spotify from '../../models/Spotify';
+import Auth from '../../controllers/Auth';
 
 function Landing(props) {
     return (
-        <button onClick={Spotify.authorize}>Login</button>
+        <button onClick={Auth.authorize}>Login</button>
     );
 }
 

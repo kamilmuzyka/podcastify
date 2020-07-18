@@ -1,20 +1,20 @@
 import React, { Fragment, useEffect } from 'react';
 import GlobalStyle from './globalStyle';
 import { Route, withRouter } from 'react-router-dom';
+import Auth from './controllers/Auth';
+import Landing from './components/Landing/Landing';
 import SearchContextProvider from './contexts/SearchProvider';
 import Header from './components/Header/Header';
-import Shows from './components/Workspace/Shows/Shows';
 import Navigation from './components/Navigation/Navigation';
 import Workspace from './components/Workspace/Workspace';
+import Shows from './components/Workspace/Shows/Shows';
 import SearchResults from './components/Workspace/SearchResults/SearchResults';
-import Landing from './components/Landing/Landing';
-import Auth from './controllers/Auth';
 
 function App(props) {
 
   useEffect(() => {
-    Auth.init(props.history.push);
-    setInterval(() => Auth.init(props.history.push), 3600 * 1000);
+    Auth.check(props.history.push);
+    setInterval(() => Auth.check(props.history.push), 3600000);
   }, []);
 
   return (
