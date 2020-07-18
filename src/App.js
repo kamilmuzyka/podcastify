@@ -1,14 +1,13 @@
 import React, { Fragment, useEffect } from 'react';
 import GlobalStyle from './globalStyle';
-import { Route, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import Auth from './controllers/Auth';
 import Landing from './components/Landing/Landing';
 import SearchContextProvider from './contexts/SearchProvider';
 import Header from './components/Header/Header';
+import Wrapper from './components/Wrapper/Wrapper';
 import Navigation from './components/Navigation/Navigation';
 import Workspace from './components/Workspace/Workspace';
-import Shows from './components/Workspace/Shows/Shows';
-import SearchResults from './components/Workspace/SearchResults/SearchResults';
 
 function App(props) {
 
@@ -25,11 +24,10 @@ function App(props) {
         :
         <SearchContextProvider>
           <Header/>
-          <Workspace>
+          <Wrapper>
             <Navigation/>
-            <Route path="/shows" exact component={Shows}/>
-            <Route path="/search" exact component={SearchResults}/>
-          </Workspace>
+            <Workspace/>
+          </Wrapper>
         </SearchContextProvider>
         }
       </Fragment>
