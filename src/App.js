@@ -8,14 +8,13 @@ import Navigation from './components/Navigation/Navigation';
 import Workspace from './components/Workspace/Workspace';
 import SearchResults from './components/Workspace/SearchResults/SearchResults';
 import Landing from './components/Landing/Landing';
-
-import Spotify from './models/Spotify';
+import Auth from './controllers/Auth';
 
 function App(props) {
 
   useEffect(() => {
-    Spotify.init(props.history.push);
-    setInterval(() => Spotify.init(props.history.push), 3600 * 1000);
+    Auth.init(props.history.push);
+    setInterval(() => Auth.init(props.history.push), 3600 * 1000);
   }, []);
 
   return (
