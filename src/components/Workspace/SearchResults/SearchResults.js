@@ -11,7 +11,7 @@ function SearchResults(props) {
                 return;
             }
 
-            const results = await Spotify.getResults(query);
+            const results = await Spotify.getSearchResults(query);
             if(results) {
 
                 if(results.shows) {

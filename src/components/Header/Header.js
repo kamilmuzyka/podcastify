@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect }  from 'react';
 import styled from 'styled-components';
 import Profile from './Profile/Profile';
 import Search from './Search/Search';
+import Spotify from '../../models/Spotify';
+import DefaultImage from '../../assets/img/profile.jpg';
 
 
 const Element = styled.header`
@@ -30,9 +32,22 @@ const Element = styled.header`
 `;
 
 function Header(props) {
+    const [profileURL, profileUpdateURL] = useState();
+    const [profileName, profileUpdateName] = useState();
+    const [profileImage, profileUpdateImage] = useState();
+
+    useEffect(() => {
+        (async () => {
+            const profile = await Spotify.getUserProfile();
+            profileUpdateURL(profile.external_urls.spotify);
+            profileUpdateName(profile.display_name);
+            profileUpdateImage(profile.images[0] || DefaultImage);
+        })();
+    }, []);
+
     return (
         <Element>
-            <Profile name="john.doe" src="https://cdn.pixabay.com/photo/2016/03/09/15/10/man-1246508_960_720.jpg"/>
+            <Profile source={profileURL} name={profileName} image={profileImage}/>
             <Search/>
         </Element>
     );

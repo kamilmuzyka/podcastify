@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 const Container = styled.div`
     display: flex;
@@ -21,26 +20,29 @@ const Photo = styled.div`
     }
 `;
 
-const Name = styled.p`
+const Name = styled.a`
+    display: block;
     margin-left: 0.75em;
+    text-decoration: none;
+    font: inherit;
+    color: inherit;
+
+    &:hover {
+        text-decoration: underline;
+    }
 `;
 
 function Profile(props) {
     return (
         <Container>
-        <Photo>
-            <img src={props.src} alt=""/>
-        </Photo>
-        <Name>
-            {props.name}
-        </Name>
+            <Photo>
+                <img src={props.image} alt={`${props.name}'s profile photo`}/>
+            </Photo>
+            <Name href={props.source}>
+                {props.name}
+            </Name>
         </Container>
     );
-}
-
-Profile.propTypes = {
-    src: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
 }
 
 export default Profile;
