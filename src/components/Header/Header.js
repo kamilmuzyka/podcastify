@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Profile from './Profile/Profile';
 import Search from './Search/Search';
 import Spotify from '../../models/Spotify';
-import DefaultImage from '../../assets/img/profile.jpg';
+import DefaultImage from '../../assets/img/profile.png';
 
 
 const Element = styled.header`
@@ -39,6 +39,9 @@ function Header(props) {
     useEffect(() => {
         (async () => {
             const profile = await Spotify.getUserProfile();
+            if(!profile) {
+                return;
+            }
             profileUpdateURL(profile.external_urls.spotify);
             profileUpdateName(profile.display_name);
             profileUpdateImage(profile.images[0] || DefaultImage);

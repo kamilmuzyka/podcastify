@@ -1,6 +1,6 @@
 const settings = {
     clientID: 'c9587c71088b4ad78b3f54fda5ba1544',
-    redirectURI: 'http://localhost:3000/shows'
+    redirectURI: 'http://localhost:3000/'
 }
 
 class Auth {
@@ -13,7 +13,7 @@ class Auth {
         window.location.href = 'https://accounts.spotify.com/authorize?' + params;
     }
 
-    static check(redirect) {
+    static check() {
         function accessDataAvailable() {
             const access = JSON.parse(localStorage.getItem('access'));
             if (access) {
@@ -30,8 +30,7 @@ class Auth {
         }
 
         if (accessDataAvailable()) {
-            redirect('/shows');
-            return;
+            return true;
         }
 
         if (hashAvailable()) {
@@ -46,11 +45,10 @@ class Auth {
                 token,
                 expires
             }));
-            redirect('/shows');
-            return;
+            return true;
         }
 
-        redirect('/');
+        return false;
     }
 }
 

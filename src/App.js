@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import GlobalStyle from './globalStyle';
 import { withRouter } from 'react-router-dom';
 import Auth from './controllers/Auth';
@@ -10,18 +10,19 @@ import Navigation from './components/Navigation/Navigation';
 import Workspace from './components/Workspace/Workspace';
 
 function App(props) {
+  const [isAuthenticated, updateIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    Auth.check(props.history.push);
-    setInterval(() => Auth.check(props.history.push), 3600000);
-  }, []);
+    if (Auth.check()) {
+      updateIsAuthenticated(true);
+      setInterval(() => Auth.check(), 3600000);
+    }
+  }, [isAuthenticated]);
 
   return (
       <Fragment>
         <GlobalStyle/>
-        { props.history.location.pathname === '/' ?
-        <Landing/>
-        :
+        { isAuthenticated ?
         <SearchContextProvider>
           <Header/>
           <Wrapper>
@@ -29,6 +30,8 @@ function App(props) {
             <Workspace/>
           </Wrapper>
         </SearchContextProvider>
+        :
+        <Landing/>
         }
       </Fragment>
   );
