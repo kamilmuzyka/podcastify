@@ -1,31 +1,50 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { withRouter } from 'react-router';
 import styled from 'styled-components';
 import { SearchContext } from '../../../contexts/SearchProvider';
+import Button from '../../Button/Button';
 
-const Element = styled.input`
+const Form = styled.form`
+    button {
+        margin-right: calc(1em + 10px);
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+`;
+
+const Input = styled.input`
     padding: 0.5em 1em;
     min-width: 225px;
     font: inherit;
     font-size: 0.9em;
-    margin-right: calc(1em + 10px);
     border: none;
-    border-radius: 100px;
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
     outline: none;
 `;
 
 function Search(props) {
-
     const { updateQuery } = useContext(SearchContext);
+    const { updateSearching } = useContext(SearchContext);
+    const [currentQuery, updateCurrentQuery] = useState('');
 
     const handleChange = (e) => {
         const query = e.target.value;
-        updateQuery(query);
+        updateCurrentQuery(query);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        updateSearching(true);
+        updateQuery(currentQuery);
         props.history.push(`/search`);
     }
 
     return (
-        <Element type="text" placeholder="Search" onChange={handleChange}/>
+        <Form onSubmit={handleSubmit}>
+            <Input type="text" placeholder="Search" onChange={handleChange}/>
+            <Button>Search</Button>
+        </Form>
     );
 }
 

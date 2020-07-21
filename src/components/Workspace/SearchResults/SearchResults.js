@@ -1,39 +1,74 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, Fragment } from 'react';
+import { Redirect } from 'react-router-dom';
 import { SearchContext } from '../../../contexts/SearchProvider';
 import Spotify from '../../../models/Spotify';
+import SearchResult from './SearchResult/SearchResult';
 
 function SearchResults(props) {
-    const { query } = useContext(SearchContext);
+    const [shows, updateShows] = useState([]);
+    const [episodes, updateEpisodes] = useState([]);
+    const { query, updateQuery } = useContext(SearchContext);
+    const { searching, updateSearching } = useContext(SearchContext);
+
+    function prepareShows(shows) {
+        if(shows.length === 0) {
+            updateShows([]);
+            return;
+        }
+    }
+
+    function prepareEpisodes(episodes) {
+        if (episodes.length === 0) {
+            updateEpisodes([]);
+            return;
+        }
+
+        const newEpisodes = episodes.map((episode, index) => {
+            return <SearchResult
+                key={`searchEpisode-${index}`}
+                name={episode.name}
+                description={episode.description}
+                image={episode.images[1].url} />
+        });
+
+        updateEpisodes(newEpisodes);
+    }
 
     useEffect(() => {
-        (async () => {
-            if(!query) {
-                return;
-            }
-
-            const results = await Spotify.getSearchResults(query);
-            if(results) {
-
-                if(results.shows) {
-                    const shows = results.shows.items.map(show => {
-                        const name = show.name;
-                        const image = show.images[1].url;
-                        const description = show.description;
-                        // console.table([name, description, image]);
-                    });
+        if(!searching) {
+            return;
+        }
+        let mounted = true;
+        if(query) {
+            (async () => {
+                const results = await Spotify.getSearchResults(query);
+                if(mounted) {
+                    prepareShows(results.shows.items);
+                    prepareEpisodes(results.episodes.items);
                 }
+            })();
+        }
 
-                if(results.episodes) {
+        return () => {
+            mounted = false
+        };
+    }, [query]);
 
-                }
-            }
-        })();
-    });
+    useEffect(() => {
+        return () => {
+            updateSearching(false);
+            updateQuery('');
+        }
+    }, [])
 
     return (
-        <div>
-            {query}
-        </div>
+        (searching) ?
+            <Fragment>
+                {shows}
+                {episodes}
+            </Fragment>
+            :
+            <Redirect to="/shows"/>
     );
 }
 

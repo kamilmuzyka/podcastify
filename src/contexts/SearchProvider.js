@@ -4,10 +4,11 @@ export const SearchContext = createContext();
 
 function SearchContextProvider(props) {
 
-    const [query, updateQuery] = useState(null);
+    const [searching, updateSearching] = useState(false);
+    const [query, updateQuery] = useState('');
 
     return (
-        <SearchContext.Provider value={{query, updateQuery}}>
+        <SearchContext.Provider value={{searching, updateSearching, query, updateQuery}}>
             {props.children}
         </SearchContext.Provider>
     );
