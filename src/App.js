@@ -13,11 +13,11 @@ function App(props) {
   const [isAuthenticated, updateIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    if (Auth.check()) {
+    if (Auth.check() === true) {
       updateIsAuthenticated(true);
       setInterval(() => Auth.check(), 3600000);
     }
-  }, [isAuthenticated]);
+  }, []);
 
   return (
       <Fragment>

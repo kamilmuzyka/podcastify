@@ -26,12 +26,7 @@ function Like(props) {
 }
 
 Like.propTypes = {
-    // Define a size of the icon
     scale: PropTypes.number,
-
-    // Define the hover behaviour:
-    // - False (Default) - Element has not been liked yet
-    // - True - Element has been liked already
     active: PropTypes.bool
 }
 

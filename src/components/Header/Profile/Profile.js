@@ -1,9 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
+const Container = styled.a`
     display: flex;
     align-items: center;
+    text-decoration: none;
+    font: inherit;
+    color: inherit;
+
+    &:hover {
+        text-decoration: underline;
+    }
 `;
 
 const Photo = styled.div`
@@ -20,25 +27,17 @@ const Photo = styled.div`
     }
 `;
 
-const Name = styled.a`
-    display: block;
+const Name = styled.p`
     margin-left: 0.75em;
-    text-decoration: none;
-    font: inherit;
-    color: inherit;
-
-    &:hover {
-        text-decoration: underline;
-    }
 `;
 
 function Profile(props) {
     return (
-        <Container>
+        <Container href={props.source}>
             <Photo>
                 <img src={props.image} alt={`${props.name}'s profile photo`}/>
             </Photo>
-            <Name href={props.source}>
+            <Name>
                 {props.name}
             </Name>
         </Container>

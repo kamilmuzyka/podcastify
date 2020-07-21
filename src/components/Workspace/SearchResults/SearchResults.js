@@ -19,7 +19,7 @@ function SearchResults(props) {
                         const name = show.name;
                         const image = show.images[1].url;
                         const description = show.description;
-                        console.table([name, description, image]);
+                        // console.table([name, description, image]);
                     });
                 }
 

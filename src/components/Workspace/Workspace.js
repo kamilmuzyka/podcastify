@@ -1,12 +1,15 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Shows from './Shows/Shows';
 import SearchResults from './SearchResults/SearchResults';
+import Episodes from './Episodes/Episodes';
+import Settings from './Settings/Settings';
+import Page404 from './Page404/Page404';
+
 
 const Main = styled.main`
     flex: 1;
-
     padding: 2em;
     max-height: calc(100vh - 83px);
     overflow-y: scroll;
@@ -28,8 +31,13 @@ const Main = styled.main`
 function Workspace(props) {
     return (
         <Main>
-            <Route path="/shows" exact component={Shows}/>
-            <Route path="/search" exact component={SearchResults}/>
+            <Switch>
+                <Route path="/shows" component={Shows}/>
+                <Route path="/search" component={SearchResults}/>
+                <Route path="/episodes" component={Episodes}/>
+                <Route path="/settings" component={Settings}/>
+                <Route component={Page404}/>
+            </Switch>
         </Main>
     );
 }

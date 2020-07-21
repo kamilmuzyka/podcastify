@@ -3,7 +3,7 @@ import Auth from '../../controllers/Auth';
 
 function Landing(props) {
     return (
-        <button onClick={Auth.authorize}>Login</button>
+        <button onClick={Auth.logIn}>Login</button>
     );
 }
 
