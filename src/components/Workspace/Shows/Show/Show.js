@@ -74,7 +74,7 @@ const Description = styled.p`
 
 function Show(props) {
     return (
-        <section>
+        <li>
             <Outer>
                 <Inner>
                     <img src={props.image}/>
@@ -93,7 +93,7 @@ function Show(props) {
                     {props.description}
                 </Description>
             </Header>
-        </section>
+        </li>
     );
 }
 

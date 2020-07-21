@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import Show from './Show/Show';
 
-const Element = styled.article`
+const Element = styled.ul`
     display grid;
     gap: 2em;
+    list-style-type: none;
 
     @media (min-width: 500px) {
         grid-template-columns: repeat(2, 1fr);
