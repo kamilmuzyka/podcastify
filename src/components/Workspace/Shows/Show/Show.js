@@ -2,6 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import Like from '../../../Like/Like';
 
+const Item = styled.li`
+    overflow: hidden;
+`;
+
 const Outer = styled.div`
     position: relative;
     width: 100%;
@@ -74,7 +78,7 @@ const Description = styled.p`
 
 function Show(props) {
     return (
-        <li>
+        <Item>
             <Outer>
                 <Inner>
                     <img src={props.image}/>
@@ -93,7 +97,7 @@ function Show(props) {
                     {props.description}
                 </Description>
             </Header>
-        </li>
+        </Item>
     );
 }
 

@@ -24,12 +24,7 @@ const Element = styled.ul`
 function Shows(props) {
     return (
         <Element>
-            <Show title="Lorem Ipsum" description="Lorem ipsum dolor sit amet" image="https://picsum.photos/250"/>
-            <Show title="Lorem Ipsum" description="Lorem ipsum dolor sit amet" image="https://picsum.photos/251"/>
-            <Show title="Lorem Ipsum" description="Lorem ipsum dolor sit amet" image="https://picsum.photos/252"/>
-            <Show title="Lorem Ipsum" description="Lorem ipsum dolor sit amet" image="https://picsum.photos/253"/>
-            <Show title="Lorem Ipsum" description="Lorem ipsum dolor sit amet" image="https://picsum.photos/254"/>
-            <Show title="Lorem Ipsum" description="Lorem ipsum dolor sit amet" image="https://picsum.photos/255"/>
+            {props.children}
         </Element>
     );
 }

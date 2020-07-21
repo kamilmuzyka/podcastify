@@ -2,7 +2,8 @@ import React, { useState, useContext, useEffect, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import { SearchContext } from '../../../contexts/SearchProvider';
 import Spotify from '../../../models/Spotify';
-import SearchResult from './SearchResult/SearchResult';
+import ShowsList from '../Shows/Shows';
+import Show from '../Shows/Show/Show';
 
 function SearchResults(props) {
     const [shows, updateShows] = useState([]);
@@ -24,9 +25,9 @@ function SearchResults(props) {
         }
 
         const newEpisodes = episodes.map((episode, index) => {
-            return <SearchResult
+            return <Show
                 key={`searchEpisode-${index}`}
-                name={episode.name}
+                title={episode.name}
                 description={episode.description}
                 image={episode.images[1].url} />
         });
@@ -64,11 +65,12 @@ function SearchResults(props) {
     return (
         (searching) ?
             <Fragment>
-                {shows}
-                {episodes}
+                <ShowsList>
+                    {episodes}
+                </ShowsList>
             </Fragment>
             :
-            <Redirect to="/shows"/>
+            <Redirect to="/"/>
     );
 }
 
