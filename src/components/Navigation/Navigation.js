@@ -94,13 +94,13 @@ function Navigation(props) {
         <Element>
             <List>
                 <Item>
-                    <Link to="/shows" activeClassName="active">Shows</Link>
+                    <Link to="/" exact activeClassName="active">Shows</Link>
                 </Item>
                 <Item>
-                    <Link to="/episodes">Episodes</Link>
+                    <Link to="/episodes" activeClassName="active" exact >Episodes</Link>
                 </Item>
                 <Item>
-                    <Link to="/settings">Settings</Link>
+                    <Link to="/settings" activeClassName="active" exact>Settings</Link>
                 </Item>
                 <Item>
                     <Button type="button">Log Out</Button>

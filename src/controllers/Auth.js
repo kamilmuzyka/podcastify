@@ -1,6 +1,6 @@
 const settings = {
     clientID: 'c9587c71088b4ad78b3f54fda5ba1544',
-    redirectURI: 'http://localhost:3000/shows'
+    redirectURI: 'http://localhost:3000/'
 }
 
 class Auth {

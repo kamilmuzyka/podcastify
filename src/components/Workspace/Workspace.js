@@ -32,10 +32,10 @@ function Workspace(props) {
     return (
         <Main>
             <Switch>
-                <Route path="/shows" component={Shows}/>
-                <Route path="/search" component={SearchResults}/>
-                <Route path="/episodes" component={Episodes}/>
-                <Route path="/settings" component={Settings}/>
+                <Route path="/" exact component={Shows}/>
+                <Route path="/search" exact component={SearchResults}/>
+                <Route path="/episodes" exact component={Episodes}/>
+                <Route path="/settings" exact component={Settings}/>
                 <Route component={Page404}/>
             </Switch>
         </Main>

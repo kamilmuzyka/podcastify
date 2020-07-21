@@ -35,9 +35,11 @@ function Search(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        updateSearching(true);
-        updateQuery(currentQuery);
-        props.history.push(`/search`);
+        if(currentQuery.length > 0) {
+            updateSearching(true);
+            updateQuery(currentQuery);
+            props.history.push(`/search`);
+        }
     }
 
     return (
