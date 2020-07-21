@@ -9,6 +9,7 @@ const Form = styled.form`
         margin-right: calc(1em + 10px);
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
+        font-size: 0.9em;
     }
 `;
 
@@ -45,7 +46,7 @@ function Search(props) {
     return (
         <Form onSubmit={handleSubmit}>
             <Input type="text" placeholder="Search" onChange={handleChange}/>
-            <Button>Search</Button>
+            <Button type="submit">Search</Button>
         </Form>
     );
 }

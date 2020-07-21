@@ -30,7 +30,6 @@ const GlobalStyle = createGlobalStyle`
         position: relative;
         background-color: var(--primary);
         font-family: 'Montserrat', sans-serif;
-        line-height: 125%;
         font-size: 16px;
         color: var(--light);
     }
