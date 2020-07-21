@@ -30,7 +30,7 @@ const GlobalStyle = createGlobalStyle`
         position: relative;
         background-color: var(--primary);
         font-family: 'Montserrat', sans-serif;
-        font-size: 16px;
+        font-size: 15px;
         color: var(--light);
     }
 `;

@@ -13,7 +13,7 @@ function App(props) {
   const [isAuthenticated, updateIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    if (Auth.check() === true) {
+    if (Auth.check()) {
       updateIsAuthenticated(true);
       setInterval(() => Auth.check(), 3600000);
     }
