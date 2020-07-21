@@ -6,9 +6,6 @@ const Element = styled.div`
     position: absolute;
     width: 80px;
     height: 80px;
-    top: 0;
-    left: 0;
-    transform: translate(-50%, -50%);
 
     & div {
         box-sizing: border-box;
@@ -45,7 +42,7 @@ const Element = styled.div`
     }
 `;
 
-function Loading(props) {
+function LoadingIcon(props) {
     return (
         <Element className={props.className}>
             <div></div>
@@ -56,4 +53,4 @@ function Loading(props) {
     );
 }
 
-export default Loading;
+export default LoadingIcon;

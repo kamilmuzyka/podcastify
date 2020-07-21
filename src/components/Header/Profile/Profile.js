@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Loading from '../../Loading/Loading';
+import LoadingIcon from '../../LoadingIcon/LoadingIcon';
 
 const Container = styled.a`
     display: flex;
@@ -48,7 +48,7 @@ const Name = styled.p`
     margin-left: 0.75em;
 `;
 
-const StyledLoading = styled(Loading)`
+const StyledLoadingIcon = styled(LoadingIcon)`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.25);
@@ -61,7 +61,7 @@ function Profile(props) {
                 <img src={props.image} alt={`${props.name}'s profile photo`}/>
             </Photo>
             <Overlay loading={props.loading}>
-                <StyledLoading/>
+                <StyledLoadingIcon/>
             </Overlay>
             <Name>
                 {props.name}

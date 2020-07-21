@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Like from '../../../Like/Like';
+import LikeIcon from '../../../LikeIcon/LikeIcon';
 
 const Item = styled.li`
     overflow: hidden;
@@ -83,7 +83,7 @@ function Show(props) {
                 <Inner>
                     <img src={props.image}/>
                     <Hidden>
-                        <Like scale={2} />
+                        <LikeIcon scale={2} />
                     </Hidden>
                 </Inner>
             </Outer>
