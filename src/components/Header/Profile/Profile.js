@@ -38,8 +38,8 @@ const Overlay = styled.div`
     transform: translate(-1px, -1px);
     background-color: var(--primary);
     border-radius: 50%;
-    opacity: ${props => props.loading ? 1 : 0};
-    visibility: ${props => props.loading ? 'visible' : 'none'};
+    opacity: ${props => props.loading === "true" ? 1 : 0};
+    visibility: ${props => props.loading === "false" ? 'visible' : 'none'};
     transition: opacity 0.1s ease-in-out,
                 visibility 0.1s ease-in-out
 `;

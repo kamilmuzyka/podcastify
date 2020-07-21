@@ -5,7 +5,6 @@ import Search from './Search/Search';
 import Spotify from '../../models/Spotify';
 import DefaultImage from '../../assets/img/profile.png';
 
-
 const Element = styled.header`
     display: flex;
     flex-direction: column;
@@ -56,7 +55,7 @@ function Header(props) {
                 source={profileURL}
                 name={profileName}
                 image={profileImage}
-                loading={imageLoading}/>
+                loading={imageLoading.toString()}/>
             <Search/>
         </Element>
     );
