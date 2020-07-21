@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import Loading from '../../Loading/Loading';
 
 const Container = styled.a`
     display: flex;
     align-items: center;
+    position: relative;
     text-decoration: none;
     font: inherit;
     color: inherit;
@@ -27,8 +29,29 @@ const Photo = styled.div`
     }
 `;
 
+const Overlay = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 37px;
+    height: 37px;
+    transform: translate(-1px, -1px);
+    background-color: var(--primary);
+    border-radius: 50%;
+    opacity: ${props => props.loading ? 1 : 0};
+    visibility: ${props => props.loading ? 'visible' : 'none'};
+    transition: opacity 0.1s ease-in-out,
+                visibility 0.1s ease-in-out
+`;
+
 const Name = styled.p`
     margin-left: 0.75em;
+`;
+
+const StyledLoading = styled(Loading)`
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.25);
 `;
 
 function Profile(props) {
@@ -37,6 +60,9 @@ function Profile(props) {
             <Photo>
                 <img src={props.image} alt={`${props.name}'s profile photo`}/>
             </Photo>
+            <Overlay loading={props.loading}>
+                <StyledLoading/>
+            </Overlay>
             <Name>
                 {props.name}
             </Name>

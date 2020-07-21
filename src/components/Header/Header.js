@@ -35,6 +35,7 @@ function Header(props) {
     const [profileURL, profileUpdateURL] = useState();
     const [profileName, profileUpdateName] = useState();
     const [profileImage, profileUpdateImage] = useState();
+    const [imageLoading, updateImageLoading] = useState(true);
 
     useEffect(() => {
         (async () => {
@@ -45,12 +46,17 @@ function Header(props) {
             profileUpdateURL(profile.external_urls.spotify);
             profileUpdateName(profile.display_name);
             profileUpdateImage(profile.images[0] || DefaultImage);
+            updateImageLoading(false);
         })();
     }, []);
 
     return (
         <Element>
-            <Profile source={profileURL} name={profileName} image={profileImage}/>
+            <Profile
+                source={profileURL}
+                name={profileName}
+                image={profileImage}
+                loading={imageLoading}/>
             <Search/>
         </Element>
     );
