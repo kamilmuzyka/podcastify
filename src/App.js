@@ -16,13 +16,13 @@ function App(props) {
   useEffect(() => {
     if (Auth.check()) {
       updateIsAuthenticated(true);
-      updateApplicationLoading(false);
     }
+    updateApplicationLoading(false);
   }, []);
 
   return (
       <Fragment>
-        {/* <LoadingScreen loading={applicationLoading.toString()}/> */}
+        <LoadingScreen loading={applicationLoading.toString()}/>
         { isAuthenticated ?
         <SearchContextProvider>
           <Header/>
