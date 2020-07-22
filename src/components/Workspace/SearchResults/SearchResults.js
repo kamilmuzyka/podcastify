@@ -26,7 +26,7 @@ function SearchResults(props) {
 
         const newEpisodes = episodes.map((episode, index) => {
             return <Show
-                key={`searchEpisode-${index}`}
+                key={episode.id}
                 title={episode.name}
                 description={episode.description}
                 image={episode.images[1].url} />
@@ -43,6 +43,7 @@ function SearchResults(props) {
         if(query) {
             (async () => {
                 const results = await Spotify.getSearchResults(query);
+                console.log(results);
                 if(mounted) {
                     prepareShows(results.shows.items);
                     prepareEpisodes(results.episodes.items);

@@ -13,6 +13,7 @@ const Main = styled.main`
     padding: 2em;
     max-height: calc(100vh - 80px);
     overflow-y: scroll;
+
     ::-webkit-scrollbar {
         width: 10px;
         background: transparent;
