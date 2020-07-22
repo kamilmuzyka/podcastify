@@ -45,6 +45,7 @@ const Hidden = styled.div`
 
 const Header = styled.header`
     padding-top: 1em;
+    word-wrap: break-word;
 `;
 
 const Lead = styled.h2`

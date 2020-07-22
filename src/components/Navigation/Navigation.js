@@ -11,12 +11,13 @@ const Element = styled.nav`
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 9998;
     background-color: var(--dark);
 
     @media (min-width: 1024px) {
         display: inline-block;
         position: static;
+        z-index: 9997;
         width: auto;
         height: calc(100vh - 83px);
         background-color: var(--secondary);
@@ -103,6 +104,7 @@ function Navigation(props) {
                     <Link to="/settings" activeClassName="active" exact>Settings</Link>
                 </Item>
                 <Item>
+                    {/* Trigger a Modal with Logout Component as a content */}
                     <Button type="button">Log Out</Button>
                 </Item>
             </List>

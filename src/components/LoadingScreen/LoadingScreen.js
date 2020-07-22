@@ -29,8 +29,8 @@ const Wrapper = styled.div`
 `;
 
 const StyledLoadingIcon = styled(LoadingIcon)`
-left: 50%;
-transform: translateX(-50%);
+    left: 50%;
+    transform: translateX(-50%);
     bottom: 0;
 `;
 
