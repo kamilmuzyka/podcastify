@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { ModalContext } from '../../contexts/ModalContextProvider';
 
 const StyledModal = styled.div`
     position: absolute;
@@ -9,6 +10,10 @@ const StyledModal = styled.div`
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    opacity: ${(props) => props.active === 'true' ? '1' : '0'};
+    visibility: ${(props) => props.active === 'true' ? 'visible' : 'hidden'};
+    transition: opacity 0.2s ease-in-out,
+                visibility 0.2s ease-in-out;
 `;
 
 const Content = styled.div`
@@ -41,11 +46,13 @@ const Close = styled.button`
 `;
 
 const Modal = (props) => {
+    const {modalActive, updateModalActive, modalContent} = useContext(ModalContext);
+
     return (
-        <StyledModal>
+        <StyledModal active={modalActive.toString()}>
             <Content>
-                {props.children}
-                <Close>
+                {modalContent}
+                <Close onClick={() => updateModalActive(false)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 29.657 29.657">
                     <g id="X" transform="translate(2.828 2.828)">
                     <line id="Line_3" data-name="Line 3" x1="24" y2="24" strokeWidth="4" stroke="#FFFFFF" strokeLinecap="round" strokeLinejoin="round" fill="none"/>

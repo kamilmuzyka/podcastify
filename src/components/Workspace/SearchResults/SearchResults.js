@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
-import { SearchContext } from '../../../contexts/SearchProvider';
+import { SearchContext } from '../../../contexts/SearchContextProvider';
 import Spotify from '../../../models/Spotify';
 import ShowsList from '../Shows/Shows';
 import Show from '../Shows/Show/Show';
