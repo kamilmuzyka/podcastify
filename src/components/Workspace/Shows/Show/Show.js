@@ -2,10 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import LikeIcon from '../../../LikeIcon/LikeIcon';
 
-const Item = styled.li`
-    overflow: hidden;
-`;
-
 const Outer = styled.div`
     position: relative;
     width: 100%;
@@ -69,16 +65,18 @@ const Link = styled.a`
 const Description = styled.p`
     display: inline-box;
     margin-top: 0.5em;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3; /* Number of lines */
-    overflow: hidden;
     font-size: 0.9em;
     color: var(--gray);
 `;
 
 function Show(props) {
     return (
-        <Item>
+        <li>
             <Outer>
                 <Inner>
                     <img src={props.image}/>
@@ -97,7 +95,7 @@ function Show(props) {
                     {props.description}
                 </Description>
             </Header>
-        </Item>
+        </li>
     );
 }
 

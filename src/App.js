@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import GlobalStyle from './globalStyle';
 import { withRouter } from 'react-router-dom';
 import Auth from './controllers/Auth';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
@@ -18,13 +17,11 @@ function App(props) {
     if (Auth.check()) {
       updateIsAuthenticated(true);
       updateApplicationLoading(false);
-      // setInterval(() => Auth.check(), 3600000);
     }
   }, []);
 
   return (
       <Fragment>
-        <GlobalStyle/>
         {/* <LoadingScreen loading={applicationLoading.toString()}/> */}
         { isAuthenticated ?
         <SearchContextProvider>
@@ -36,7 +33,7 @@ function App(props) {
         </SearchContextProvider>
         :
         <Landing/>
-        }
+      }
       </Fragment>
   );
 }
