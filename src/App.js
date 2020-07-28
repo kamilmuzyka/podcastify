@@ -8,8 +8,6 @@ import Header from './components/Header/Header';
 import Wrapper from './components/Wrapper/Wrapper';
 import Navigation from './components/Navigation/Navigation';
 import Workspace from './components/Workspace/Workspace';
-import ModalContextProvider from './contexts/ModalContextProvider';
-import Modal from './components/Modal/Modal';
 
 function App(props) {
   const [isAuthenticated, updateIsAuthenticated] = useState(false);
@@ -32,9 +30,6 @@ function App(props) {
             <Navigation/>
             <Workspace/>
           </Wrapper>
-          <ModalContextProvider>
-            <Modal/>
-          </ModalContextProvider>
         </SearchContextProvider>
         :
         <Landing/>

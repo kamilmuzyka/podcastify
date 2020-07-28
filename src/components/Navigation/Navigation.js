@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import Auth from '../../controllers/Auth';
 
 const Element = styled.nav`
     display: flex;
@@ -104,7 +105,6 @@ function Navigation(props) {
                     <Link to="/settings" activeClassName="active" exact>Settings</Link>
                 </Item>
                 <Item>
-                    {/* Trigger a Modal with Logout Component as a content */}
                     <Button type="button">Log Out</Button>
                 </Item>
             </List>
