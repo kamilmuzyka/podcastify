@@ -13,6 +13,11 @@ class Auth {
         window.location.href = 'https://accounts.spotify.com/authorize?' + params;
     }
 
+    static logOut() {
+        localStorage.removeItem('access');
+        window.location.href = '/';
+    }
+
     static check() {
         function accessDataAvailable() {
             const access = JSON.parse(localStorage.getItem('access'));
