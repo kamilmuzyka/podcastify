@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import Auth from '../../controllers/Auth';
+import { ModalContext } from '../../contexts/ModalContextProvider';
 
 const Element = styled.nav`
     display: flex;
@@ -92,6 +92,9 @@ const Button = styled.button`
 `;
 
 function Navigation(props) {
+
+    const { openModal } = useContext(ModalContext);
+
     return (
         <Element>
             <List>
@@ -105,7 +108,7 @@ function Navigation(props) {
                     <Link to="/settings" activeClassName="active" exact>Settings</Link>
                 </Item>
                 <Item>
-                    <Button type="button">Log Out</Button>
+                    <Button type="button" onClick={() => openModal(null)}>Log Out</Button>
                 </Item>
             </List>
         </Element>
