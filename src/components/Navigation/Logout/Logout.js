@@ -1,12 +1,31 @@
-import React, { useContext } from 'react';
+import React, { Fragment } from 'react';
+import Button from '../../Button/Button';
+import styled from 'styled-components';
+
+const Element = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+const Paragraph = styled.p`
+    margin-bottom: 1em;
+`;
+
+const ButtonConfirm = styled(Button)`
+    margin-right: 0.5em;
+`;
 
 const Logout = (props) => {
     return (
-        <div>
-            <p>Are you sure you want to log out?</p>
-            <button onClick={() => console.log('Logging out')}>Yes</button>
-            <button onClick={props.closeModal}>No</button>
-        </div>
+        <Element>
+            <Paragraph>Are you sure you want to log out?</Paragraph>
+            <div>
+                <ButtonConfirm type="button" outline onClick={() => console.log('Logging out')}>Yes</ButtonConfirm>
+                <Button type="button" onClick={props.closeModal}>No</Button>
+            </div>
+        </Element>
     );
 }
 

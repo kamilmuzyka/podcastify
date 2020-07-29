@@ -18,9 +18,9 @@ const Backdrop = styled.div`
 
 const Content = styled.div`
     position: absolute;
-    padding: 3em;
     top: 50%;
     left: 50%;
+    padding: 2em;
     transform: translate(-50%, -50%);
     background-color: var(--primary);
     border-radius: 1em;
@@ -39,7 +39,6 @@ const Modal = (props) => {
             <Backdrop active={modalActive} onClick={closeModal}/>
             <Content active={modalActive}>
                 { modalContent }
-                <button onClick={closeModal}>Close</button>
             </Content>
         </Fragment>
     );
