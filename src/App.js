@@ -33,7 +33,7 @@ function App(props) {
               <Navigation/>
               <Workspace/>
             </Wrapper>
-            <Modal/>
+            <Modal/> 
           </ModalContextProvider>
         </SearchContextProvider>
         :
