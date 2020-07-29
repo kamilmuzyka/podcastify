@@ -12,7 +12,7 @@ const ModalContextProvider = (props) => {
     }
 
     const closeModal = () => {
-        updateModalContent(null);
+        setTimeout(() => updateModalContent(null), 200);
         updateModalActive(false);
     }
 

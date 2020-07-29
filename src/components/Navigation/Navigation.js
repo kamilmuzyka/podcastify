@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { ModalContext } from '../../contexts/ModalContextProvider';
+import Logout from './Logout/Logout';
 
 const Element = styled.nav`
     display: flex;
@@ -93,7 +94,7 @@ const Button = styled.button`
 
 function Navigation(props) {
 
-    const { openModal } = useContext(ModalContext);
+    const { openModal, closeModal } = useContext(ModalContext);
 
     return (
         <Element>
@@ -108,7 +109,11 @@ function Navigation(props) {
                     <Link to="/settings" activeClassName="active" exact>Settings</Link>
                 </Item>
                 <Item>
-                    <Button type="button" onClick={() => openModal(null)}>Log Out</Button>
+                    <Button
+                        type="button"
+                        onClick={() => openModal(<Logout closeModal={closeModal}/>)}>
+                        Log Out
+                        </Button>
                 </Item>
             </List>
         </Element>
