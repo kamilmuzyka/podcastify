@@ -25,6 +25,8 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
+        width: 100%;
+        min-height: 100vh;
         position: relative;
         background-color: var(--primary);
         font-family: 'Montserrat', sans-serif;

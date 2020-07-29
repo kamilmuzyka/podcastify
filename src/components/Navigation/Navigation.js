@@ -13,13 +13,12 @@ const Element = styled.nav`
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 9998;
+    z-index: 800;
     background-color: var(--dark);
 
     @media (min-width: 1024px) {
         display: inline-block;
         position: static;
-        z-index: 9997;
         width: auto;
         height: calc(100vh - 83px);
         background-color: var(--secondary);

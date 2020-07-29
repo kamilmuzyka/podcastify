@@ -9,7 +9,7 @@ const Backdrop = styled.div`
     width: 100%;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.75);
-    z-index: 9998;
+    z-index: 900;
     opacity: ${props => props.active ? '1' : '0'};
     visibility: ${props => props.active ? 'visible' : 'hidden'};
     transition: opacity 0.2s ease-in-out,
@@ -18,17 +18,24 @@ const Backdrop = styled.div`
 
 const Content = styled.div`
     position: absolute;
+    display: inline-block;
+    text-align: center;
+    width: 90%;
     top: 50%;
     left: 50%;
     padding: 2em;
     transform: translate(-50%, -50%);
     background-color: var(--primary);
     border-radius: 1em;
-    z-index: 9999;
+    z-index: 1000;
     opacity: ${props => props.active ? '1' : '0'};
     visibility: ${props => props.active ? 'visible' : 'hidden'};
     transition: opacity 0.2s ease-in-out,
                 visibility 0.2s ease-in-out;
+
+    @media (min-width: 500px) {
+        width: auto;
+    }
 `;
 
 const Modal = (props) => {
