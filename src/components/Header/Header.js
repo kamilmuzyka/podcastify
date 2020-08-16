@@ -44,7 +44,7 @@ function Header(props) {
             }
             profileUpdateURL(profile.external_urls.spotify);
             profileUpdateName(profile.display_name);
-            profileUpdateImage(profile.images[0] || DefaultImage);
+            profileUpdateImage(profile.images[0].url || DefaultImage);
             updateImageLoading(false);
         })();
     }, []);

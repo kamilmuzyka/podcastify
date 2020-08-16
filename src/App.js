@@ -25,7 +25,7 @@ function App(props) {
   return (
       <Fragment>
         <LoadingScreen loading={applicationLoading.toString()}/>
-        { isAuthenticated ?
+        { isAuthenticated ? (
         <SearchContextProvider>
           <ModalContextProvider>
             <Header/>
@@ -33,11 +33,11 @@ function App(props) {
               <Navigation/>
               <Workspace/>
             </Wrapper>
-            <Modal/> 
+            <Modal/>
           </ModalContextProvider>
         </SearchContextProvider>
-        :
-        <Landing/>
+        ) : (
+        <Landing/> )
       }
       </Fragment>
   );
