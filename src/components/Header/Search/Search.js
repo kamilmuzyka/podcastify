@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { withRouter } from 'react-router';
 import styled from 'styled-components';
 import { SearchContext } from '../../../contexts/SearchContextProvider';
-import Button from '../../Button/Button';
+import Button from '../../../UI/Button/Button';
 
 const Form = styled.form`
     button {

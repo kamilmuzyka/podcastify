@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import LoadingIcon from '../../LoadingIcon/LoadingIcon';
+import LoadingIcon from '../../../UI/LoadingIcon/LoadingIcon';
 
 const Container = styled.a`
     display: flex;
