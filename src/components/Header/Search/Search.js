@@ -19,8 +19,7 @@ const StyledButton = styled(Button)`
 `;
 
 const Input = styled.input`
-    flex: 1;
-    padding: 0.5em 1em;
+    padding: 0.5em 0 0.5em 1em;
     font: inherit;
     font-size: 0.9em;
     border: none;

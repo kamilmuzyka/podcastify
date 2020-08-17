@@ -10,7 +10,7 @@ const Element = styled.button`
     cursor: pointer;
 `;
 
-const Close = (props) => {
+const CloseIcon = (props) => {
     return (
         <Element {...props}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 29.657 29.657">
@@ -23,4 +23,4 @@ const Close = (props) => {
     );
 }
 
-export default Close;
+export default CloseIcon;
