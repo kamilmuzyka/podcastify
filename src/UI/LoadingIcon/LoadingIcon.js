@@ -14,10 +14,10 @@ const Element = styled.div`
         width: 64px;
         height: 64px;
         margin: 8px;
-        border: 8px solid var(--accent);
+        border: 8px solid ${({ theme }) => theme.colors.accent};
         border-radius: 50%;
         animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        border-color: var(--accent) transparent transparent transparent;
+        border-color: ${({ theme }) => theme.colors.accent} transparent transparent transparent;
     }
 
     & div:nth-child(1) {

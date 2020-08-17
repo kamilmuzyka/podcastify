@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const Element = styled.span`
     svg {
-        transform: scale(${props => props.scale ? props.scale : 1});
+        transform: scale(${({ scale }) => scale ? scale : 1});
         transition: fill .2s ease-in-out;
     }
 
@@ -12,7 +12,7 @@ const Element = styled.span`
         cursor: pointer;
 
         svg {
-            fill: ${props => props.active ? '#AAAAAA' : 'var(--accent)'};
+            fill: ${({ active, theme }) => active ? '#AAAAAA' : theme.colors.accent};
         }
     }
 `;

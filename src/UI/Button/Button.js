@@ -3,15 +3,15 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const Element = styled.button`
-    width: ${props => props.fluid === true ? '100%' : 'auto'};
+    width: ${({ fluid }) => fluid === true ? '100%' : 'auto'};
     padding: 0.5em 2em;
     box-sizing: border-box;
-    background-color: ${props => props.outline ? 'transparent' : 'var(--accent)'};
-    border: ${props => props.outline ? '2px solid var(--accent)' : 'none'};
+    background-color: ${({ outline }) => outline ? 'transparent' : 'var(--accent)'};
+    border: ${({ outline }) => outline ? '2px solid var(--accent)' : 'none'};
     border-radius: 100px;
     outline: none;
     font-family: inherit;
-    font-size: var(--small);
+    font-size: ${({ theme }) => theme.typography.small};
     letter-spacing: 1px;
     color: var(--light);
     transition: background-color 0.1s ease-in-out,
@@ -19,8 +19,8 @@ const Element = styled.button`
     cursor: pointer;
 
     &:hover {
-        background-color: ${props => props.outline ? 'auto' : 'var(--attention)'};
-        border-color: ${props => props.outline ? 'var(--attention)' : 'auto'};
+        background-color: ${({ outline }) => outline ? 'auto' : 'var(--attention)'};
+        border-color: ${({ outline }) => outline ? 'var(--attention)' : 'auto'};
     }
 `;
 
