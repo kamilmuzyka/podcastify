@@ -72,7 +72,8 @@ const Description = styled.p`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3; /* Number of lines */
     font-size: 0.9em;
-    color: var(--gray);
+    line-height: 125%;
+    color: ${({ theme }) => theme.colors.specific};
 `;
 
 function Show(props) {
@@ -80,7 +81,7 @@ function Show(props) {
         <li>
             <Outer>
                 <Inner>
-                    <img src={props.image}/>
+                    <img src={props.image} alt={props.title}/>
                     <Hidden>
                         <LikeIcon scale={2} />
                     </Hidden>

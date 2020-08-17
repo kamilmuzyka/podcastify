@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Button from '../../../UI/Button/Button';
 import styled from 'styled-components';
 import Auth from '../../../controllers/Auth';

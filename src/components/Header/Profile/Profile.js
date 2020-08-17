@@ -58,7 +58,7 @@ function Profile(props) {
     return (
         <Container href={props.source}>
             <Photo>
-                <img src={props.image} alt={`${props.name}'s profile photo`}/>
+                <img src={props.image} alt={`${props.name}'s profile`}/>
             </Photo>
             <Overlay loading={props.loading}>
                 <StyledLoadingIcon/>

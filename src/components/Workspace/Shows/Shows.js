@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Show from './Show/Show';
 
 const Element = styled.ul`
     display grid;
