@@ -8,13 +8,13 @@ const Element = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    background-color: black;
+    background-color: ${({ theme }) => theme.colors.tertiary};
     z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: ${props => props.loading === 'true' ? '1' : '0'};
-    visibility: ${props => props.loading === 'true' ? 'visible' : 'hidden'};
+    opacity: ${({ loading }) => loading === 'true' ? '1' : '0'};
+    visibility: ${({ loading }) => loading === 'true' ? 'visible' : 'hidden'};
     transition: opacity 1s ease-in-out,
                 visibility 1s ease-in-out;
 `;

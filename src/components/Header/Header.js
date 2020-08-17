@@ -10,7 +10,7 @@ const Element = styled.header`
     flex-direction: column;
     width: 100%;
     padding: 1.5em 2em;
-    background-color: var(--dark);
+    background-color: ${({ theme }) => theme.colors.tertiary};
 
     & > * {
         margin-top: 2em;

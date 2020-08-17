@@ -10,8 +10,8 @@ const Backdrop = styled.div`
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.75);
     z-index: 900;
-    opacity: ${props => props.active ? '1' : '0'};
-    visibility: ${props => props.active ? 'visible' : 'hidden'};
+    opacity: ${({ active }) => active ? '1' : '0'};
+    visibility: ${({ active }) => active ? 'visible' : 'hidden'};
     transition: opacity 0.2s ease-in-out,
                 visibility 0.2s ease-in-out;
 `;
@@ -25,11 +25,11 @@ const Content = styled.div`
     left: 50%;
     padding: 2em;
     transform: translate(-50%, -50%);
-    background-color: var(--primary);
+    background-color: ${({ theme }) => theme.colors.primary};
     border-radius: 1em;
     z-index: 1000;
-    opacity: ${props => props.active ? '1' : '0'};
-    visibility: ${props => props.active ? 'visible' : 'hidden'};
+    opacity: ${({ active }) => active ? '1' : '0'};
+    visibility: ${({ active }) => active ? 'visible' : 'hidden'};
     transition: opacity 0.2s ease-in-out,
                 visibility 0.2s ease-in-out;
 

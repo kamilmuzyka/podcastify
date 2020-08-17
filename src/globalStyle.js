@@ -10,10 +10,6 @@ const GlobalStyle = createGlobalStyle`
         --gray: #AAAAAA;
         --accent: #4BB043;
         --attention: #5AD54F;
-
-        // Fonts
-        --default: 16px;
-        --small: 14px;
     }
 
     *,

@@ -14,14 +14,14 @@ const Element = styled.nav`
     top: 0;
     left: 0;
     z-index: 800;
-    background-color: var(--dark);
+    background-color: ${({ theme }) => theme.colors.tertiary};
 
     @media (min-width: 1024px) {
         display: inline-block;
         position: static;
         width: auto;
         height: calc(100vh - 83px);
-        background-color: var(--secondary);
+        background-color: ${({ theme }) => theme.colors.secondary};
     }
 `;
 
@@ -50,7 +50,7 @@ const Link = styled(NavLink)`
     transition: color 0.2s ease-in-out;
 
     &.active {
-        color: var(--accent);
+        color: ${({ theme }) => theme.colors.accent};
     }
 
     @media (min-width: 1024px) {
@@ -66,7 +66,7 @@ const Link = styled(NavLink)`
             visibility: hidden;
             width: 3px;
             height: 100%;
-            background-color var(--accent);
+            background-color ${({ theme }) => theme.colors.accent};
             transition: opacity 0.2s ease-in-out,
                         visibility 0.2s ease-in-out
         }
