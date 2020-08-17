@@ -5,6 +5,7 @@ import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import Landing from './components/Landing/Landing';
 import SearchContextProvider from './contexts/SearchContextProvider';
 import ModalContextProvider from './contexts/ModalContextProvider';
+import ThemeContextProvider from './contexts/ThemeContextProvider';
 import Header from './components/Header/Header';
 import Wrapper from './components/Wrapper/Wrapper';
 import Navigation from './components/Navigation/Navigation';
@@ -28,12 +29,14 @@ function App(props) {
         { isAuthenticated ? (
         <SearchContextProvider>
           <ModalContextProvider>
-            <Header/>
-            <Wrapper>
-              <Navigation/>
-              <Workspace/>
-            </Wrapper>
-            <Modal/>
+            <ThemeContextProvider>
+              <Header/>
+              <Wrapper>
+                <Navigation/>
+                <Workspace/>
+              </Wrapper>
+              <Modal/>
+            </ThemeContextProvider>
           </ModalContextProvider>
         </SearchContextProvider>
         ) : (
