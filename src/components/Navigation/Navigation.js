@@ -12,7 +12,8 @@ const Element = styled.nav`
     height: 100vh;
     position: fixed;
     top: 0;
-    left: 0;
+    // left: 0;
+    left: 100%;
     z-index: 800;
     background-color: ${({ theme }) => theme.colors.tertiary};
 

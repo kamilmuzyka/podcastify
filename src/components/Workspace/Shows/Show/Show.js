@@ -2,6 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import LikeIcon from '../../../../UI/LikeIcon/LikeIcon';
 
+const Item = styled.li`
+    margin-bottom: 2em;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    @media (min-width: 500px) {
+        margin-bottom: 0;
+    }
+`;
+
 const Outer = styled.div`
     position: relative;
     width: 100%;
@@ -78,7 +90,7 @@ const Description = styled.p`
 
 function Show(props) {
     return (
-        <li>
+        <Item>
             <Outer>
                 <Inner>
                     <img src={props.image} alt={props.title}/>
@@ -97,7 +109,7 @@ function Show(props) {
                     {props.description}
                 </Description>
             </Header>
-        </li>
+        </Item>
     );
 }
 
