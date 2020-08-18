@@ -5,6 +5,7 @@ import LoadingIcon from '../../../UI/LoadingIcon/LoadingIcon';
 const Container = styled.a`
     display: flex;
     align-items: center;
+    align-self: flex-start;
     position: relative;
     text-decoration: none;
     font: inherit;

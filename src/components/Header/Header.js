@@ -2,10 +2,12 @@ import React, { useState, useEffect }  from 'react';
 import styled from 'styled-components';
 import Profile from './Profile/Profile';
 import Search from './Search/Search';
+import MenuButton from '../../UI/MenuButton/MenuButton';
 import Spotify from '../../models/Spotify';
 import DefaultImage from '../../assets/img/profile.png';
 
 const Element = styled.header`
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -27,6 +29,23 @@ const Element = styled.header`
         & > * {
             margin-top: 0;
         }
+    }
+`;
+
+const StyledSearch = styled(Search)`
+    @media (min-width: 500px) {
+        margin-right: 4em;
+    }
+`;
+
+const StyledMenuButton = styled(MenuButton)`
+    position: absolute;
+    top: 0;
+    right: 2em;
+
+    @media (min-width: 500px) {
+        top: 50%;
+        transform: translateY(-50%);
     }
 `;
 
@@ -56,7 +75,8 @@ function Header(props) {
                 name={profileName}
                 image={profileImage}
                 loading={imageLoading.toString()}/>
-            <Search/>
+            <StyledSearch/>
+            <StyledMenuButton/>
         </Element>
     );
 }

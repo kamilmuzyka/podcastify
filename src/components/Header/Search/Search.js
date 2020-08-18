@@ -19,6 +19,7 @@ const StyledButton = styled(Button)`
 `;
 
 const Input = styled.input`
+    flex: 1;
     padding: 0.5em 0 0.5em 1em;
     font: inherit;
     font-size: 0.9em;
@@ -52,7 +53,7 @@ function Search(props) {
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} {...props}>
             <Input type="text" placeholder="Search" onChange={handleChange}/>
             <StyledButton type="submit">Search</StyledButton>
         </Form>
