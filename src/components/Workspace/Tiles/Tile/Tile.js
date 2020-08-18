@@ -52,7 +52,6 @@ const Hidden = styled.div`
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
-    cursor: pointer;
 `;
 
 const Header = styled.header`
@@ -88,7 +87,7 @@ const Description = styled.p`
     color: ${({ theme }) => theme.colors.specific};
 `;
 
-function Show(props) {
+function Tile(props) {
     return (
         <Item>
             <Outer>
@@ -113,4 +112,4 @@ function Show(props) {
     );
 }
 
-export default Show;
+export default Tile;

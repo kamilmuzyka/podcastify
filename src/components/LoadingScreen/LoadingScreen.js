@@ -8,7 +8,7 @@ const Element = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    background-color: ${({ theme }) => theme.colors.tertiary};
+    background-color: ${({ theme }) => theme.colors.negative};
     z-index: 9999;
     display: flex;
     align-items: center;

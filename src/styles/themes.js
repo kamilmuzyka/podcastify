@@ -10,6 +10,7 @@ const darkTheme = {
         secondary: '#131313',
         tertiary: '#0F0F0F',
         positive: '#FFFFFF',
+        negative: '#000000',
         specific: '#AAAAAA',
         attention: '#5AD54F',
         accent: '#4BB043'

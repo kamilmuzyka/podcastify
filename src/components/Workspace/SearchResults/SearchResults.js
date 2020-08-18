@@ -2,8 +2,8 @@ import React, { useState, useContext, useEffect, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import { SearchContext } from '../../../contexts/SearchContextProvider';
 import Spotify from '../../../models/Spotify';
-import ShowsList from '../Shows/Shows';
-import Show from '../Shows/Show/Show';
+import Tiles from '../Tiles/Tiles';
+import Tile from '../Tiles/Tile/Tile';
 
 function SearchResults(props) {
     const [shows, updateShows] = useState([]);
@@ -16,6 +16,16 @@ function SearchResults(props) {
             updateShows([]);
             return;
         }
+
+        const updatedShows = shows.map(show => {
+            return <Tile
+                key={show.id}
+                title={show.name}
+                description={show.description}
+                image={show.images[1].url} />
+        });
+
+        updateShows(updatedShows);
     }
 
     function prepareEpisodes(episodes) {
@@ -24,15 +34,15 @@ function SearchResults(props) {
             return;
         }
 
-        const newEpisodes = episodes.map((episode, index) => {
-            return <Show
+        const updatedEpisodes = episodes.map(episode => {
+            return <Tile
                 key={episode.id}
                 title={episode.name}
                 description={episode.description}
                 image={episode.images[1].url} />
         });
 
-        updateEpisodes(newEpisodes);
+        updateEpisodes(updatedEpisodes);
     }
 
     useEffect(() => {
@@ -43,7 +53,6 @@ function SearchResults(props) {
         if(query) {
             (async () => {
                 const results = await Spotify.getSearchResults(query);
-                console.log(results);
                 if(mounted) {
                     prepareShows(results.shows.items);
                     prepareEpisodes(results.episodes.items);
@@ -65,13 +74,16 @@ function SearchResults(props) {
 
     return (
         (searching) ?
-            <Fragment>
-                <ShowsList>
-                    {episodes}
-                </ShowsList>
-            </Fragment>
-            :
-            <Redirect to="/"/>
+        <Fragment>
+            <Tiles title="Shows">
+                {shows}
+            </Tiles>
+            <Tiles title="Episodes">
+                {episodes}
+            </Tiles>
+        </Fragment>
+        :
+        <Redirect to="/"/>
     );
 }
 

@@ -2,9 +2,10 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Shows from './Shows/Shows';
-import SearchResults from './SearchResults/SearchResults';
 import Episodes from './Episodes/Episodes';
+import Details from './Details/Details';
 import Settings from './Settings/Settings';
+import SearchResults from './SearchResults/SearchResults';
 import Page404 from './Page404/Page404';
 
 
@@ -34,9 +35,10 @@ function Workspace(props) {
         <Main>
             <Switch>
                 <Route path="/" exact component={Shows}/>
-                <Route path="/search" exact component={SearchResults}/>
                 <Route path="/episodes" exact component={Episodes}/>
+                <Route path="/details" exact component={Details}/>
                 <Route path="/settings" exact component={Settings}/>
+                <Route path="/search" exact component={SearchResults}/>
                 <Route component={Page404}/>
             </Switch>
         </Main>
