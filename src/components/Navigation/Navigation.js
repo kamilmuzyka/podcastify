@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { MenuContext } from '../../contexts/MenuContextProvider';
 import { ModalContext } from '../../contexts/ModalContextProvider';
 import Logout from './Logout/Logout';
 
@@ -12,13 +13,15 @@ const Element = styled.nav`
     height: 100vh;
     position: fixed;
     top: 0;
-    // left: 0;
-    left: 100%;
+    left: 0;
     z-index: 800;
+    transform: ${({ isActive }) => isActive ? 'translateX(0)' : 'translateX(100%)'};
+    transition: transform 0.3s ease-in-out;
     background-color: ${({ theme }) => theme.colors.tertiary};
 
     @media (min-width: 1024px) {
         display: inline-block;
+        transform: none;
         position: static;
         width: auto;
         height: calc(100vh - 83px);
@@ -94,19 +97,20 @@ const Button = styled.button`
 
 function Navigation(props) {
 
+    const { isActive, toggleMenu } = useContext(MenuContext);
     const { openModal, closeModal } = useContext(ModalContext);
 
     return (
-        <Element>
+        <Element isActive={isActive}>
             <List>
                 <Item>
-                    <Link to="/" exact activeClassName="active">Shows</Link>
+                    <Link onClick={toggleMenu} to="/" exact activeClassName="active">Shows</Link>
                 </Item>
                 <Item>
-                    <Link to="/episodes" activeClassName="active" exact >Episodes</Link>
+                    <Link onClick={toggleMenu} to="/episodes" activeClassName="active" exact >Episodes</Link>
                 </Item>
                 <Item>
-                    <Link to="/settings" activeClassName="active" exact>Settings</Link>
+                    <Link onClick={toggleMenu} to="/settings" activeClassName="active" exact>Settings</Link>
                 </Item>
                 <Item>
                     <Button

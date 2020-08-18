@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { MenuContext } from '../../contexts/MenuContextProvider';
 
 const Element = styled.button`
+    position: absolute;
+    z-index: 900;
     padding: 0.5em;
     background-color: transparent;
     border: none;
@@ -12,8 +15,11 @@ const Element = styled.button`
 `;
 
 const MenuButton= (props) => {
+
+    const { toggleMenu } = useContext(MenuContext);
+
     return (
-        <Element onClick={() => console.log('Toggle')} {...props}>
+        <Element onClick={toggleMenu} {...props}>
             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="14" viewBox="0 0 26 14">
             <g id="Fill" transform="translate(29 23) rotate(180)">
                 <rect id="Rectangle_1" data-name="Rectangle 1" width="22" height="2" transform="translate(3 15)" fill="#fff"/>

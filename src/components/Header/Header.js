@@ -39,7 +39,6 @@ const StyledSearch = styled(Search)`
 `;
 
 const StyledMenuButton = styled(MenuButton)`
-    position: absolute;
     top: 0;
     right: 2em;
 
