@@ -15,14 +15,15 @@ const Element = styled.nav`
     top: 0;
     left: 0;
     z-index: 800;
-    transform: ${({ isActive }) => isActive ? 'translateX(0)' : 'translateX(100%)'};
     transition: transform 0.3s ease-in-out;
+    transform: ${({ isActive }) => isActive ? 'translateX(0)' : 'translateX(100%)'};
     background-color: ${({ theme }) => theme.colors.tertiary};
 
     @media (min-width: 1024px) {
-        display: inline-block;
-        transform: none;
         position: static;
+        display: inline-block;
+        transition: none;
+        transform: none;
         width: auto;
         height: calc(100vh - 83px);
         background-color: ${({ theme }) => theme.colors.secondary};

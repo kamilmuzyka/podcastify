@@ -32,12 +32,6 @@ const Element = styled.header`
     }
 `;
 
-const StyledSearch = styled(Search)`
-    @media (min-width: 500px) {
-        margin-right: 4em;
-    }
-`;
-
 const StyledMenuButton = styled(MenuButton)`
     top: 0;
     right: 2em;
@@ -74,7 +68,7 @@ function Header(props) {
                 name={profileName}
                 image={profileImage}
                 loading={imageLoading.toString()}/>
-            <StyledSearch/>
+            <Search/>
             <StyledMenuButton/>
         </Element>
     );
