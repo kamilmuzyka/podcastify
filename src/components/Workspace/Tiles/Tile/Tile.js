@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import LikeIcon from '../../../../UI/LikeIcon/LikeIcon';
 
@@ -88,6 +89,11 @@ const Description = styled.p`
 `;
 
 function Tile(props) {
+
+    const showDetails = (id) => {
+        props.history.push(`/details?${id}`);
+    }
+
     return (
         <Item>
             <Outer>
@@ -100,7 +106,7 @@ function Tile(props) {
             </Outer>
             <Header>
                 <Lead>
-                    <Link>
+                    <Link onClick={() => showDetails(props.details)}>
                         {props.title}
                     </Link>
                 </Lead>
@@ -112,4 +118,4 @@ function Tile(props) {
     );
 }
 
-export default Tile;
+export default withRouter(Tile);

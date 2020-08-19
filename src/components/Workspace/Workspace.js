@@ -37,7 +37,7 @@ function Workspace(props) {
             <Switch>
                 <Route path="/" exact component={Shows}/>
                 <Route path="/episodes" exact component={Episodes}/>
-                <Route path="/details" exact component={Details}/>
+                <Route path="/details" component={Details}/>
                 <Route path="/settings" exact component={Settings}/>
                 <Route path="/search" exact component={SearchResults}/>
                 <Route component={Page404}/>

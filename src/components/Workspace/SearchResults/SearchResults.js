@@ -2,10 +2,9 @@ import React, { useState, useContext, useEffect, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import { SearchContext } from '../../../contexts/SearchContextProvider';
 import Spotify from '../../../models/Spotify';
+import WorkspaceLoading from '../WorkspaceLoading/WorkspaceLoading';
 import Tiles from '../Tiles/Tiles';
 import Tile from '../Tiles/Tile/Tile';
-
-import WorkspaceLoading from '../WorkspaceLoading/WorkspaceLoading';
 
 function SearchResults(props) {
     const [isLoading, updateIsLoading] = useState(true);
@@ -24,6 +23,7 @@ function SearchResults(props) {
         const updatedShows = shows.map(show => {
             return <Tile
                 key={show.id}
+                details={show.id}
                 title={show.name}
                 description={show.description}
                 image={show.images[1].url} />
@@ -41,6 +41,7 @@ function SearchResults(props) {
         const updatedEpisodes = episodes.map(episode => {
             return <Tile
                 key={episode.id}
+                details={episode.id}
                 title={episode.name}
                 description={episode.description}
                 image={episode.images[1].url} />
