@@ -6,6 +6,7 @@ import Tiles from '../Tiles/Tiles';
 import Tile from '../Tiles/Tile/Tile';
 
 function SearchResults(props) {
+    const [isMounted, updateIsMounted] = useState(false);
     const [shows, updateShows] = useState([]);
     const [episodes, updateEpisodes] = useState([]);
     const { query, updateQuery } = useContext(SearchContext);
@@ -49,11 +50,14 @@ function SearchResults(props) {
         if(!searching) {
             return;
         }
-        let mounted = true;
+
+
+        updateIsMounted(true);
+
         if(query) {
             (async () => {
                 const results = await Spotify.getSearchResults(query);
-                if(mounted) {
+                if(isMounted) {
                     prepareShows(results.shows.items);
                     prepareEpisodes(results.episodes.items);
                 }
@@ -61,16 +65,16 @@ function SearchResults(props) {
         }
 
         return () => {
-            mounted = false
+            updateIsMounted(false);
         };
-    }, [query]);
+    }, [isMounted, query]);
 
     useEffect(() => {
         return () => {
             updateSearching(false);
             updateQuery('');
         }
-    }, [])
+    }, []);
 
     return (
         (searching) ?
