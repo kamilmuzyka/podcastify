@@ -10,6 +10,7 @@ import Page404 from './Page404/Page404';
 
 
 const Main = styled.main`
+    position: relative;
     flex: 1;
     padding: 2em;
     max-height: calc(100vh - 80px);

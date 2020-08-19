@@ -5,8 +5,11 @@ import Spotify from '../../../models/Spotify';
 import Tiles from '../Tiles/Tiles';
 import Tile from '../Tiles/Tile/Tile';
 
+import WorkspaceLoading from '../WorkspaceLoading/WorkspaceLoading';
+
 function SearchResults(props) {
-    const [isMounted, updateIsMounted] = useState(false);
+    const [isLoading, updateIsLoading] = useState(true);
+
     const [shows, updateShows] = useState([]);
     const [episodes, updateEpisodes] = useState([]);
     const { query, updateQuery } = useContext(SearchContext);
@@ -51,23 +54,15 @@ function SearchResults(props) {
             return;
         }
 
-
-        updateIsMounted(true);
-
         if(query) {
             (async () => {
                 const results = await Spotify.getSearchResults(query);
-                if(isMounted) {
-                    prepareShows(results.shows.items);
-                    prepareEpisodes(results.episodes.items);
-                }
+                prepareShows(results.shows.items);
+                prepareEpisodes(results.episodes.items);
+                updateIsLoading(false);
             })();
         }
-
-        return () => {
-            updateIsMounted(false);
-        };
-    }, [isMounted, query]);
+    }, [query]);
 
     useEffect(() => {
         return () => {
@@ -76,19 +71,56 @@ function SearchResults(props) {
         }
     }, []);
 
-    return (
-        (searching) ?
-        <Fragment>
-            <Tiles title="Shows">
-                {shows}
-            </Tiles>
-            <Tiles title="Episodes">
-                {episodes}
-            </Tiles>
-        </Fragment>
-        :
-        <Redirect to="/"/>
-    );
+    if(searching) {
+
+        if(shows.length > 0 && episodes.length > 0) {
+            return (
+                <Fragment>
+                    <Tiles title="Shows">
+                        {shows}
+                    </Tiles>
+                    <Tiles title="Episodes">
+                        {episodes}
+                    </Tiles>
+                    <WorkspaceLoading loading={isLoading.toString()}/>
+                </Fragment>
+            );
+        }
+
+        if(shows.length > 0 && episodes.length === 0) {
+            return (
+                <Fragment>
+                    <Tiles title="Shows">
+                        {shows}
+                    </Tiles>
+                    <WorkspaceLoading loading={isLoading.toString()}/>
+                </Fragment>
+            );
+        }
+
+        if(shows.length === 0 && episodes.length > 0) {
+            return (
+                <Fragment>
+                    <Tiles title="Episodes">
+                        {episodes}
+                    </Tiles>
+                    <WorkspaceLoading loading={isLoading.toString()}/>
+                </Fragment>
+            );
+        }
+
+        if(shows.length === 0 && episodes.length === 0) {
+            return (
+                <Fragment>
+                    <div>Nothing found</div>
+                    <WorkspaceLoading loading={isLoading.toString()}/>
+                </Fragment>
+            );
+        }
+
+    }
+
+    return <Redirect to="/"/>;
 }
 
 export default SearchResults;
