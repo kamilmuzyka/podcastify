@@ -23,10 +23,11 @@ function SearchResults(props) {
         const updatedShows = shows.map(show => {
             return <Tile
                 key={show.id}
-                details={show.id}
+                id={show.id}
                 title={show.name}
                 description={show.description}
-                image={show.images[1].url} />
+                image={show.images[1].url}
+                type="show" />
         });
 
         updateShows(updatedShows);
@@ -41,10 +42,11 @@ function SearchResults(props) {
         const updatedEpisodes = episodes.map(episode => {
             return <Tile
                 key={episode.id}
-                details={episode.id}
+                id={episode.id}
                 title={episode.name}
                 description={episode.description}
-                image={episode.images[1].url} />
+                image={episode.images[1].url}
+                type="episode" />
         });
 
         updateEpisodes(updatedEpisodes);

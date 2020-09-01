@@ -90,8 +90,15 @@ const Description = styled.p`
 
 function Tile(props) {
 
-    const showDetails = (id) => {
-        props.history.push(`/details?${id}`);
+    const showDetails = (id, type) => {
+
+        if(type === 'show') {
+            props.history.push(`/shows/${id}`);
+        }
+
+        if(type === 'episode') {
+            props.history.push(`/episodes/${id}`);
+        }
     }
 
     return (
@@ -106,7 +113,7 @@ function Tile(props) {
             </Outer>
             <Header>
                 <Lead>
-                    <Link onClick={() => showDetails(props.details)}>
+                    <Link onClick={() => showDetails(props.id, props.type)}>
                         {props.title}
                     </Link>
                 </Lead>
