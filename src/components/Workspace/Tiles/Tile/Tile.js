@@ -92,14 +92,14 @@ const Description = styled.p`
 function Tile(props) {
 
     const showDetails = (id, type) => {
-
-        console.log(props.history);
         if(type === SEARCH_TYPES.show) {
             props.history.push(`/shows/${id}`);
+            return;
         }
 
         if(type === SEARCH_TYPES.episode) {
             props.history.push(`/episodes/${id}`);
+            return;
         }
     }
 

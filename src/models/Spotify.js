@@ -24,6 +24,22 @@ class Spotify {
         return results;
     }
 
+    static async getDetails(id, type) {
+        const token = this.retrieveToken();
+
+        if(!token) {
+            return;
+        }
+
+        const data = await fetch(`https://api.spotify.com/v1/${type}s/${id}`, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        });
+        const results = await data.json();
+        return results;
+    }
+
     static async getUserProfile() {
         const token = this.retrieveToken();
 
