@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import { SearchContext } from '../../../contexts/SearchContextProvider';
+import { SEARCH_TYPES } from '../../../constants';
 import Spotify from '../../../models/Spotify';
 import WorkspaceLoading from '../WorkspaceLoading/WorkspaceLoading';
 import Tiles from '../Tiles/Tiles';
@@ -27,7 +28,7 @@ function SearchResults(props) {
                 title={show.name}
                 description={show.description}
                 image={show.images[1].url}
-                type="show" />
+                type={SEARCH_TYPES.show} />
         });
 
         updateShows(updatedShows);
@@ -46,7 +47,7 @@ function SearchResults(props) {
                 title={episode.name}
                 description={episode.description}
                 image={episode.images[1].url}
-                type="episode" />
+                type={SEARCH_TYPES.episode} />
         });
 
         updateEpisodes(updatedEpisodes);

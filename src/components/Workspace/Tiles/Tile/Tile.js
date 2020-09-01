@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { SEARCH_TYPES } from '../../../../constants';
 import styled from 'styled-components';
 import LikeIcon from '../../../../UI/LikeIcon/LikeIcon';
 
@@ -92,11 +93,12 @@ function Tile(props) {
 
     const showDetails = (id, type) => {
 
-        if(type === 'show') {
+        console.log(props.history);
+        if(type === SEARCH_TYPES.show) {
             props.history.push(`/shows/${id}`);
         }
 
-        if(type === 'episode') {
+        if(type === SEARCH_TYPES.episode) {
             props.history.push(`/episodes/${id}`);
         }
     }
