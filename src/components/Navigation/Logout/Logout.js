@@ -23,8 +23,8 @@ const Logout = (props) => {
         <Element>
             <Paragraph>Are you sure you want to log out?</Paragraph>
             <div>
-                <ButtonConfirm type="button" outline onClick={Auth.logOut}>Yes</ButtonConfirm>
-                <Button type="button" onClick={props.closeModal}>No</Button>
+                <ButtonConfirm type="button" onClick={Auth.logOut}>Yes</ButtonConfirm>
+                <Button type="button" outline onClick={props.closeModal}>No</Button>
             </div>
         </Element>
     );
