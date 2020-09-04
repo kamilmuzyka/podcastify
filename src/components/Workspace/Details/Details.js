@@ -2,11 +2,16 @@ import React, { useState, useEffect, Fragment } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { SEARCH_TYPES } from '../../../constants';
+import Accordion from '../../../UI/Accordion/Accordion';
 import Button from '../../../UI/Button/Button';
 
 const Image = styled.img`
     display: block;
     width: 100%;
+
+    @media (min-width: 500px) {
+        max-width: 250px;
+    }
 `;
 
 const Header = styled.header``;
@@ -31,7 +36,7 @@ const Publisher = styled(Label)`
     margin: 0.5em 0 1em 0;
 `;
 
-const Description = styled.p`
+const Description = styled(Accordion)`
     color: ${({ theme }) => theme.colors.specific};
 `;
 
@@ -41,7 +46,12 @@ const Controls = styled.div`
 
 const Link = styled.a`
     margin-left: 1em;
+    text-decoration: none;
     color: ${({ theme }) => theme.colors.specific};
+
+    &:hover {
+        text-decoration: underline;
+    }
 `;
 
 const Details = ({ name, publisher, source, description, image, type }) => {

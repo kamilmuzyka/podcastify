@@ -84,8 +84,6 @@ const Description = styled.p`
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3; /* Number of lines */
-    font-size: 0.9em;
-    line-height: 125%;
     color: ${({ theme }) => theme.colors.specific};
 `;
 

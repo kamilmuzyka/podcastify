@@ -29,6 +29,10 @@ const GlobalStyle = createGlobalStyle`
         font-size: 16px;
         color: var(--light);
     }
+
+    p {
+        line-height: 125%;
+    }
 `;
 
 export default GlobalStyle;
