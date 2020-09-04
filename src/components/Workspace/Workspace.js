@@ -9,7 +9,6 @@ import Settings from './Settings/Settings';
 import SearchResults from './SearchResults/SearchResults';
 import Page404 from './Page404/Page404';
 
-
 const Main = styled.main`
     position: relative;
     flex: 1;

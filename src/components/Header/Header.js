@@ -50,14 +50,18 @@ function Header(props) {
 
     useEffect(() => {
         (async () => {
-            const profile = await Spotify.getUserProfile();
-            if(!profile) {
-                return;
+            try {
+                const profile = await Spotify.getUserProfile();
+                if(!profile) {
+                    return;
+                }
+                profileUpdateURL(profile.external_urls.spotify);
+                profileUpdateName(profile.display_name);
+                profileUpdateImage(profile.images[0].url || DefaultImage);
+                updateImageLoading(false);
+            } catch(err) {
+                console.error(err);
             }
-            profileUpdateURL(profile.external_urls.spotify);
-            profileUpdateName(profile.display_name);
-            profileUpdateImage(profile.images[0].url || DefaultImage);
-            updateImageLoading(false);
         })();
     }, []);
 

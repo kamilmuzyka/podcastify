@@ -11,23 +11,26 @@ const ShowDetails = ({ location }) => {
         (async () => {
             const path = location.pathname;
             const showId = path.substring(path.lastIndexOf('/') + 1);
+            try {
+                const {
+                    name,
+                    publisher,
+                    external_urls,
+                    description,
+                    images,
+                    episodes } = await Spotify.getDetails(showId, SEARCH_TYPES.show);
 
-            const {
-                name,
-                publisher,
-                external_urls,
-                description,
-                images,
-                episodes } = await Spotify.getDetails(showId, SEARCH_TYPES.show);
-
-            updateDetails({
-                name,
-                publisher,
-                source: external_urls.spotify,
-                description,
-                image: images[1].url,
-                episodes
-            });
+                updateDetails({
+                    name,
+                    publisher,
+                    source: external_urls.spotify,
+                    description,
+                    image: images[1].url,
+                    episodes
+                });
+            } catch(err) {
+                console.error(err);
+            }
         })();
     }, []);
 

@@ -59,10 +59,14 @@ function SearchResults(props) {
 
         if(query) {
             (async () => {
-                const { shows, episodes } = await Spotify.getSearchResults(query);
-                prepareShows(shows.items);
-                prepareEpisodes(episodes.items);
-                updateIsLoading(false);
+                try {
+                    const { shows, episodes } = await Spotify.getSearchResults(query);
+                    prepareShows(shows.items);
+                    prepareEpisodes(episodes.items);
+                    updateIsLoading(false);
+                } catch(err) {
+                    console.error(err);
+                }
             })();
         }
     }, [query]);
@@ -115,7 +119,7 @@ function SearchResults(props) {
         if(shows.length === 0 && episodes.length === 0) {
             return (
                 <Fragment>
-                    <div>Nothing found</div>
+                    <p>Nothing found</p>
                     <WorkspaceLoading loading={isLoading.toString()}/>
                 </Fragment>
             );
