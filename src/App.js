@@ -28,21 +28,21 @@ function App(props) {
       <Fragment>
         <ThemeContextProvider>
           <LoadingScreen loading={applicationLoading.toString()}/>
-          { isAuthenticated ? (
-          <SearchContextProvider>
-            <ModalContextProvider>
-              <MenuContextProvider>
-                <Header/>
-                <Wrapper>
-                  <Navigation/>
-                  <Workspace/>
-                </Wrapper>
-                <Modal/>
-              </MenuContextProvider>
-            </ModalContextProvider>
-          </SearchContextProvider>
-          ) : (
-            <Landing/> )
+          { isAuthenticated ?
+            <SearchContextProvider>
+              <ModalContextProvider>
+                <MenuContextProvider>
+                  <Header/>
+                  <Wrapper>
+                    <Navigation/>
+                    <Workspace/>
+                  </Wrapper>
+                  <Modal/>
+                </MenuContextProvider>
+              </ModalContextProvider>
+            </SearchContextProvider>
+            :
+            <Landing/>
           }
         </ThemeContextProvider>
       </Fragment>

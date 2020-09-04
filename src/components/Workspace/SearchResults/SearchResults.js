@@ -61,8 +61,8 @@ function SearchResults(props) {
             (async () => {
                 try {
                     const { shows, episodes } = await Spotify.getSearchResults(query);
-                    prepareShows(shows.items);
-                    prepareEpisodes(episodes.items);
+                    if(shows) prepareShows(shows.items);
+                    if(episodes) prepareEpisodes(episodes.items);
                     updateIsLoading(false);
                 } catch(err) {
                     console.error(err);
