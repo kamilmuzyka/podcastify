@@ -9,7 +9,6 @@ import Tile from '../Tiles/Tile/Tile';
 
 function SearchResults(props) {
     const [isLoading, updateIsLoading] = useState(true);
-
     const [shows, updateShows] = useState([]);
     const [episodes, updateEpisodes] = useState([]);
     const { query, updateQuery } = useContext(SearchContext);
@@ -60,9 +59,9 @@ function SearchResults(props) {
 
         if(query) {
             (async () => {
-                const results = await Spotify.getSearchResults(query);
-                prepareShows(results.shows.items);
-                prepareEpisodes(results.episodes.items);
+                const { shows, episodes } = await Spotify.getSearchResults(query);
+                prepareShows(shows.items);
+                prepareEpisodes(episodes.items);
                 updateIsLoading(false);
             })();
         }

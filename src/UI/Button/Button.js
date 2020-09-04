@@ -29,7 +29,7 @@ function Button(props) {
 }
 
 Button.propTypes = {
-    type: PropTypes.oneOf(['button', 'submit']),
+    type: PropTypes.oneOf(['button', 'submit']).isRequired,
     fluid: PropTypes.bool
 }
 
