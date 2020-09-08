@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { SEARCH_TYPES } from '../../../../constants';
 import Spotify from '../../../../models/Spotify';
 import Details from '../../Details/Details';
+import ShowEpisodes from './ShowEpisodes/ShowEpisodes';
 
 const ShowDetails = ({ location }) => {
     const [details, updateDetails] = useState({});
@@ -37,7 +38,7 @@ const ShowDetails = ({ location }) => {
     return (
         <Fragment>
             <Details {...details} type={SEARCH_TYPES.show} />
-            {/* <ShowEpisodes/> */}
+            <ShowEpisodes episodes={details.episodes}/>
         </Fragment>
     );
 }
