@@ -12,6 +12,11 @@ const GlobalStyle = createGlobalStyle`
         --attention: #5AD54F;
     }
 
+    ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+    }
+
     *,
     *::before,
     *::after {
