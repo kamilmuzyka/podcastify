@@ -32,11 +32,15 @@ const Label = styled.p`
 `;
 
 const Type = styled(Label)`
-    margin: 0 0 0.75em 0;
+    margin: 1em 0 0.5em 0;
+
+    @media (min-width: 1024px) {
+        margin: 0 0 0.5em 0;
+    }
 `;
 
 const Publisher = styled(Label)`
-    margin: 0.75em 0 1.25em 0;
+    margin: 0.5em 0 1em 0;
 `;
 
 const Description = styled(Accordion)`
