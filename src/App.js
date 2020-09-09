@@ -4,7 +4,6 @@ import Auth from './controllers/Auth';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import Landing from './components/Landing/Landing';
 import ThemeContextProvider from './contexts/ThemeContextProvider';
-import SearchContextProvider from './contexts/SearchContextProvider';
 import ModalContextProvider from './contexts/ModalContextProvider';
 import MenuContextProvider from './contexts/MenuContextProvider';
 import Header from './components/Header/Header';
@@ -29,18 +28,16 @@ function App(props) {
         <ThemeContextProvider>
           <LoadingScreen loading={applicationLoading.toString()}/>
           { isAuthenticated ?
-            <SearchContextProvider>
-              <ModalContextProvider>
-                <MenuContextProvider>
-                  <Header/>
-                  <Wrapper>
-                    <Navigation/>
-                    <Workspace/>
-                  </Wrapper>
-                  <Modal/>
-                </MenuContextProvider>
-              </ModalContextProvider>
-            </SearchContextProvider>
+            <ModalContextProvider>
+              <MenuContextProvider>
+                <Header/>
+                <Wrapper>
+                  <Navigation/>
+                  <Workspace/>
+                </Wrapper>
+                <Modal/>
+              </MenuContextProvider>
+            </ModalContextProvider>
             :
             <Landing/>
           }

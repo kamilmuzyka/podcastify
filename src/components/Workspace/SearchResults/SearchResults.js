@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect, Fragment } from 'react';
-import { Redirect } from 'react-router-dom';
-import { SearchContext } from '../../../contexts/SearchContextProvider';
+import { withRouter } from 'react-router-dom';
 import { SEARCH_TYPES } from '../../../constants';
 import Spotify from '../../../models/Spotify';
 import WorkspaceLoading from '../WorkspaceLoading/WorkspaceLoading';
@@ -9,10 +8,9 @@ import Tile from '../Tiles/Tile/Tile';
 
 function SearchResults(props) {
     const [isLoading, updateIsLoading] = useState(true);
+    const [query, updateQuery] = useState('');
     const [shows, updateShows] = useState([]);
     const [episodes, updateEpisodes] = useState([]);
-    const { query, updateQuery } = useContext(SearchContext);
-    const { searching, updateSearching } = useContext(SearchContext);
 
     function prepareShows(shows) {
         if(shows.length === 0) {
@@ -53,10 +51,14 @@ function SearchResults(props) {
     }
 
     useEffect(() => {
-        if(!searching) {
-            return;
-        }
+        const newQuery = new URLSearchParams(props.history.location.search).get('query');
 
+        if(newQuery === query) return;
+
+        updateQuery(newQuery);
+    });
+
+    useEffect(() => {
         if(query) {
             (async () => {
                 try {
@@ -71,63 +73,50 @@ function SearchResults(props) {
         }
     }, [query]);
 
-    useEffect(() => {
-        return () => {
-            updateSearching(false);
-            updateQuery('');
-        }
-    }, []);
-
-    if(searching) {
-
-        if(shows.length > 0 && episodes.length > 0) {
-            return (
-                <Fragment>
-                    <Tiles title="Shows">
-                        {shows}
-                    </Tiles>
-                    <Tiles title="Episodes">
-                        {episodes}
-                    </Tiles>
-                    <WorkspaceLoading loading={isLoading.toString()}/>
-                </Fragment>
-            );
-        }
-
-        if(shows.length > 0 && episodes.length === 0) {
-            return (
-                <Fragment>
-                    <Tiles title="Shows">
-                        {shows}
-                    </Tiles>
-                    <WorkspaceLoading loading={isLoading.toString()}/>
-                </Fragment>
-            );
-        }
-
-        if(shows.length === 0 && episodes.length > 0) {
-            return (
-                <Fragment>
-                    <Tiles title="Episodes">
-                        {episodes}
-                    </Tiles>
-                    <WorkspaceLoading loading={isLoading.toString()}/>
-                </Fragment>
-            );
-        }
-
-        if(shows.length === 0 && episodes.length === 0) {
-            return (
-                <Fragment>
-                    <p>Nothing found</p>
-                    <WorkspaceLoading loading={isLoading.toString()}/>
-                </Fragment>
-            );
-        }
-
+    if(shows.length > 0 && episodes.length > 0) {
+        return (
+            <Fragment>
+                <Tiles title="Shows">
+                    {shows}
+                </Tiles>
+                <Tiles title="Episodes">
+                    {episodes}
+                </Tiles>
+                <WorkspaceLoading loading={isLoading.toString()}/>
+            </Fragment>
+        );
     }
 
-    return <Redirect to="/"/>;
+    if(shows.length > 0 && episodes.length === 0) {
+        return (
+            <Fragment>
+                <Tiles title="Shows">
+                    {shows}
+                </Tiles>
+                <WorkspaceLoading loading={isLoading.toString()}/>
+            </Fragment>
+        );
+    }
+
+    if(shows.length === 0 && episodes.length > 0) {
+        return (
+            <Fragment>
+                <Tiles title="Episodes">
+                    {episodes}
+                </Tiles>
+                <WorkspaceLoading loading={isLoading.toString()}/>
+            </Fragment>
+        );
+    }
+
+    if(shows.length === 0 && episodes.length === 0) {
+        return (
+            <Fragment>
+                <p>Nothing found</p>
+                <WorkspaceLoading loading={isLoading.toString()}/>
+            </Fragment>
+        );
+    }
 }
 
-export default SearchResults;
+export default withRouter(SearchResults);

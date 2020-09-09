@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router';
 import styled from 'styled-components';
-import { SearchContext } from '../../../contexts/SearchContextProvider';
 import Button from '../../../UI/Button/Button';
 
 const Form = styled.form`
@@ -38,21 +37,16 @@ const Input = styled.input`
 `;
 
 function Search(props) {
-    const { updateQuery } = useContext(SearchContext);
-    const { updateSearching } = useContext(SearchContext);
-    const [currentQuery, updateCurrentQuery] = useState('');
+    const [query, updateQuery] = useState('');
 
     const handleChange = (e) => {
-        const query = e.target.value;
-        updateCurrentQuery(query);
+        updateQuery(e.target.value);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(currentQuery.length > 0) {
-            updateSearching(true);
-            updateQuery(currentQuery);
-            props.history.push('/search');
+        if(query.length > 0) {
+            props.history.push('/search?query=' + query);
         }
     }
 
