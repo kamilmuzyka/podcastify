@@ -11,7 +11,7 @@ import Wrapper from './components/Wrapper/Wrapper';
 import Navigation from './components/Navigation/Navigation';
 import Workspace from './components/Workspace/Workspace';
 import Modal from './components/Modal/Modal';
-
+ 
 function App(props) {
   const [isAuthenticated, updateIsAuthenticated] = useState(false);
   const [applicationLoading, updateApplicationLoading] = useState(true);
