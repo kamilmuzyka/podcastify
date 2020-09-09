@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 const Element = styled.p`
     display: inline-block;
-    word-wrap: break-word;
+    max-height: ${({ isOpen }) => isOpen ? '75em' : '4.5em'};
+    line-height: 1.5;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-height: ${({ isOpen }) => isOpen ? '25em' : '3.75em'};
-    line-height: 1.25em;
+    word-wrap: break-word;
     transition: max-height 0.3s ease-in-out;
     cursor: pointer;
 `;

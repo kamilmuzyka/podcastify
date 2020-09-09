@@ -20,9 +20,13 @@ const Header = styled.header``;
 
 const Lead = styled.h2`
     position: relative;
-    max-width: calc(0.5em * 50);
     font-size: 2em;
+    line-height: 1.25;
     color: ${({ theme }) => theme.colors.positive};
+
+    @media (min-width: 500px) {
+        max-width: calc(0.5em * 50);
+    }
 `;
 
 const Label = styled.p`
@@ -32,19 +36,18 @@ const Label = styled.p`
 `;
 
 const Type = styled(Label)`
-    margin: 1em 0 0.5em 0;
+    margin: 1em 0 0.25em 0;
 
     @media (min-width: 1024px) {
-        margin: 0 0 0.5em 0;
+        margin: 0 0 0.25em 0;
     }
 `;
 
 const Publisher = styled(Label)`
-    margin: 0.5em 0 1em 0;
+    margin: 0.25em 0 1em 0;
 `;
 
 const Description = styled(Accordion)`
-    max-width: calc(1em * 50);
     color: ${({ theme }) => theme.colors.specific};
 `;
 

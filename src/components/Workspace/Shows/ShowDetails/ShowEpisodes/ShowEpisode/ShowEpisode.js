@@ -7,26 +7,22 @@ const Element = styled.div`
     margin-top: 1em;
     padding-top: 1em;
     border-top: 1px solid #505050;
+    color: ${({ theme }) => theme.colors.specific};
 `;
 
 const Lead = styled.h3`
     font-size: inherit;
     font-weight: 400;
+    color: ${({ theme }) => theme.colors.positive};
 `;
 
 const Description = styled(Accordion)`
     margin-top: 0.5em;
-    max-width: 100%;
-    color: ${({ theme }) => theme.colors.specific};
 `;
 
-const Date = styled.time`
-    color: ${({ theme }) => theme.colors.specific};
-`;
+const Date = styled.time``;
 
-const Duration = styled.span`
-    color: ${({ theme }) => theme.colors.specific};
-`;
+const Duration = styled.span``;
 
 const Block = styled.div`
     margin-top: 0.5em;
@@ -34,7 +30,7 @@ const Block = styled.div`
 
 const Link = styled.a`
     display: inline-block;
-    color: ${({ theme }) => theme.colors.positive};
+    color: inherit;
     text-decoration: none;
 
     &:hover {

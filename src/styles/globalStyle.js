@@ -33,10 +33,15 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Montserrat', sans-serif;
         font-size: 16px;
         color: var(--light);
+        line-height: 1.5;
     }
 
-    p {
-        line-height: 125%;
+    h1, h2, h3, h4, p {
+        max-width: 100%;
+
+        @media (min-width: 500px) {
+            max-width: calc(1em * 50);
+        }
     }
 `;
 
