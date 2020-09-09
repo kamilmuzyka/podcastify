@@ -9,7 +9,7 @@ const Element = styled.button`
 
     svg {
         transform: scale(${({ scale }) => scale ? scale : 1});
-        transition: scale .2s ease-in-out;
+        transition: transform .2s ease-in-out;
     }
 
     &:hover {
