@@ -63,6 +63,9 @@ function SearchResults({ history }) {
                     })}
                 </Tiles>
             : null }
+
+            { (shows.length === 0 && episodes.length === 0) ? 'Nothing found' : null }
+
             <WorkspaceLoading loading={isLoading.toString()}/>
         </Fragment>
     );
