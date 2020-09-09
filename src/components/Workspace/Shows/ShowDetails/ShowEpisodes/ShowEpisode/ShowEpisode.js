@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Accordion from '../../../../../../UI/Accordion/Accordion';
 import { msToHours } from '../../../../../../utils/msToHours';
+import LikeIcon from '../../../../../../UI/LikeIcon/LikeIcon';
+import PlayIcon from '../../../../../../UI/PlayIcon/PlayIcon';
 
 const Element = styled.div`
     margin-top: 1em;
@@ -24,9 +26,7 @@ const Date = styled.time``;
 
 const Duration = styled.span``;
 
-const Block = styled.div`
-    margin-top: 0.5em;
-`;
+const Block = styled.div``;
 
 const Link = styled.a`
     display: inline-block;
@@ -36,6 +36,16 @@ const Link = styled.a`
     &:hover {
         text-decoration: underline;
     }
+`;
+
+const Controls = styled.div`
+    display: flex;
+    align-items: center;
+    margin-top: 0.5em;
+`;
+
+const StyledPlayIcon = styled(PlayIcon)`
+    margin-right: 0.75em;
 `;
 
 const ShowEpisode = ({ name, description, releaseDate, duration, source }) => {
@@ -50,6 +60,10 @@ const ShowEpisode = ({ name, description, releaseDate, duration, source }) => {
             <Block>
                 <Link href={source}>Listen on Spotify</Link>
             </Block>
+            <Controls>
+                <StyledPlayIcon/>
+                <LikeIcon/>
+            </Controls>
         </Element>
     );
 }

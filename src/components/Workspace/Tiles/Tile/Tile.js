@@ -79,6 +79,7 @@ const Link = styled.a`
 const Description = styled.p`
     display: inline-box;
     margin-top: 0.5em;
+    max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
