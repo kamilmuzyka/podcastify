@@ -21,7 +21,7 @@ const Element = styled.button`
     }
 `;
 
-function LikeIcon(props) {
+function PlayButton(props) {
     return (
         <Element type="button" {...props}>
             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
@@ -37,8 +37,8 @@ function LikeIcon(props) {
     );
 }
 
-LikeIcon.propTypes = {
+PlayButton.propTypes = {
     scale: PropTypes.number
 }
 
-export default LikeIcon;
+export default PlayButton;

@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { SEARCH_TYPES } from '../../../../constants';
 import styled from 'styled-components';
-import LikeIcon from '../../../../UI/LikeIcon/LikeIcon';
+import LikeButton from '../../../../UI/LikeButton/LikeButton';
 
 const Item = styled.li`
     margin-bottom: 2em;
@@ -107,7 +107,7 @@ function Tile(props) {
                 <Inner>
                     <img src={props.image} alt={props.title}/>
                     <Hidden>
-                        <LikeIcon scale={2} />
+                        <LikeButton scale={2} />
                     </Hidden>
                 </Inner>
             </Outer>
