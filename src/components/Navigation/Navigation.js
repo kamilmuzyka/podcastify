@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { MenuContext } from '../../contexts/MenuContextProvider';
 import { ModalContext } from '../../contexts/ModalContextProvider';
-import Logout from './Logout/Logout';
+import Logout from '../Logout/Logout';
 
 const Element = styled.nav`
     display: flex;
@@ -99,28 +99,25 @@ const Button = styled.button`
 function Navigation(props) {
 
     const { isActive, toggleMenu } = useContext(MenuContext);
-    const { openModal, closeModal } = useContext(ModalContext);
+    const { modalActive, openModal, closeModal } = useContext(ModalContext);
 
     return (
         <Element isActive={isActive}>
             <List>
                 <Item>
-                    <Link onClick={toggleMenu} to="/" exact activeClassName="active">Shows</Link>
+                    <Link onClick={toggleMenu} to="/" activeClassName="active" exact>Shows</Link>
                 </Item>
                 <Item>
-                    <Link onClick={toggleMenu} to="/episodes" activeClassName="active" exact >Episodes</Link>
+                    <Link onClick={toggleMenu} to="/episodes" activeClassName="active" exact>Episodes</Link>
                 </Item>
                 <Item>
                     <Link onClick={toggleMenu} to="/settings" activeClassName="active" exact>Settings</Link>
                 </Item>
                 <Item>
-                    <Button
-                        type="button"
-                        onClick={() => openModal(<Logout closeModal={closeModal}/>)}>
-                        Log Out
-                        </Button>
+                    <Button type="button" onClick={() => openModal()}>Log Out</Button>
                 </Item>
             </List>
+            <Logout active={modalActive} close={closeModal}/>
         </Element>
     );
 }

@@ -4,14 +4,13 @@ import Auth from './controllers/Auth';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import Landing from './components/Landing/Landing';
 import ThemeContextProvider from './contexts/ThemeContextProvider';
-import ModalContextProvider from './contexts/ModalContextProvider';
 import MenuContextProvider from './contexts/MenuContextProvider';
+import ModalContextProvider from './contexts/ModalContextProvider';
 import GlobalStyle from './styles/globalStyle';
 import Header from './components/Header/Header';
 import Wrapper from './components/Wrapper/Wrapper';
 import Navigation from './components/Navigation/Navigation';
 import Workspace from './components/Workspace/Workspace';
-import Modal from './components/Modal/Modal';
 
 function App(props) {
   const [isAuthenticated, updateIsAuthenticated] = useState(false);
@@ -29,16 +28,15 @@ function App(props) {
         <ThemeContextProvider>
           <LoadingScreen loading={applicationLoading.toString()}/>
           { isAuthenticated ?
-            <ModalContextProvider>
-              <MenuContextProvider>
-                <Header/>
-                <Wrapper>
+            <MenuContextProvider>
+              <Header/>
+              <Wrapper>
+                <ModalContextProvider>
                   <Navigation/>
-                  <Workspace/>
-                </Wrapper>
-                <Modal/>
-              </MenuContextProvider>
-            </ModalContextProvider>
+                </ModalContextProvider>
+                <Workspace/>
+              </Wrapper>
+            </MenuContextProvider>
             :
             <Landing/>
           }

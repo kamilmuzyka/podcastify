@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { SEARCH_TYPES } from '../../../constants';
 import Spotify from '../../../models/Spotify';
@@ -17,7 +17,7 @@ function SearchResults({ history }) {
         if(newQuery !== query) {
             updateQuery(newQuery);
         }
-    });
+    }, [history.location.search, query]);
 
     useEffect(() => {
         if(query) {
