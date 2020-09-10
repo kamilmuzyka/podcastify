@@ -1,4 +1,5 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import LoadingIcon from '../../UI/LoadingIcon/LoadingIcon';
 
@@ -35,13 +36,14 @@ const StyledLoadingIcon = styled(LoadingIcon)`
 `;
 
 function LoadingScreen(props) {
-    return (
+    return createPortal(
         <Element loading={props.loading}>
             <Wrapper>
                 <Heading>Podcastify</Heading>
                 <StyledLoadingIcon/>
             </Wrapper>
-        </Element>
+        </Element>,
+        document.getElementById('loading')
     );
 }
 

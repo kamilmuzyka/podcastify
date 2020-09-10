@@ -8,7 +8,7 @@ const Element = styled.p`
     overflow: hidden;
     text-overflow: ellipsis;
     word-wrap: break-word;
-    transition: max-height 0.3s ease-in-out;
+    transition: max-height 0.9s ease-in-out;
     cursor: pointer;
 `;
 
