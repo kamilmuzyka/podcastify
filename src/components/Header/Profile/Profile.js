@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import LoadingIcon from '../../../UI/LoadingIcon/LoadingIcon';
+import RotatingIcon from '../../../UI/RotatingIcon/RotatingIcon';
 
 const Container = styled.a`
     display: flex;
@@ -41,15 +41,16 @@ const Overlay = styled.div`
     background-color: ${({ theme }) => theme.colors.primary};
     opacity: ${props => props.loading === "true" ? 1 : 0};
     visibility: ${props => props.loading === "false" ? 'visible' : 'none'};
-    transition: opacity 0.1s ease-in-out,
-                visibility 0.1s ease-in-out
+    transition: opacity 0.3s ease-in-out,
+                visibility 0.3s ease-in-out
 `;
 
 const Name = styled.p`
     margin-left: 0.75em;
 `;
 
-const StyledLoadingIcon = styled(LoadingIcon)`
+const StyledRotatingIcon = styled(RotatingIcon)`
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.25);
@@ -62,7 +63,7 @@ function Profile(props) {
                 <img src={props.image} alt={`${props.name}'s profile`}/>
             </Photo>
             <Overlay loading={props.loading}>
-                <StyledLoadingIcon/>
+                <StyledRotatingIcon/>
             </Overlay>
             <Name>
                 {props.name}

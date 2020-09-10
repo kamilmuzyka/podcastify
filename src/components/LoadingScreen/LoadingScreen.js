@@ -1,12 +1,12 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
-import LoadingIcon from '../../UI/LoadingIcon/LoadingIcon';
+import BouncingIcon from '../../UI/BouncingIcon/BouncingIcon';
 
 const Element = styled.div`
     width: 100%;
     height: 100vh;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     background-color: ${({ theme }) => theme.colors.negative};
@@ -16,32 +16,26 @@ const Element = styled.div`
     justify-content: center;
     opacity: ${({ loading }) => loading === 'true' ? '1' : '0'};
     visibility: ${({ loading }) => loading === 'true' ? 'visible' : 'hidden'};
-    transition: opacity 1s ease-in-out,
-                visibility 1s ease-in-out;
+    transition: opacity 1s 0.3s ease-in-out,
+                visibility 1s 0.3s ease-in-out;
 `;
 
 const Heading = styled.h1`
+    margin-bottom: 0.5em;
     font-size: 3em;
-    margin-bottom: 128px;
 `;
 
-const Wrapper = styled.div`
+const Container = styled.div`
     position: relative;
-`;
-
-const StyledLoadingIcon = styled(LoadingIcon)`
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 0;
 `;
 
 function LoadingScreen(props) {
     return createPortal(
         <Element loading={props.loading}>
-            <Wrapper>
+            <Container>
                 <Heading>Podcastify</Heading>
-                <StyledLoadingIcon/>
-            </Wrapper>
+                <BouncingIcon/>
+            </Container>
         </Element>,
         document.getElementById('loading')
     );

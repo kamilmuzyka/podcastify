@@ -19,7 +19,7 @@ const Backdrop = styled.div`
 `;
 
 const Container = styled.div`
-    position: absolute;
+    position: fixed;
     display: inline-block;
     text-align: center;
     width: 90%;

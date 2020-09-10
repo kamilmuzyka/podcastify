@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const Element = styled.div`
     display: inline-block;
-    position: absolute;
     width: 80px;
     height: 80px;
 
@@ -14,10 +13,10 @@ const Element = styled.div`
         width: 64px;
         height: 64px;
         margin: 8px;
-        border: 8px solid ${({ theme }) => theme.colors.accent};
+        border: 8px solid ${({ theme }) => theme.colors.positive};
         border-radius: 50%;
         animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        border-color: ${({ theme }) => theme.colors.accent} transparent transparent transparent;
+        border-color: ${({ theme }) => theme.colors.positive} transparent transparent transparent;
     }
 
     & div:nth-child(1) {
@@ -42,7 +41,7 @@ const Element = styled.div`
     }
 `;
 
-function LoadingIcon(props) {
+function RotatingIcon(props) {
     return (
         <Element className={props.className}>
             <div></div>
@@ -53,4 +52,4 @@ function LoadingIcon(props) {
     );
 }
 
-export default LoadingIcon;
+export default RotatingIcon;
