@@ -4,6 +4,7 @@ import Accordion from '../../../../../../UI/Accordion/Accordion';
 import { msToHours } from '../../../../../../utils/msToHours';
 import LikeButton from '../../../../../../UI/LikeButton/LikeButton';
 import PlayButton from '../../../../../../UI/PlayButton/PlayButton';
+import TextSeparator from '../../../../../../UI/TextSeparator/TextSeparator';
 
 const Element = styled.div`
     margin-top: 1em;
@@ -22,11 +23,11 @@ const Description = styled(Accordion)`
     margin-top: 0.5em;
 `;
 
+const Container = styled.div`
+    margin-top: 0.5em;
+`;
+
 const Date = styled.time``;
-
-const Duration = styled.span``;
-
-const Block = styled.div``;
 
 const Link = styled.a`
     display: inline-block;
@@ -53,13 +54,16 @@ const ShowEpisode = ({ name, description, releaseDate, duration, source }) => {
         <Element>
             <Lead>{name}</Lead>
             <Description>{description}</Description>
-            <Block>
-                <Date dateTime={releaseDate}>{releaseDate}</Date>
-                <Duration> • {msToHours(duration)}</Duration>
-            </Block>
-            <Block>
+            <Container>
+                <Date dateTime={releaseDate}>
+                    {releaseDate}
+                </Date>
+                <TextSeparator/>
+                {msToHours(duration)}
+            </Container>
+            <div>
                 <Link href={source}>Listen on Spotify</Link>
-            </Block>
+            </div>
             <Controls>
                 <StyledPlayButton/>
                 <LikeButton/>

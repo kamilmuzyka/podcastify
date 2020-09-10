@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Element = styled.p`
-    display: inline-block;
+    display: block;
     max-height: ${({ isOpen }) => isOpen ? '75em' : '4.5em'};
     line-height: 1.5;
     overflow: hidden;
