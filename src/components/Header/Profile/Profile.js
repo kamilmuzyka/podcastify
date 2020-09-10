@@ -19,9 +19,9 @@ const Container = styled.a`
 const Photo = styled.div`
     width: 35px;
     height: 35px;
-    background-color: var(--primary);
     border-radius: 50%;
     overflow: hidden;
+    background-color: ${({ theme }) => theme.colors.primary};
 
     img {
         width: 100%;
@@ -37,8 +37,8 @@ const Overlay = styled.div`
     width: 37px;
     height: 37px;
     transform: translate(-1px, -1px);
-    background-color: var(--primary);
     border-radius: 50%;
+    background-color: ${({ theme }) => theme.colors.primary};
     opacity: ${props => props.loading === "true" ? 1 : 0};
     visibility: ${props => props.loading === "false" ? 'visible' : 'none'};
     transition: opacity 0.1s ease-in-out,

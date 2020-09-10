@@ -1,6 +1,7 @@
 const typography = {
-    small: '14px',
-    default: '16px'
+    family: 'Montserrat, sans-serif',
+    default: '16px',
+    small: '14px'
 }
 
 const darkTheme = {
