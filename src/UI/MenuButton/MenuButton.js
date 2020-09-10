@@ -15,7 +15,6 @@ const Element = styled.button`
 `;
 
 const MenuButton= (props) => {
-
     const { toggleMenu } = useContext(MenuContext);
 
     return (

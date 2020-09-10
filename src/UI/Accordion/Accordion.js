@@ -13,7 +13,6 @@ const Element = styled.p`
 `;
 
 const Accordion = (props) => {
-
     const [isOpen, updateIsOpen] = useState(false);
 
     const toggleHandler = () => {
