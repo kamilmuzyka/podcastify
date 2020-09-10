@@ -43,7 +43,7 @@ const Element = styled.div`
 
 function RotatingIcon(props) {
     return (
-        <Element className={props.className}>
+        <Element {...props}>
             <div></div>
             <div></div>
             <div></div>

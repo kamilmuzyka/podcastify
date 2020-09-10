@@ -2,10 +2,12 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { SEARCH_TYPES } from '../../../../constants';
 import Spotify from '../../../../models/Spotify';
+import WorkspaceLoading from '../../WorkspaceLoading/WorkspaceLoading';
 import Details from '../../Details/Details';
 import ShowEpisodes from './ShowEpisodes/ShowEpisodes';
 
 const ShowDetails = ({ location }) => {
+    const [isLoading, updateIsLoading] = useState(true);
     const [details, updateDetails] = useState({});
 
     useEffect(() => {
@@ -29,6 +31,8 @@ const ShowDetails = ({ location }) => {
                     image: images[1].url,
                     episodes
                 });
+
+                updateIsLoading(false);
             } catch(err) {
                 console.error(err);
             }
@@ -39,6 +43,7 @@ const ShowDetails = ({ location }) => {
         <Fragment>
             <Details {...details} type={SEARCH_TYPES.show} />
             <ShowEpisodes episodes={details.episodes}/>
+            <WorkspaceLoading loading={isLoading.toString()}/>
         </Fragment>
     );
 }

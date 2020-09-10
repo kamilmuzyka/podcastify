@@ -6,7 +6,7 @@ import BouncingIcon from '../../UI/BouncingIcon/BouncingIcon';
 const Element = styled.div`
     width: 100%;
     height: 100vh;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     background-color: ${({ theme }) => theme.colors.negative};

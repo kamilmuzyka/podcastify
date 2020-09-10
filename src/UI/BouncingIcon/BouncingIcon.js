@@ -45,7 +45,7 @@ const Point = styled.span`
 
 function BouncingIcon(props) {
     return (
-        <Icon>
+        <Icon {...props}>
             <Point/>
             <Point/>
             <Point/>
