@@ -11,13 +11,18 @@ const Element = styled.div`
     border-top: 1px solid #505050;
     color: ${({ theme }) => theme.colors.specific};
 
+    & > * {
+        margin-top: 0.5em;
+    }
+
     @media (min-width: 1380px) {
         display: grid;
-        grid-template-columns: 1fr 15fr 3fr 3fr 3fr;
         grid-template-rows: auto;
+        grid-template-columns: 1fr 15fr 3fr 3fr 3fr;
         gap: 1em;
 
         & > * {
+            margin-top: 0;
             align-self: start;
         }
     }
@@ -41,24 +46,20 @@ const Description = styled(Accordion)`
 
 const Date = styled.time`
     display: inline-block;
-    margin-top: 0.5em;
-    @media (min-width: 1380px) {
-        margin-top: 0;
-    }
 `;
 
 const Duration = styled.div`
-    display: inline-block;
     position: relative;
+    display: inline-block;
     margin-left: 1em;
 
     &::before {
         content: '•';
-        color: ${({ theme }) => theme.colors.specific};
         position: absolute;
         top: 50%;
         left: -0.5em;
         transform: translate(-50%, -50%);
+        color: ${({ theme }) => theme.colors.specific};
     }
 
     @media (min-width: 1380px) {
@@ -83,10 +84,9 @@ const Link = styled.a`
 const Controls = styled.div`
     display: flex;
     align-items: center;
-    margin-top: 0.5em;
     @media (min-width: 1380px) {
+        margin-right: 1em;
         order: -1;
-        margin: 0 2em 0 0;
     }
 `;
 
