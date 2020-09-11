@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { SEARCH_TYPES } from '../../../../constants';
 import styled from 'styled-components';
 import LikeButton from '../../../../UI/LikeButton/LikeButton';
@@ -66,7 +66,7 @@ const Lead = styled.h2`
     font-weight: 400;
 `;
 
-const Link = styled.a`
+const InternalLink = styled(Link)`
     display: block;
     text-decoration: none;
     color: inherit;
@@ -88,25 +88,12 @@ const Description = styled.p`
     color: ${({ theme }) => theme.colors.specific};
 `;
 
-function Tile(props) {
-
-    const redirectToDetails = (id, type) => {
-        if(type === SEARCH_TYPES.show) {
-            props.history.push(`/shows/${id}`);
-            return;
-        }
-
-        if(type === SEARCH_TYPES.episode) {
-            props.history.push(`/episodes/${id}`);
-            return;
-        }
-    }
-
+function Tile({ id, title, description, image, type}) {
     return (
         <Item>
             <Outer>
                 <Inner>
-                    <img src={props.image} alt={props.title}/>
+                    <img src={image} alt={title}/>
                     <Hidden>
                         <LikeButton scale={2} />
                     </Hidden>
@@ -114,12 +101,12 @@ function Tile(props) {
             </Outer>
             <Header>
                 <Lead>
-                    <Link onClick={() => redirectToDetails(props.id, props.type)}>
-                        {props.title}
-                    </Link>
+                    <InternalLink to={type === SEARCH_TYPES.show ? `/shows/${id}` : `/episodes/${id}`}>
+                        {title}
+                    </InternalLink>
                 </Lead>
                 <Description>
-                    {props.description}
+                    {description}
                 </Description>
             </Header>
         </Item>

@@ -37,16 +37,12 @@ const Title = styled.h2`
     padding-bottom: 1em;
 `;
 
-function Tiles(props) {
+function Tiles({ title, children }) {
     return (
         <Wrapper>
-            { (props.title) ?
-                <Title>{props.title}</Title>
-                :
-                null
-            }
+            { (title) ? <Title>{title}</Title> : null }
             <Element>
-                {props.children}
+                { children }
             </Element>
         </Wrapper>
     );

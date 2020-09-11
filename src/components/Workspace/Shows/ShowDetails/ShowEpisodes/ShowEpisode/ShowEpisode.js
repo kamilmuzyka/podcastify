@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Accordion from '../../../../../../UI/Accordion/Accordion';
 import { msToHours } from '../../../../../../utils/msToHours';
@@ -34,18 +35,23 @@ const Header = styled.header`
     }
 `;
 
-const Lead = styled.h3`
-    font-size: inherit;
+const Lead = styled.h3``;
+
+const InternalLink = styled(Link)`
+    display: block;
+    font-size: ${({ theme }) => theme.typography.default};
     font-weight: 400;
+    text-decoration: none;
     color: ${({ theme }) => theme.colors.positive};
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
 `;
 
 const Description = styled(Accordion)`
     margin-top: 0.5em;
-
-    @media (min-width: 1380px) {
-        margin-top: 0;
-    }
 `;
 
 const Date = styled.time`
@@ -73,7 +79,7 @@ const Duration = styled.div`
     }
 `;
 
-const Link = styled.a`
+const ExternalLink = styled.a`
     display: inline-block;
     margin-bottom: 0.5em;
     color: inherit;
@@ -101,11 +107,13 @@ const StyledPlayButton = styled(PlayButton)`
     margin-right: 1.5em;
 `;
 
-const ShowEpisode = ({ name, description, releaseDate, duration, source }) => {
+const ShowEpisode = ({ id, name, description, releaseDate, duration, external }) => {
     return (
         <Element>
             <Header>
-                <Lead>{name}</Lead>
+                <Lead>
+                    <InternalLink to={`/episodes/${id}`}>{name}</InternalLink>
+                </Lead>
                 <Description>{description}</Description>
             </Header>
 
@@ -116,7 +124,7 @@ const ShowEpisode = ({ name, description, releaseDate, duration, source }) => {
             <Duration>{msToHours(duration)}</Duration>
 
             <div>
-                <Link href={source}>Listen on Spotify</Link>
+                <ExternalLink href={external}>Listen on Spotify</ExternalLink>
             </div>
 
             <Controls>

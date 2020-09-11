@@ -31,11 +31,12 @@ const ShowEpisodes = ({ episodes }) => {
             { episodes ? episodes.items.map(episode => {
                 return <ShowEpisode
                     key={episode.id}
+                    id={episode.id}
                     name={episode.name}
                     description={episode.description}
                     releaseDate={episode.release_date}
                     duration={episode.duration_ms}
-                    source={episode.external_urls.spotify}
+                    external={episode.external_urls.spotify}
                     preview={episode.audio_preview_url} />}) : null }
         </Fragment>
     );

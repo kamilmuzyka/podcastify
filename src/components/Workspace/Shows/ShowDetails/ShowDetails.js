@@ -26,7 +26,7 @@ const ShowDetails = ({ location }) => {
                 updateDetails({
                     name,
                     publisher,
-                    source: external_urls.spotify,
+                    external: external_urls.spotify,
                     description,
                     image: images[1].url,
                     episodes

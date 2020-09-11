@@ -51,7 +51,7 @@ const Controls = styled.div`
     margin-top: 1em;
 `;
 
-const Link = styled.a`
+const ExternalLink = styled.a`
     margin-left: 1em;
     text-decoration: none;
     color: ${({ theme }) => theme.colors.specific};
@@ -73,7 +73,7 @@ const Content = styled.div`
     }
 `;
 
-const Details = ({ name, publisher, source, description, image, type }) => {
+const Details = ({ name, publisher, external, description, image, type }) => {
     return (
         <Fragment>
             <Split>
@@ -93,7 +93,7 @@ const Details = ({ name, publisher, source, description, image, type }) => {
                     <Description>{description}</Description>
                     <Controls>
                         <Button type="button">Follow</Button>
-                        <Link href={source}>Listen on Spotify</Link>
+                        <ExternalLink href={external}>Listen on Spotify</ExternalLink>
                     </Controls>
                 </Content>
             </Split>
