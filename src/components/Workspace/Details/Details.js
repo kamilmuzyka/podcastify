@@ -7,13 +7,9 @@ import Button from '../../../UI/Button/Button';
 
 const Image = styled.img`
     display: block;
-    width: 100%;
+    max-width: 250px;
     object-fit: contain;
     object-position: top;
-
-    @media (min-width: 1024px) {
-        max-width: 250px;
-    }
 `;
 
 const Header = styled.header``;

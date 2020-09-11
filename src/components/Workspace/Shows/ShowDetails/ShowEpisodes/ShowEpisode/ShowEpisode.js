@@ -42,6 +42,10 @@ const Lead = styled.h3`
 
 const Description = styled(Accordion)`
     margin-top: 0.5em;
+
+    @media (min-width: 1380px) {
+        margin-top: 0;
+    }
 `;
 
 const Date = styled.time`
@@ -77,6 +81,10 @@ const Link = styled.a`
 
     &:hover {
         text-decoration: underline;
+    }
+
+    @media (min-width: 1380px) {
+        margin-bottom: 0;
     }
 `;
 
