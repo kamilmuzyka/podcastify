@@ -29,9 +29,9 @@ const Container = styled.div`
     position: relative;
 `;
 
-function LoadingScreen(props) {
+function LoadingScreen({ loading }) {
     return createPortal(
-        <Element loading={props.loading}>
+        <Element loading={loading}>
             <Container>
                 <Heading>Podcastify</Heading>
                 <BouncingIcon/>

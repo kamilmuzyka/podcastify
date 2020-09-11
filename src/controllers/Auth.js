@@ -23,8 +23,8 @@ class Auth {
             const access = JSON.parse(localStorage.getItem('access'));
             if (access) {
                 const expires = access.expires;
-                const now = (new Date()).getTime();
-                return (now < expires) ? true : false;
+                const now = Date.now();
+                return now < expires;
             }
             return false;
         }
@@ -44,7 +44,7 @@ class Auth {
             const params = new URLSearchParams(replaced);
             const token = params.get('access_token');
             const expiresAddOn = params.get('expires_in') * 1000;
-            const expiresBase = + (new Date()).getTime();
+            const expiresBase = Date.now();
             const expires = expiresBase + expiresAddOn;
             localStorage.setItem('access', JSON.stringify({
                 token,

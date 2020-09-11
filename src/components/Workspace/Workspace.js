@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Shows from './Shows/Shows';
-import ShowDetails from './Shows/ShowDetails/ShowDetails';
+import Show from './Shows/Show/Show';
 import Episodes from './Episodes/Episodes';
 import EpisodeDetails from './Episodes/EpisodeDetails/EpisodeDetails';
 import Settings from './Settings/Settings';
@@ -36,7 +36,7 @@ function Workspace(props) {
         <Main>
             <Switch>
                 <Route path="/" exact component={Shows}/>
-                <Route path="/shows/:id" exact component={ShowDetails}/>
+                <Route path="/shows/:id" exact component={Show}/>
                 <Route path="/episodes" exact component={Episodes}/>
                 <Route path="/episodes/:id" exact component={EpisodeDetails}/>
                 <Route path="/settings" exact component={Settings}/>

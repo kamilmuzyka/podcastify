@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import RotatingIcon from '../../../UI/RotatingIcon/RotatingIcon';
 
-const Container = styled.a`
+const ExternalLink = styled.a`
     display: flex;
     align-items: center;
     align-self: flex-start;
@@ -39,8 +39,8 @@ const Overlay = styled.div`
     transform: translate(-1px, -1px);
     border-radius: 50%;
     background-color: ${({ theme }) => theme.colors.primary};
-    opacity: ${props => props.loading === "true" ? 1 : 0};
-    visibility: ${props => props.loading === "false" ? 'visible' : 'none'};
+    opacity: ${({ loading }) => loading === "true" ? 1 : 0};
+    visibility: ${({ loading }) => loading === "false" ? 'visible' : 'none'};
     transition: opacity 0.3s ease-in-out,
                 visibility 0.3s ease-in-out
 `;
@@ -56,19 +56,19 @@ const StyledRotatingIcon = styled(RotatingIcon)`
     transform: translate(-50%, -50%) scale(0.25);
 `;
 
-function Profile(props) {
+function Profile({ external, name, image, loading }) {
     return (
-        <Container href={props.source}>
+        <ExternalLink href={external}>
             <Photo>
-                <img src={props.image} alt={`${props.name}'s profile`}/>
+                <img src={image} alt={`${name}'s profile`}/>
             </Photo>
-            <Overlay loading={props.loading}>
+            <Overlay loading={loading}>
                 <StyledRotatingIcon/>
             </Overlay>
             <Name>
-                {props.name}
+                {name}
             </Name>
-        </Container>
+        </ExternalLink>
     );
 }
 

@@ -68,7 +68,7 @@ function Header(props) {
     return (
         <Element>
             <Profile
-                source={profileURL}
+                external={profileURL}
                 name={profileName}
                 image={profileImage}
                 loading={imageLoading.toString()}/>
