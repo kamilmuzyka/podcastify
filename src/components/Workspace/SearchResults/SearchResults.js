@@ -64,7 +64,7 @@ function SearchResults({ history }) {
                 </Tiles>
             : null }
 
-            { (shows.length === 0 && episodes.length === 0) ? 'Nothing found' : null }
+            { (shows.length === 0 && episodes.length === 0) ? 'No results for ' + query : null }
 
             <WorkspaceLoading loading={isLoading.toString()}/>
         </Fragment>
