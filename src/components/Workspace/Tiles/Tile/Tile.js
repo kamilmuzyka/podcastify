@@ -67,6 +67,7 @@ const Lead = styled.h2`
 `;
 
 const Link = styled.a`
+    display: block;
     text-decoration: none;
     color: inherit;
     cursor: pointer;

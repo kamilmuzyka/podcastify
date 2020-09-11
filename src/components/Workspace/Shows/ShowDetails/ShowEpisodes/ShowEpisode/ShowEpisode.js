@@ -59,7 +59,6 @@ const Duration = styled.div`
         top: 50%;
         left: -0.5em;
         transform: translate(-50%, -50%);
-        color: ${({ theme }) => theme.colors.specific};
     }
 
     @media (min-width: 1380px) {
