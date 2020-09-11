@@ -17,11 +17,17 @@ function App(props) {
   const [applicationLoading, updateApplicationLoading] = useState(true);
 
   useEffect(() => {
-    if (Auth.check()) {
-      updateIsAuthenticated(true);
-    }
     updateApplicationLoading(false);
   }, []);
+
+  useEffect(() => {
+    if (Auth.check()) {
+      updateIsAuthenticated(true);
+      return;
+    }
+
+    updateIsAuthenticated(false);
+  });
 
   return (
       <Fragment>
