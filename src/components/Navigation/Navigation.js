@@ -97,7 +97,6 @@ const Button = styled.button`
 `;
 
 function Navigation(props) {
-
     const { isActive, toggleMenu } = useContext(MenuContext);
     const { modalActive, openModal, closeModal } = useContext(ModalContext);
 

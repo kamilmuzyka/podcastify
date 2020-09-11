@@ -89,7 +89,7 @@ const Description = styled.p`
 
 function Tile(props) {
 
-    const showDetails = (id, type) => {
+    const redirectToDetails = (id, type) => {
         if(type === SEARCH_TYPES.show) {
             props.history.push(`/shows/${id}`);
             return;
@@ -113,7 +113,7 @@ function Tile(props) {
             </Outer>
             <Header>
                 <Lead>
-                    <Link onClick={() => showDetails(props.id, props.type)}>
+                    <Link onClick={() => redirectToDetails(props.id, props.type)}>
                         {props.title}
                     </Link>
                 </Lead>

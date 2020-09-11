@@ -39,11 +39,11 @@ const Input = styled.input`
 function Search(props) {
     const [query, updateQuery] = useState('');
 
-    const handleChange = (e) => {
+    const handleInputChange = (e) => {
         updateQuery(e.target.value);
     }
 
-    const handleSubmit = (e) => {
+    const handleFormSubmission = (e) => {
         e.preventDefault();
         if(query.length > 0) {
             props.history.push('/search?query=' + query);
@@ -51,8 +51,8 @@ function Search(props) {
     }
 
     return (
-        <Form onSubmit={handleSubmit} {...props}>
-            <Input type="text" placeholder="Search" onChange={handleChange}/>
+        <Form onSubmit={handleFormSubmission} {...props}>
+            <Input type="text" placeholder="Type here" onChange={handleInputChange}/>
             <StyledButton type="submit">Search</StyledButton>
         </Form>
     );
