@@ -48,11 +48,24 @@ const Description = styled(Accordion)`
 `;
 
 const Controls = styled.div`
-    margin-top: 1em;
+    margin-top: 0.75em;
+`;
+
+const PlayButton = styled(Button)`
+    margin-left: 0.75em;
+`;
+
+const Links = styled.div`
+    margin-top: 0.75em;
+    @media (min-width: 500px) {
+        display: inline-block;
+        margin-top: 0;
+        margin-left: 0.75em;
+    }
 `;
 
 const ExternalLink = styled.a`
-    margin-left: 1em;
+    display: inline-block;
     text-decoration: none;
     color: ${({ theme }) => theme.colors.specific};
 
@@ -92,8 +105,17 @@ const Details = ({ name, publisher, external, description, image, type }) => {
                     </Header>
                     <Description>{description}</Description>
                     <Controls>
-                        <Button type="button">Follow</Button>
-                        <ExternalLink href={external}>Listen on Spotify</ExternalLink>
+                        <Button type="button">
+                            {type === SEARCH_TYPES.show ? 'Follow' : 'Like'}
+                        </Button>
+                        <PlayButton type="button" outline>
+                            Play
+                        </PlayButton>
+                        <Links>
+                            <ExternalLink href={external}>
+                                Listen on Spotify
+                            </ExternalLink>
+                        </Links>
                     </Controls>
                 </Content>
             </Split>
