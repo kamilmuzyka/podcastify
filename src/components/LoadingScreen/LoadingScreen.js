@@ -30,14 +30,13 @@ const Container = styled.div`
 `;
 
 function LoadingScreen({ loading }) {
-    return createPortal(
+    return (
         <Element loading={loading}>
             <Container>
                 <Heading>Podcastify</Heading>
                 <BouncingIcon/>
             </Container>
-        </Element>,
-        document.getElementById('loading')
+        </Element>
     );
 }
 

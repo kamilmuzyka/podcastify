@@ -1,4 +1,4 @@
-function capitalizeString(string) {
+const capitalizeString = (string) => {
     if(!string) {
         console.error('No value provided');
         return;

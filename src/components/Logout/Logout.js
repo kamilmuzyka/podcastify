@@ -58,7 +58,7 @@ const ButtonConfirm = styled(Button)`
 `;
 
 const Logout = ({ active, close}) => {
-    return createPortal(
+    return (
         <Fragment>
             <Backdrop active={active} onClick={close}/>
             <Container active={active}>
@@ -70,8 +70,7 @@ const Logout = ({ active, close}) => {
                 </Controls>
                 </Confirmation>
             </Container>
-        </Fragment>,
-        document.getElementById('logout')
+        </Fragment>
     );
 }
 
