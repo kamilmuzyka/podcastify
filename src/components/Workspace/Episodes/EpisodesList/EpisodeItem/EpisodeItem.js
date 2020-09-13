@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Accordion from '../../../../../UI/Accordion/Accordion';
-import { msToHours } from '../../../../../utils/msToHours';
+import convertTime from '../../../../../utils/convertTime';
 import LikeButton from '../../../../../UI/LikeButton/LikeButton';
 import PlayButton from '../../../../../UI/PlayButton/PlayButton';
 
@@ -121,7 +121,7 @@ const EpisodeItem = ({ id, name, description, releaseDate, duration, external })
                 {releaseDate}
             </Date>
 
-            <Duration>{msToHours(duration)}</Duration>
+            <Duration>{convertTime(duration)}</Duration>
 
             <div>
                 <ExternalLink href={external}>Listen on Spotify</ExternalLink>

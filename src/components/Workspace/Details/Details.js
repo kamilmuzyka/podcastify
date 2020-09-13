@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { SEARCH_TYPES } from '../../../constants';
+import capitalizeString from '../../../utils/capitalizeString';
 import Accordion from '../../../UI/Accordion/Accordion';
 import Button from '../../../UI/Button/Button';
 
@@ -94,7 +95,7 @@ const Details = ({ name, publisher, external, description, image, type }) => {
                 <Content>
                     <Header>
                         <Type>
-                            {type[0].toUpperCase() + type.substring(1)}
+                            {capitalizeString(type)}
                         </Type>
 
                         <Lead>{name}</Lead>

@@ -1,4 +1,14 @@
-export const msToHours = (ms) => {
+const convertTime = (ms) => {
+    if(!ms) {
+        console.error('No value provided');
+        return;
+    }
+
+    if(typeof ms !== 'number') {
+        console.error('Provided value must be a number');
+        return;
+    }
+
     const minutes = Math.floor((ms / 1000 / 60) % 60);
     const hours = Math.floor(ms / 1000 / 60 / 60);
 
@@ -18,3 +28,5 @@ export const msToHours = (ms) => {
 
     return result;
 }
+
+export default convertTime;
