@@ -7,13 +7,13 @@ import LikeButton from '../../../../../UI/LikeButton/LikeButton';
 import PlayButton from '../../../../../UI/PlayButton/PlayButton';
 
 const Element = styled.li`
-    margin-top: 1em;
-    padding-top: 1em;
+    margin-top: 0.75em;
+    padding-top: 0.75em;
     border-top: 1px solid #505050;
     color: ${({ theme }) => theme.colors.specific};
 
     & > * {
-        margin-top: 0.5em;
+        margin-top: 0.25em;
     }
 
     @media (min-width: 1380px) {
@@ -51,7 +51,7 @@ const InternalLink = styled(Link)`
 `;
 
 const Description = styled(Accordion)`
-    margin-top: 0.5em;
+    margin-top: 0.25em;
 `;
 
 const Date = styled.time`
@@ -81,7 +81,7 @@ const Duration = styled.div`
 
 const ExternalLink = styled.a`
     display: inline-block;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.25em;
     color: inherit;
     text-decoration: none;
 

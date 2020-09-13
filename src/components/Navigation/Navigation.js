@@ -43,7 +43,7 @@ const List = styled.ul`
 `;
 
 const Item = styled.li`
-    padding: 1.5em 0;
+    padding: 0.75em 0;
 `;
 
 const Link = styled(NavLink)`

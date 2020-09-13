@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-    margin-top: 3em;
+const Container = styled.div`
+    margin-top: 2em;
 
     &:first-child {
         margin-top: 0;
@@ -30,21 +30,21 @@ const Element = styled.ul`
 `;
 
 const Title = styled.h2`
-    font-size: 2em;
-    margin-bottom: 1.5em;
-    font-weight: 600;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
     border-bottom: 1px solid #414141;
-    padding-bottom: 1em;
+    font-size: 2em;
+    font-weight: 700;
 `;
 
 function Tiles({ title, children }) {
     return (
-        <Wrapper>
+        <Container>
             { (title) ? <Title>{title}</Title> : null }
             <Element>
                 { children }
             </Element>
-        </Wrapper>
+        </Container>
     );
 }
 

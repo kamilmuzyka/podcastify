@@ -57,11 +57,17 @@ const Hidden = styled.div`
 `;
 
 const Header = styled.header`
-    padding-top: 1em;
     word-wrap: break-word;
 `;
 
 const Lead = styled.h2`
+    display: -webkit-box;
+    margin-top: 0.75em;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     font-size: 1em;
     font-weight: 400;
 `;
@@ -78,8 +84,8 @@ const InternalLink = styled(Link)`
 `;
 
 const Description = styled.p`
-    display: inline-box;
-    margin-top: 0.5em;
+    display: -webkit-box;
+    margin-top: 0.25em;
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
