@@ -1,10 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-const EpisodeDetails = ({ location }) => {
+const Episode = ({ location }) => {
     return (
         <div>Episode</div>
     );
 }
 
-export default withRouter(EpisodeDetails);
+export default withRouter(Episode);

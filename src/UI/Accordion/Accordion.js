@@ -10,11 +10,6 @@ const Element = styled.p`
     word-wrap: break-word;
     transition: max-height 0.9s ease-in-out;
     cursor: pointer;
-
-    @media (min-width: 1024px) {
-        max-height: ${({ isOpen }) => isOpen ? '50em' : '4.5em'};
-        transition: max-height 0.6s ease-in-out;
-    }
 `;
 
 const Accordion = (props) => {

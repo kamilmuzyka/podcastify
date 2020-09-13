@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Accordion from '../../../../../../UI/Accordion/Accordion';
-import { msToHours } from '../../../../../../utils/msToHours';
-import LikeButton from '../../../../../../UI/LikeButton/LikeButton';
-import PlayButton from '../../../../../../UI/PlayButton/PlayButton';
+import Accordion from '../../../../../UI/Accordion/Accordion';
+import { msToHours } from '../../../../../utils/msToHours';
+import LikeButton from '../../../../../UI/LikeButton/LikeButton';
+import PlayButton from '../../../../../UI/PlayButton/PlayButton';
 
-const Element = styled.div`
+const Element = styled.li`
     margin-top: 1em;
     padding-top: 1em;
     border-top: 1px solid #505050;
@@ -107,7 +107,7 @@ const StyledPlayButton = styled(PlayButton)`
     margin-right: 1.5em;
 `;
 
-const ShowEpisode = ({ id, name, description, releaseDate, duration, external }) => {
+const EpisodeItem = ({ id, name, description, releaseDate, duration, external }) => {
     return (
         <Element>
             <Header>
@@ -135,4 +135,4 @@ const ShowEpisode = ({ id, name, description, releaseDate, duration, external })
     );
 }
 
-export default ShowEpisode;
+export default EpisodeItem;

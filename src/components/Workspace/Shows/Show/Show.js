@@ -4,7 +4,7 @@ import { SEARCH_TYPES } from '../../../../constants';
 import Spotify from '../../../../models/Spotify';
 import WorkspaceLoading from '../../WorkspaceLoading/WorkspaceLoading';
 import Details from '../../Details/Details';
-import ShowEpisodes from './ShowEpisodes/ShowEpisodes';
+import EpisodesList from '../../Episodes/EpisodesList/EpisodesList';
 
 const ShowDetails = ({ location }) => {
     const [isLoading, updateIsLoading] = useState(true);
@@ -42,7 +42,7 @@ const ShowDetails = ({ location }) => {
     return (
         <Fragment>
             <Details {...details} type={SEARCH_TYPES.show} />
-            <ShowEpisodes episodes={details.episodes}/>
+            <EpisodesList episodes={details.episodes}/>
             <WorkspaceLoading loading={isLoading.toString()}/>
         </Fragment>
     );
