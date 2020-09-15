@@ -16,24 +16,16 @@ const ShowDetails = ({ location }) => {
             const path = location.pathname;
             const showId = extractId(path);
             try {
-                const {
-                    name,
-                    publisher,
-                    external_urls,
-                    description,
-                    images,
-                    episodes } = await Spotify.getShowDetails(showId);
-
+                const show = await Spotify.getShowDetails(showId);
                 updateDetails({
-                    name,
-                    publisher,
-                    external: external_urls.spotify,
-                    description,
-                    image: images[1].url,
-                    episodes,
-                    type: SEARCH_TYPES.show
+                    name: show.name,
+                    description: show.description,
+                    external: show.external_urls.spotify,
+                    type: SEARCH_TYPES.show,
+                    publisher: show.publisher,
+                    image: show.images[1].url,
+                    episodes: show.episodes
                 });
-
                 updateIsLoading(false);
             } catch(err) {
                 throw new Error(err);
@@ -43,7 +35,7 @@ const ShowDetails = ({ location }) => {
 
     return (
         <Fragment>
-            <Details {...details}/>
+            <Details payload={details}/>
             <EpisodesList episodes={details.episodes}/>
             <WorkspaceLoading loading={isLoading.toString()}/>
         </Fragment>

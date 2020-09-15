@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { SEARCH_TYPES } from '../../../constants';
@@ -44,6 +45,19 @@ const Publisher = styled(Label)`
     margin: 0.25em 0 0.75em 0;
 `;
 
+const Show = styled(Label)`
+    margin: 0.25em 0 0.75em 0;
+`;
+
+const InternalLink = styled(Link)`
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+        text-decoration: underline;
+    }
+`;
+
 const Description = styled(Accordion)`
     color: ${({ theme }) => theme.colors.specific};
 `;
@@ -83,41 +97,53 @@ const Split = styled.div`
 
 const Content = styled.div`
     @media (min-width: 1024px) {
-        margin-left: 3em;
+        margin-left: ${({ type }) => type === SEARCH_TYPES.show ? '3em' : '0'};
     }
 `;
 
-const Details = ({ name, publisher, external, description, image, type }) => {
+const Details = ({ payload }) => {
     return (
         <Fragment>
             <Split>
-                <Image src={image} alt="" />
-                <Content>
+                <Image src={payload.type === SEARCH_TYPES.show ? payload.image : null} alt=""/>
+                <Content type={payload.type}>
                     <Header>
                         <Type>
-                            {type ? capitalizeString(type) : null}
+                            {payload.type ? capitalizeString(payload.type) : null}
                         </Type>
-
-                        <Lead>{name}</Lead>
-
-                        <Publisher>
-                            By {publisher}
-                        </Publisher>
+                        <Lead>
+                            {payload.name}
+                        </Lead>
+                        { payload.type === SEARCH_TYPES.show ?
+                            <Publisher>
+                                By {payload.publisher}
+                            </Publisher>
+                            :
+                            <Show>
+                                <InternalLink to={`/shows/${payload.showId}`}>
+                                    {payload.showName}
+                                </InternalLink>
+                            </Show> }
                     </Header>
-                    <Description>{description}</Description>
+                    <Description>
+                        {payload.description}
+                    </Description>
                     <Controls>
                         <Button type="button">
-                            {type === SEARCH_TYPES.show ? 'Follow' : 'Like'}
+                            {payload.type === SEARCH_TYPES.show ? 'Follow' : 'Like'}
                         </Button>
                         <PlayButton type="button" outline>
                             Play
                         </PlayButton>
                         <Links>
-                            <ExternalLink href={external}>
+                            <ExternalLink href={payload.external}>
                                 Listen on Spotify
                             </ExternalLink>
                         </Links>
                     </Controls>
+                    { payload.type === SEARCH_TYPES.episode ?
+                        'Date - Duration'
+                        : null }
                 </Content>
             </Split>
         </Fragment>

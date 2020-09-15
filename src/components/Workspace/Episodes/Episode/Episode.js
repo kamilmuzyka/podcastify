@@ -15,29 +15,17 @@ const Episode = ({ location }) => {
             const path = location.pathname;
             const episodeId = extractId(path);
             try {
-
-                const results = await Spotify.getEpisodeDetails(episodeId);
-                console.log(results);
-
-
-                const {
-                    name,
-                    external_urls,
-                    description,
-                    images,
-                    release_date,
-                    duration_ms } = await Spotify.getEpisodeDetails(episodeId);
-
+                const episode = await Spotify.getEpisodeDetails(episodeId);
                 updateDetails({
-                    name,
-                    external: external_urls.spotify,
-                    description,
-                    image: images[1].url,
-                    releaseDate: release_date,
-                    duration: duration_ms,
-                    type: SEARCH_TYPES.episode
+                    name: episode.name,
+                    description: episode.description,
+                    external: episode.external_urls.spotify,
+                    type: SEARCH_TYPES.episode,
+                    showName: episode.show.name,
+                    showId: episode.show.id,
+                    releaseDate: episode.release_date,
+                    duration: episode.duration_ms
                 });
-
                 updateIsLoading(false);
             } catch(err) {
                 throw new Error(err);
@@ -47,7 +35,7 @@ const Episode = ({ location }) => {
 
     return (
         <Fragment>
-            <Details {...details}/>
+            <Details payload={details}/>
             <WorkspaceLoading loading={isLoading.toString()}/>
         </Fragment>
     );
