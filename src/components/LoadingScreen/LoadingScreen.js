@@ -1,5 +1,4 @@
 import React from 'react';
-import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import BouncingIcon from '../../UI/BouncingIcon/BouncingIcon';
 

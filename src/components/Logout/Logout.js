@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import Auth from '../../controllers/Auth';
 import Button from '../../UI/Button/Button';
@@ -63,11 +62,11 @@ const Logout = ({ active, close}) => {
             <Backdrop active={active} onClick={close}/>
             <Container active={active}>
                 <Confirmation>
-                <Paragraph>Are you sure you want to log out?</Paragraph>
-                <Controls>
-                    <ButtonConfirm type="button" onClick={Auth.logOut}>Yes</ButtonConfirm>
-                    <Button type="button" outline onClick={close}>No</Button>
-                </Controls>
+                    <Paragraph>Are you sure you want to log out?</Paragraph>
+                    <Controls>
+                        <ButtonConfirm type="button" onClick={Auth.logOut}>Yes</ButtonConfirm>
+                        <Button type="button" outline onClick={close}>No</Button>
+                    </Controls>
                 </Confirmation>
             </Container>
         </Fragment>

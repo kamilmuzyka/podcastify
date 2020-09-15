@@ -1,12 +1,10 @@
 const convertTime = (ms) => {
     if(!ms) {
-        console.error('No value provided');
-        return;
+        throw new Error('No value provided');
     }
 
     if(typeof ms !== 'number') {
-        console.error('Provided value must be a number');
-        return;
+        throw new Error('Provided value must be a number');
     }
 
     const minutes = Math.floor((ms / 1000 / 60) % 60);
