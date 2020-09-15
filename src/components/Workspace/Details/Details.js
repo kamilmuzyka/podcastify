@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { SEARCH_TYPES } from '../../../constants';
 import capitalizeString from '../../../utils/capitalizeString';
+import convertTime from '../../../utils/convertTime';
 import Accordion from '../../../UI/Accordion/Accordion';
 import Button from '../../../UI/Button/Button';
 
@@ -101,6 +102,29 @@ const Content = styled.div`
     }
 `;
 
+const Time = styled.div`
+    margin-top: 0.75em;
+    color: ${({ theme }) => theme.colors.specific};
+`;
+
+const Date = styled.time`
+    display: inline-block;
+`;
+
+const Duration = styled.div`
+    position: relative;
+    display: inline-block;
+    margin-left: 1em;
+
+    &::before {
+        content: '•';
+        position: absolute;
+        top: 50%;
+        left: -0.5em;
+        transform: translate(-50%, -50%);
+    }
+`;
+
 const Details = ({ payload }) => {
     return (
         <Fragment>
@@ -114,7 +138,7 @@ const Details = ({ payload }) => {
                         <Lead>
                             {payload.name}
                         </Lead>
-                        { payload.type === SEARCH_TYPES.show ?
+                        {payload.type === SEARCH_TYPES.show ?
                             <Publisher>
                                 By {payload.publisher}
                             </Publisher>
@@ -123,14 +147,19 @@ const Details = ({ payload }) => {
                                 <InternalLink to={`/shows/${payload.showId}`}>
                                     {payload.showName}
                                 </InternalLink>
-                            </Show> }
+                            </Show>
+                        }
                     </Header>
                     <Description>
                         {payload.description}
                     </Description>
                     <Controls>
                         <Button type="button">
-                            {payload.type === SEARCH_TYPES.show ? 'Follow' : 'Like'}
+                            {payload.type === SEARCH_TYPES.show ?
+                                'Follow'
+                                :
+                                'Like'
+                            }
                         </Button>
                         <PlayButton type="button" outline>
                             Play
@@ -141,9 +170,16 @@ const Details = ({ payload }) => {
                             </ExternalLink>
                         </Links>
                     </Controls>
-                    { payload.type === SEARCH_TYPES.episode ?
-                        'Date - Duration'
-                        : null }
+                    {payload.type === SEARCH_TYPES.episode ?
+                        <Time>
+                            <Date dateTime={payload.releaseDate}>
+                                {payload.releaseDate}
+                            </Date>
+                            <Duration>{convertTime(payload.duration)}</Duration>
+                        </Time>
+                        :
+                        null
+                    }
                 </Content>
             </Split>
         </Fragment>
