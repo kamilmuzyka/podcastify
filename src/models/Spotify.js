@@ -1,20 +1,20 @@
 class Spotify {
+    static retrieveAccessToken() {
+        const access = localStorage.getItem('access');
 
-    static retrieveToken() {
-        if (localStorage.getItem('access')) {
-            const {
-                token
-            } = JSON.parse(localStorage.getItem('access'));
-            return token ? token : false;
+        if(!access) {
+            throw new Error('No access token found');
         }
-        return false;
+
+        const { token } = JSON.parse(access);
+        return token;
     }
 
     static async getSearchResults(query) {
-        const token = this.retrieveToken();
+        const token = this.retrieveAccessToken();
 
         if (!token) {
-            return;
+            throw new Error('No token provided');
         }
 
         try {
@@ -23,38 +23,55 @@ class Spotify {
                     'Authorization': 'Bearer ' + token
                 }
             });
-            const results = await data.json();
-            return results;
+            return await data.json();
         } catch (err) {
-            console.error(err);
+            throw new Error(err);
         }
     }
 
-    static async getDetails(id, type) {
-        const token = this.retrieveToken();
+    static async getShowDetails(id) {
+        const token = this.retrieveAccessToken();
 
         if (!token) {
-            return;
+            throw new Error('No token provided');
         }
 
         try {
-            const data = await fetch(`https://api.spotify.com/v1/${type}s/${id}`, {
+            const data = await fetch(`https://api.spotify.com/v1/shows/${id}`, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
             });
-            const results = await data.json();
-            return results;
+            return await data.json();
         } catch (err) {
-            console.error(err);
+            throw new Error(err);
+        }
+    }
+
+    static async getEpisodeDetails(id) {
+        const token = this.retrieveAccessToken();
+
+        if (!token) {
+            throw new Error('No token provided');
+        }
+
+        try {
+            const data = await fetch(`https://api.spotify.com/v1/episodes/${id}`, {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            });
+            return await data.json();
+        } catch (err) {
+            throw new Error(err);
         }
     }
 
     static async getUserProfile() {
-        const token = this.retrieveToken();
+        const token = this.retrieveAccessToken();
 
         if (!token) {
-            return;
+            throw new Error('No token provided');
         }
 
         try {
@@ -63,10 +80,9 @@ class Spotify {
                     'Authorization': 'Bearer ' + token
                 }
             });
-            const results = await data.json();
-            return results;
+            return await data.json();
         } catch (err) {
-            console.error(err);
+            throw new Error(err);
         }
     }
 }

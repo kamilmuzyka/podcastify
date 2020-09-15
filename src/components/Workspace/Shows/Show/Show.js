@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { SEARCH_TYPES } from '../../../../constants';
 import Spotify from '../../../../models/Spotify';
+import extractId from '../../../../utils/extractId';
 import WorkspaceLoading from '../../WorkspaceLoading/WorkspaceLoading';
 import Details from '../../Details/Details';
 import EpisodesList from '../../Episodes/EpisodesList/EpisodesList';
@@ -13,7 +14,7 @@ const ShowDetails = ({ location }) => {
     useEffect(() => {
         (async () => {
             const path = location.pathname;
-            const showId = path.substring(path.lastIndexOf('/') + 1);
+            const showId = extractId(path);
             try {
                 const {
                     name,
@@ -21,7 +22,7 @@ const ShowDetails = ({ location }) => {
                     external_urls,
                     description,
                     images,
-                    episodes } = await Spotify.getDetails(showId, SEARCH_TYPES.show);
+                    episodes } = await Spotify.getShowDetails(showId);
 
                 updateDetails({
                     name,
@@ -29,19 +30,20 @@ const ShowDetails = ({ location }) => {
                     external: external_urls.spotify,
                     description,
                     image: images[1].url,
-                    episodes
+                    episodes,
+                    type: SEARCH_TYPES.show
                 });
 
                 updateIsLoading(false);
             } catch(err) {
-                console.error(err);
+                throw new Error(err);
             }
         })();
-    }, [location.pathname]);
+    }, []);
 
     return (
         <Fragment>
-            <Details {...details} type={SEARCH_TYPES.show} />
+            <Details {...details}/>
             <EpisodesList episodes={details.episodes}/>
             <WorkspaceLoading loading={isLoading.toString()}/>
         </Fragment>

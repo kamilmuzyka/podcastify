@@ -28,7 +28,7 @@ function SearchResults({ history }) {
                     updateEpisodes(episodes.items);
                     updateIsLoading(false);
                 } catch(err) {
-                    console.error(err);
+                    throw new Error(err);
                 }
             })();
         }

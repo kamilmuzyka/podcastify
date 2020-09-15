@@ -95,7 +95,7 @@ const Details = ({ name, publisher, external, description, image, type }) => {
                 <Content>
                     <Header>
                         <Type>
-                            {capitalizeString(type)}
+                            {type ? capitalizeString(type) : null}
                         </Type>
 
                         <Lead>{name}</Lead>
