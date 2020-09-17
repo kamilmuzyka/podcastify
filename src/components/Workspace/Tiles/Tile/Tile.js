@@ -93,7 +93,7 @@ function Tile({ id, title, description, image, type}) {
         }
 
         throw new Error('Wrong type provided. Should be one of \'shows\', \'episodes\'.');
-    }, []);
+    }, [id, type]);
 
     return (
         <Item>

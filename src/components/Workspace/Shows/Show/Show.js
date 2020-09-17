@@ -31,7 +31,7 @@ const ShowDetails = ({ location }) => {
                 throw new Error(err);
             }
         })();
-    }, []);
+    }, [location.pathname]);
 
     return (
         <Fragment>
