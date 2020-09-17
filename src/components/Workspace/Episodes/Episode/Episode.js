@@ -8,6 +8,19 @@ import Tiles from '../../Tiles/Tiles';
 import Tile from '../../Tiles/Tile/Tile';
 import WorkspaceLoading from '../../WorkspaceLoading/WorkspaceLoading';
 
+const selectCorrespondingEpisodes = (currentEpisodeId, episodes) => {
+    let episodesRangeBeginningIndex = 0;
+    const episodesToDisplay = 4;
+    const currentEpisodeIndex = episodes
+        .findIndex(episode => episode.id === currentEpisodeId);
+    if (currentEpisodeIndex !== -1 && currentEpisodeIndex >= episodesToDisplay) {
+        episodesRangeBeginningIndex = currentEpisodeIndex;
+    }
+    return episodes
+        .splice(episodesRangeBeginningIndex - episodesToDisplay, episodesToDisplay)
+        .reverse();
+}
+
 const Episode = ({ location }) => {
     const [isLoading, updateIsLoading] = useState(true);
     const [details, updateDetails] = useState({});
@@ -30,13 +43,7 @@ const Episode = ({ location }) => {
                     duration: episode.duration_ms
                 });
                 const show = await Spotify.getShowDetails(episode.show.id);
-                const totalEpisodes = show.episodes.items.length - 1;
-                const episodesToDisplay = 4;
-                const randomRangeOrigin = Math.floor(Math.random() * (totalEpisodes - episodesToDisplay - 1 + 1)) + 1;
-                const moreEpisodes = show.episodes.items
-                    .filter(episode => episode.id !== episodeId)
-                    .splice(randomRangeOrigin, episodesToDisplay)
-                    .reverse();
+                const moreEpisodes = selectCorrespondingEpisodes(episodeId, show.episodes.items);
                 updateEpisodes(moreEpisodes);
                 updateIsLoading(false);
             } catch(err) {
