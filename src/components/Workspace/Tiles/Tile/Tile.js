@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { SEARCH_TYPES } from '../../../../constants';
 import styled from 'styled-components';
-import LikeButton from '../../../../UI/LikeButton/LikeButton';
 
 const Item = styled.li`
     margin-bottom: 2em;
@@ -39,21 +38,6 @@ const Inner = styled.div`
         opacity: 1;
         visibility: visible;
     }
-`;
-
-const Hidden = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
 `;
 
 const Header = styled.header`
@@ -95,19 +79,34 @@ const Description = styled.p`
 `;
 
 function Tile({ id, title, description, image, type}) {
+    const [reference, updateReference] = useState('');
+
+    useEffect(() => {
+        if (type === SEARCH_TYPES.show) {
+            updateReference(`/shows/${id}`);
+            return;
+        }
+
+        if (type === SEARCH_TYPES.episode) {
+            updateReference(`/episodes/${id}`);
+            return;
+        }
+
+        throw new Error('Wrong type provided. Should be one of \'shows\', \'episodes\'.');
+    }, []);
+
     return (
         <Item>
             <Outer>
                 <Inner>
-                    <img src={image} alt={title}/>
-                    <Hidden>
-                        <LikeButton scale={2} />
-                    </Hidden>
+                    <InternalLink to={reference}>
+                        <img src={image} alt={title}/>
+                    </InternalLink>
                 </Inner>
             </Outer>
             <Header>
                 <Lead>
-                    <InternalLink to={type === SEARCH_TYPES.show ? `/shows/${id}` : `/episodes/${id}`}>
+                    <InternalLink to={reference}>
                         {title}
                     </InternalLink>
                 </Lead>
