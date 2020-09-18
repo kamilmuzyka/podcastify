@@ -94,7 +94,7 @@ class Spotify {
         }
 
         try {
-            const data = await fetch(`https://api.spotify.com/v1/me/shows`, {
+            const data = await fetch(`https://api.spotify.com/v1/me/shows/?limit=50`, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
