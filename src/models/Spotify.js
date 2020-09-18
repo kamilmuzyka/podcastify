@@ -85,6 +85,25 @@ class Spotify {
             throw new Error(err);
         }
     }
+
+    static async getUserShows() {
+        const token = this.retrieveAccessToken();
+
+        if (!token) {
+            throw new Error('No token provided');
+        }
+
+        try {
+            const data = await fetch(`https://api.spotify.com/v1/me/shows`, {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            });
+            return await data.json();
+        } catch (err) {
+            throw new Error(err);
+        }
+    }
 }
 
 export default Spotify;

@@ -1,6 +1,7 @@
 const settings = {
     clientID: 'c9587c71088b4ad78b3f54fda5ba1544',
-    redirectURI: 'http://localhost:3000/'
+    redirectURI: 'http://localhost:3000/',
+    scope: encodeURIComponent('user-read-private user-read-email user-follow-read user-follow-modify')
 }
 
 class Auth {
@@ -8,6 +9,7 @@ class Auth {
         const params = new URLSearchParams({
             client_id: settings.clientID,
             redirect_uri: settings.redirectURI,
+            scope: settings.scope,
             response_type: 'token'
         }).toString();
         window.location.href = 'https://accounts.spotify.com/authorize?' + params;
