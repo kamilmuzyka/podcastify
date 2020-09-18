@@ -98,7 +98,7 @@ const Split = styled.div`
 
 const Content = styled.div`
     @media (min-width: 1024px) {
-        margin-left: ${({ type }) => type === SEARCH_TYPES.show ? '3em' : '0'};
+        margin-left: 3em;
     }
 `;
 
@@ -129,7 +129,7 @@ const Details = ({ payload }) => {
     return (
         <Fragment>
             <Split>
-                <Image src={payload.type === SEARCH_TYPES.show ? payload.image : null} alt=""/>
+                <Image src={payload.image} alt=""/>
                 <Content type={payload.type}>
                     <Header>
                         <Type>

@@ -37,6 +37,7 @@ const Episode = ({ location }) => {
                     description: episode.description,
                     external: episode.external_urls.spotify,
                     type: SEARCH_TYPES.episode,
+                    image: episode.images[1].url,
                     showName: episode.show.name,
                     showId: episode.show.id,
                     releaseDate: episode.release_date,

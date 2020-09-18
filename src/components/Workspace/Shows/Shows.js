@@ -16,9 +16,8 @@ const Shows = (props) => {
                     .reverse()
             );
         })();
-    }, [])
+    }, []);
 
-    console.log(shows);
     return (
         (shows.length > 0) ?
             <Tiles title="Followed Shows">
