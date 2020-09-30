@@ -17,14 +17,21 @@ const ShowDetails = ({ location }) => {
             const showId = extractId(path);
             try {
                 const show = await Spotify.getShowDetails(showId);
+                const isFollowed = await Spotify.checkUserShow(showId);
+                const follow = () => Spotify.saveUserShow(showId);
+                const unfollow = () => Spotify.removeUserShow(showId);
                 updateDetails({
                     name: show.name,
+                    showId: show.id,
                     description: show.description,
                     external: show.external_urls.spotify,
                     type: SEARCH_TYPES.show,
                     publisher: show.publisher,
                     image: show.images[1].url,
-                    episodes: show.episodes
+                    episodes: show.episodes,
+                    isFollowed,
+                    follow,
+                    unfollow
                 });
                 updateIsLoading(false);
             } catch(err) {

@@ -8,6 +8,8 @@ import convertTime from '../../../utils/convertTime';
 import Accordion from '../../../UI/Accordion/Accordion';
 import Button from '../../../UI/Button/Button';
 
+import Spotify from '../../../models/Spotify';
+
 const Image = styled.img`
     display: block;
     max-width: 250px;
@@ -154,12 +156,10 @@ const Details = ({ payload }) => {
                         {payload.description}
                     </Description>
                     <Controls>
-                        <Button type="button">
-                            {payload.type === SEARCH_TYPES.show ?
-                                'Follow'
-                                :
-                                'Like'
-                            }
+                        <Button
+                            type="button"
+                            onClick={payload.isFollowed ? payload.unfollow : payload.follow}>
+                            {payload.type === SEARCH_TYPES.show ? 'Follow' : 'Like'}
                         </Button>
                         <PlayButton type="button" outline>
                             Play
