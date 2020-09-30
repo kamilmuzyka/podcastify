@@ -7,9 +7,20 @@ import WorkspaceLoading from '../../WorkspaceLoading/WorkspaceLoading';
 import Details from '../../Details/Details';
 import EpisodesList from '../../Episodes/EpisodesList/EpisodesList';
 
-const ShowDetails = ({ location }) => {
+const Show = ({ location }) => {
     const [isLoading, updateIsLoading] = useState(true);
+    const [isFollowed, updateIsFollowed] = useState(null);
     const [details, updateDetails] = useState({});
+
+    const handleShowFollow = (id) => {
+        Spotify.saveUserShow(id);
+        updateIsFollowed(true);
+    };
+
+    const handleShowUnfollow = (id) => {
+        Spotify.removeUserShow(id)
+        updateIsFollowed(false);
+    };
 
     useEffect(() => {
         (async () => {
@@ -17,9 +28,7 @@ const ShowDetails = ({ location }) => {
             const showId = extractId(path);
             try {
                 const show = await Spotify.getShowDetails(showId);
-                const isFollowed = await Spotify.checkUserShow(showId);
-                const follow = () => Spotify.saveUserShow(showId);
-                const unfollow = () => Spotify.removeUserShow(showId);
+                updateIsFollowed(await Spotify.checkUserShow(showId));
                 updateDetails({
                     name: show.name,
                     showId: show.id,
@@ -30,15 +39,15 @@ const ShowDetails = ({ location }) => {
                     image: show.images[1].url,
                     episodes: show.episodes,
                     isFollowed,
-                    follow,
-                    unfollow
+                    follow: () => handleShowFollow(showId),
+                    unfollow: () => handleShowUnfollow(showId)
                 });
                 updateIsLoading(false);
             } catch(err) {
                 throw new Error(err);
             }
         })();
-    }, [location.pathname]);
+    }, [location.pathname, isFollowed]);
 
     return (
         <Fragment>
@@ -49,4 +58,4 @@ const ShowDetails = ({ location }) => {
     );
 }
 
-export default withRouter(ShowDetails);
+export default withRouter(Show);

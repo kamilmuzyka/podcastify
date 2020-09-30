@@ -70,7 +70,7 @@ const Controls = styled.div`
 `;
 
 const PlayButton = styled(Button)`
-    margin-left: 0.75em;
+    margin-right: 0.75em;
 `;
 
 const Links = styled.div`
@@ -156,14 +156,18 @@ const Details = ({ payload }) => {
                         {payload.description}
                     </Description>
                     <Controls>
-                        <Button
-                            type="button"
-                            onClick={payload.isFollowed ? payload.unfollow : payload.follow}>
-                            {payload.type === SEARCH_TYPES.show ? 'Follow' : 'Like'}
-                        </Button>
-                        <PlayButton type="button" outline>
+                        <PlayButton type="button">
                             Play
                         </PlayButton>
+                        <Button
+                            outline
+                            type="button"
+                            onClick={payload.isFollowed ? payload.unfollow : payload.follow}>
+                            {payload.type === SEARCH_TYPES.show ?
+                                payload.isFollowed ? 'Unfollow' : 'Follow'
+                                :
+                                'Like'}
+                        </Button>
                         <Links>
                             <ExternalLink href={payload.external}>
                                 Listen on Spotify
