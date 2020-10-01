@@ -27,8 +27,11 @@ const Show = ({ location }) => {
             const path = location.pathname;
             const showId = extractId(path);
             try {
-                const show = await Spotify.getShowDetails(showId);
-                updateIsFollowed(await Spotify.checkUserShow(showId));
+                const [show, isFollowed] = await Promise.all([
+                    Spotify.getShowDetails(showId),
+                    Spotify.checkUserShow(showId)
+                ]);
+                updateIsFollowed(show[1]);
                 updateDetails({
                     name: show.name,
                     showId: show.id,
@@ -39,8 +42,8 @@ const Show = ({ location }) => {
                     image: show.images[1].url,
                     episodes: show.episodes,
                     isFollowed,
-                    follow: () => handleShowFollow(showId),
-                    unfollow: () => handleShowUnfollow(showId)
+                    set: () => handleShowFollow(showId),
+                    reset: () => handleShowUnfollow(showId)
                 });
                 updateIsLoading(false);
             } catch(err) {

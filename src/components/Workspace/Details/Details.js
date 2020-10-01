@@ -162,7 +162,7 @@ const Details = ({ payload }) => {
                         <Button
                             outline
                             type="button"
-                            onClick={payload.isFollowed ? payload.unfollow : payload.follow}>
+                            onClick={payload.isFollowed ? payload.reset : payload.set}>
                             {payload.type === SEARCH_TYPES.show ?
                                 payload.isFollowed ? 'Unfollow' : 'Follow'
                                 :
