@@ -41,9 +41,9 @@ const Show = ({ location }) => {
                     publisher: show.publisher,
                     image: show.images[1].url,
                     episodes: show.episodes,
-                    isFollowed,
-                    set: () => handleShowFollow(showId),
-                    reset: () => handleShowUnfollow(showId)
+                    inLibrary: isFollowed,
+                    addToLibrary: () => handleShowFollow(showId),
+                    removeFromLibrary: () => handleShowUnfollow(showId)
                 });
                 updateIsLoading(false);
             } catch(err) {

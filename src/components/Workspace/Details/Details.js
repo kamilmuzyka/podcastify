@@ -160,13 +160,10 @@ const Details = ({ payload }) => {
                             Play
                         </PlayButton>
                         <Button
-                            outline
                             type="button"
-                            onClick={payload.isFollowed ? payload.reset : payload.set}>
-                            {payload.type === SEARCH_TYPES.show ?
-                                payload.isFollowed ? 'Unfollow' : 'Follow'
-                                :
-                                'Like'}
+                            outline
+                            onClick={payload.inLibrary ? payload.removeFromLibrary : payload.addToLibrary}>
+                            {payload.type === SEARCH_TYPES.show ? payload.inLibrary ? 'Unfollow' : 'Follow' : 'Like'}
                         </Button>
                         <Links>
                             <ExternalLink href={payload.external}>
