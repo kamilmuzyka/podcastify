@@ -22,16 +22,15 @@ const selectCorrespondingEpisodes = (currentEpisodeId, episodes) => {
 }
 
 const Episode = ({ location }) => {
+    const EPISODE_ID = extractId(location.pathname);
     const [isLoading, updateIsLoading] = useState(true);
     const [details, updateDetails] = useState({});
     const [episodes, updateEpisodes] = useState([]);
 
     useEffect(() => {
         (async () => {
-            const path = location.pathname;
-            const episodeId = extractId(path);
             try {
-                const episode = await Spotify.getEpisodeDetails(episodeId);
+                const episode = await Spotify.getEpisodeDetails(EPISODE_ID);
                 updateDetails({
                     name: episode.name,
                     description: episode.description,
@@ -44,7 +43,7 @@ const Episode = ({ location }) => {
                     duration: episode.duration_ms
                 });
                 const show = await Spotify.getShowDetails(episode.show.id);
-                const moreEpisodes = selectCorrespondingEpisodes(episodeId, show.episodes.items);
+                const moreEpisodes = selectCorrespondingEpisodes(EPISODE_ID, show.episodes.items);
                 updateEpisodes(moreEpisodes);
                 updateIsLoading(false);
             } catch(err) {

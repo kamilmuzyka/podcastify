@@ -8,6 +8,7 @@ import Details from '../../Details/Details';
 import EpisodesList from '../../Episodes/EpisodesList/EpisodesList';
 
 const Show = ({ location }) => {
+    const SHOW_ID = extractId(location.pathname);
     const [details, updateDetails] = useState({});
     const [library, updateLibrary] = useState({});
     const [isFollowed, updateIsFollowed] = useState(null);
@@ -25,27 +26,23 @@ const Show = ({ location }) => {
 
     useEffect(() => {
         (async () => {
-            const path = location.pathname;
-            const showId = extractId(path);
             try {
-                const inLibrary = await Spotify.checkUserShow(showId);
+                const inLibrary = await Spotify.checkUserShow(SHOW_ID);
                 updateLibrary({
                     inLibrary,
-                    addToLibrary: () => handleShowFollow(showId),
-                    removeFromLibrary: () => handleShowUnfollow(showId)
+                    addToLibrary: () => handleShowFollow(SHOW_ID),
+                    removeFromLibrary: () => handleShowUnfollow(SHOW_ID)
                 });
             } catch(err) {
                 throw new Error(err);
             }
         })();
-    }, [location.pathname, isFollowed]);
+    }, [SHOW_ID, isFollowed]);
 
     useEffect(() => {
         (async () => {
-            const path = location.pathname;
-            const showId = extractId(path);
             try {
-                const show = await Spotify.getShowDetails(showId);
+                const show = await Spotify.getShowDetails(SHOW_ID);
                 updateDetails({
                     name: show.name,
                     showId: show.id,
@@ -61,7 +58,7 @@ const Show = ({ location }) => {
                 throw new Error(err);
             }
         })();
-    }, [location.pathname]);
+    }, [SHOW_ID]);
 
     return (
         <Fragment>
