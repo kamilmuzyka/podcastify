@@ -8,18 +8,15 @@ import Details from '../../Details/Details';
 import EpisodesList from '../../Episodes/EpisodesList/EpisodesList';
 
 const Show = ({ location }) => {
-    const [isLoading, updateIsLoading] = useState(true);
-    const [isFollowed, updateIsFollowed] = useState(null);
     const [details, updateDetails] = useState({});
+    const [isLoading, updateIsLoading] = useState(true);
 
     const handleShowFollow = (id) => {
         Spotify.saveUserShow(id);
-        updateIsFollowed(true);
     };
 
     const handleShowUnfollow = (id) => {
-        Spotify.removeUserShow(id)
-        updateIsFollowed(false);
+        Spotify.removeUserShow(id);
     };
 
     useEffect(() => {
@@ -27,11 +24,8 @@ const Show = ({ location }) => {
             const path = location.pathname;
             const showId = extractId(path);
             try {
-                const [show, isFollowed] = await Promise.all([
-                    Spotify.getShowDetails(showId),
-                    Spotify.checkUserShow(showId)
-                ]);
-                updateIsFollowed(show[1]);
+                const show = await Spotify.getShowDetails(showId);
+                const isFollowed = await Spotify.checkUserShow(showId);
                 updateDetails({
                     name: show.name,
                     showId: show.id,
@@ -50,7 +44,7 @@ const Show = ({ location }) => {
                 throw new Error(err);
             }
         })();
-    }, [location.pathname, isFollowed]);
+    }, [location.pathname, details]);
 
     return (
         <Fragment>

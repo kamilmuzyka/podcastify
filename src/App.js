@@ -14,10 +14,10 @@ import Workspace from './components/Workspace/Workspace';
 
 function App(props) {
   const [isAuthenticated, updateIsAuthenticated] = useState(false);
-  const [applicationLoading, updateApplicationLoading] = useState(true);
+  const [isLoading, updateIsLoading] = useState(true);
 
   useEffect(() => {
-    updateApplicationLoading(false);
+    updateIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function App(props) {
   return (
       <Fragment>
         <ThemeContextProvider>
-          <LoadingScreen loading={applicationLoading.toString()}/>
+          <LoadingScreen loading={isLoading.toString()}/>
           { isAuthenticated ?
             <MenuContextProvider>
               <Header/>
