@@ -9,40 +9,25 @@ import EpisodesList from '../../Episodes/EpisodesList/EpisodesList';
 
 const Show = ({ location }) => {
     const SHOW_ID = extractId(location.pathname);
+    const [status, updateStatus] = useState(null);
     const [details, updateDetails] = useState({});
-    const [library, updateLibrary] = useState({});
-    const [isFollowed, updateIsFollowed] = useState(null);
     const [isLoading, updateIsLoading] = useState(true);
 
     const handleShowFollow = (id) => {
         Spotify.saveUserShow(id);
-        updateIsFollowed(true);
+        updateStatus(true);
     };
 
     const handleShowUnfollow = (id) => {
         Spotify.removeUserShow(id);
-        updateIsFollowed(false);
+        updateStatus(false);
     };
-
-    useEffect(() => {
-        (async () => {
-            try {
-                const inLibrary = await Spotify.checkUserShow(SHOW_ID);
-                updateLibrary({
-                    inLibrary,
-                    addToLibrary: () => handleShowFollow(SHOW_ID),
-                    removeFromLibrary: () => handleShowUnfollow(SHOW_ID)
-                });
-            } catch(err) {
-                throw new Error(err);
-            }
-        })();
-    }, [SHOW_ID, isFollowed]);
 
     useEffect(() => {
         (async () => {
             try {
                 const show = await Spotify.getShowDetails(SHOW_ID);
+                const inLibrary = await Spotify.checkUserShow(SHOW_ID);
                 updateDetails({
                     name: show.name,
                     showId: show.id,
@@ -52,17 +37,20 @@ const Show = ({ location }) => {
                     publisher: show.publisher,
                     image: show.images[1].url,
                     episodes: show.episodes,
+                    inLibrary,
+                    addToLibrary: () => handleShowFollow(SHOW_ID),
+                    removeFromLibrary: () => handleShowUnfollow(SHOW_ID)
                 });
                 updateIsLoading(false);
             } catch(err) {
                 throw new Error(err);
             }
         })();
-    }, [SHOW_ID]);
+    }, [SHOW_ID, status]);
 
     return (
         <Fragment>
-            <Details details={details} library={library}/>
+            <Details details={details}/>
             <EpisodesList episodes={details.episodes}/>
             <WorkspaceLoading loading={isLoading.toString()}/>
         </Fragment>

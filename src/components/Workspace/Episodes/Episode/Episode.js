@@ -27,6 +27,14 @@ const Episode = ({ location }) => {
     const [details, updateDetails] = useState({});
     const [episodes, updateEpisodes] = useState([]);
 
+    const handleEpisodeLike = (id) => {
+        console.log(`Episode added to the library [${id}]`);
+    };
+
+    const handleEpisodeRemoval = (id) => {
+        console.log(`Episode removed from the library [${id}]`);
+    };
+
     useEffect(() => {
         (async () => {
             try {
@@ -40,7 +48,9 @@ const Episode = ({ location }) => {
                     showName: episode.show.name,
                     showId: episode.show.id,
                     releaseDate: episode.release_date,
-                    duration: episode.duration_ms
+                    duration: episode.duration_ms,
+                    addToLibrary: () => handleEpisodeLike(EPISODE_ID),
+                    removeFromLibrary: () => handleEpisodeRemoval(EPISODE_ID)
                 });
                 const show = await Spotify.getShowDetails(episode.show.id);
                 const moreEpisodes = selectCorrespondingEpisodes(EPISODE_ID, show.episodes.items);
@@ -50,7 +60,7 @@ const Episode = ({ location }) => {
                 throw new Error(err);
             }
         })();
-    }, [location.pathname]);
+    }, [EPISODE_ID]);
 
     return (
         <Fragment>
