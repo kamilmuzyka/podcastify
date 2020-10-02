@@ -8,8 +8,6 @@ import convertTime from '../../../utils/convertTime';
 import Accordion from '../../../UI/Accordion/Accordion';
 import Button from '../../../UI/Button/Button';
 
-import Spotify from '../../../models/Spotify';
-
 const Image = styled.img`
     display: block;
     max-width: 250px;
@@ -127,33 +125,33 @@ const Duration = styled.div`
     }
 `;
 
-const Details = ({ payload }) => {
+const Details = ({ details, library }) => {
     return (
         <Fragment>
             <Split>
-                <Image src={payload.image} alt=""/>
-                <Content type={payload.type}>
+                <Image src={details.image} alt=""/>
+                <Content type={details.type}>
                     <Header>
                         <Type>
-                            {payload.type ? capitalizeString(payload.type) : null}
+                            {details.type ? capitalizeString(details.type) : null}
                         </Type>
                         <Lead>
-                            {payload.name}
+                            {details.name}
                         </Lead>
-                        {payload.type === SEARCH_TYPES.show ?
+                        {details.type === SEARCH_TYPES.show ?
                             <Publisher>
-                                By {payload.publisher}
+                                By {details.publisher}
                             </Publisher>
                             :
                             <Show>
-                                <InternalLink to={`/shows/${payload.showId}`}>
-                                    {payload.showName}
+                                <InternalLink to={`/shows/${details.showId}`}>
+                                    {details.showName}
                                 </InternalLink>
                             </Show>
                         }
                     </Header>
                     <Description>
-                        {payload.description}
+                        {details.description}
                     </Description>
                     <Controls>
                         <PlayButton type="button">
@@ -162,21 +160,21 @@ const Details = ({ payload }) => {
                         <Button
                             type="button"
                             outline
-                            onClick={payload.inLibrary ? payload.removeFromLibrary : payload.addToLibrary}>
-                            {payload.type === SEARCH_TYPES.show ? payload.inLibrary ? 'Unfollow' : 'Follow' : 'Like'}
+                            onClick={library.inLibrary ? library.removeFromLibrary : library.addToLibrary}>
+                            {details.type === SEARCH_TYPES.show ? library.inLibrary ? 'Unfollow' : 'Follow' : 'Like'}
                         </Button>
                         <Links>
-                            <ExternalLink href={payload.external}>
+                            <ExternalLink href={details.external}>
                                 Listen on Spotify
                             </ExternalLink>
                         </Links>
                     </Controls>
-                    {payload.type === SEARCH_TYPES.episode ?
+                    {details.type === SEARCH_TYPES.episode ?
                         <Time>
-                            <Date dateTime={payload.releaseDate}>
-                                {payload.releaseDate}
+                            <Date dateTime={details.releaseDate}>
+                                {details.releaseDate}
                             </Date>
-                            <Duration>{convertTime(payload.duration)}</Duration>
+                            <Duration>{convertTime(details.duration)}</Duration>
                         </Time>
                         :
                         null

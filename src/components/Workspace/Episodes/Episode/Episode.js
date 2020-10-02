@@ -55,7 +55,7 @@ const Episode = ({ location }) => {
 
     return (
         <Fragment>
-            <Details payload={details}/>
+            <Details details={details} library={{}}/>
             <Tiles title="More episodes">
                 { episodes ?
                     episodes.map(episode => {
