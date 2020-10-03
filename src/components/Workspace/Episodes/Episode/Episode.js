@@ -49,6 +49,9 @@ const Episode = ({ location }) => {
                     showId: episode.show.id,
                     releaseDate: episode.release_date,
                     duration: episode.duration_ms,
+                    inLibrary: false,
+                    addToLibraryText: 'Like',
+                    removeFromLibraryText: 'Remove',
                     addToLibrary: () => handleEpisodeLike(EPISODE_ID),
                     removeFromLibrary: () => handleEpisodeRemoval(EPISODE_ID)
                 });

@@ -11,6 +11,7 @@ const Show = ({ location }) => {
     const SHOW_ID = extractId(location.pathname);
     const [status, updateStatus] = useState(null);
     const [details, updateDetails] = useState({});
+    const [library, updateLibrary] = useState({});
     const [isLoading, updateIsLoading] = useState(true);
 
     const handleShowFollow = (id) => {
@@ -26,21 +27,37 @@ const Show = ({ location }) => {
     useEffect(() => {
         (async () => {
             try {
-                const show = await Spotify.getShowDetails(SHOW_ID);
-                const inLibrary = await Spotify.checkUserShow(SHOW_ID);
-                updateDetails({
-                    name: show.name,
-                    showId: show.id,
-                    description: show.description,
-                    external: show.external_urls.spotify,
-                    type: SEARCH_TYPES.show,
-                    publisher: show.publisher,
-                    image: show.images[1].url,
-                    episodes: show.episodes,
-                    inLibrary,
-                    addToLibrary: () => handleShowFollow(SHOW_ID),
-                    removeFromLibrary: () => handleShowUnfollow(SHOW_ID)
-                });
+                if(Object.keys(details).length === 0) {
+                    const [show, inLibrary] = await Promise.all([
+                        Spotify.getShowDetails(SHOW_ID),
+                        Spotify.checkUserShow(SHOW_ID)
+                    ]);
+                    updateDetails({
+                        name: show.name,
+                        showId: show.id,
+                        description: show.description,
+                        external: show.external_urls.spotify,
+                        type: SEARCH_TYPES.show,
+                        publisher: show.publisher,
+                        image: show.images[1].url,
+                        episodes: show.episodes
+                    });
+                    updateLibrary({
+                        inLibrary,
+                        addToLibraryText: 'Follow',
+                        removeFromLibraryText: 'Unfollow',
+                        addToLibrary: () => handleShowFollow(SHOW_ID),
+                        removeFromLibrary: () => handleShowUnfollow(SHOW_ID)
+                    });
+                } else {
+                    const inLibrary = await Spotify.checkUserShow(SHOW_ID);
+                    updateLibrary((prev) => {
+                        return {
+                            ...prev,
+                            inLibrary
+                        }
+                    });
+                }
                 updateIsLoading(false);
             } catch(err) {
                 throw new Error(err);
@@ -50,7 +67,7 @@ const Show = ({ location }) => {
 
     return (
         <Fragment>
-            <Details details={details}/>
+            <Details details={details} library={library}/>
             <EpisodesList episodes={details.episodes}/>
             <WorkspaceLoading loading={isLoading.toString()}/>
         </Fragment>

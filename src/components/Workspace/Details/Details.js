@@ -125,7 +125,7 @@ const Duration = styled.div`
     }
 `;
 
-const Details = ({ details }) => {
+const Details = ({ details, library }) => {
     return (
         <Fragment>
             <Split>
@@ -157,18 +157,8 @@ const Details = ({ details }) => {
                         <PlayButton type="button">
                             Play
                         </PlayButton>
-                        <Button onClick={details.inLibrary ? details.removeFromLibrary : details.addToLibrary} type="button" outline>
-                            {details.inLibrary ?
-                                details.type === SEARCH_TYPES.show ?
-                                    'Unfollow'
-                                    :
-                                    'Remove'
-                                :
-                                details.type === SEARCH_TYPES.show ?
-                                    'Follow'
-                                    :
-                                    'Like'
-                            }
+                        <Button onClick={library.inLibrary ? library.removeFromLibrary : library.addToLibrary} type="button" outline>
+                            {library.inLibrary ? library.removeFromLibraryText : library.addToLibraryText}
                         </Button>
                         <Links>
                             <ExternalLink href={details.external}>
