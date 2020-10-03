@@ -9,19 +9,19 @@ import EpisodesList from '../../Episodes/EpisodesList/EpisodesList';
 
 const Show = ({ location }) => {
     const SHOW_ID = extractId(location.pathname);
-    const [status, updateStatus] = useState(null);
     const [details, updateDetails] = useState({});
     const [library, updateLibrary] = useState({});
+    const [status, updateStatus] = useState(0);
     const [isLoading, updateIsLoading] = useState(true);
 
     const handleShowFollow = (id) => {
         Spotify.saveUserShow(id);
-        updateStatus(true);
+        updateStatus((prev) => prev + 1);
     };
 
     const handleShowUnfollow = (id) => {
         Spotify.removeUserShow(id);
-        updateStatus(false);
+        updateStatus((prev) => prev + 1);
     };
 
     useEffect(() => {

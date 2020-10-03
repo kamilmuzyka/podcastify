@@ -23,9 +23,10 @@ const selectCorrespondingEpisodes = (currentEpisodeId, episodes) => {
 
 const Episode = ({ location }) => {
     const EPISODE_ID = extractId(location.pathname);
-    const [isLoading, updateIsLoading] = useState(true);
     const [details, updateDetails] = useState({});
+    const [library, updateLibrary] = useState({});
     const [episodes, updateEpisodes] = useState([]);
+    const [isLoading, updateIsLoading] = useState(true);
 
     const handleEpisodeLike = (id) => {
         console.log(`Episode added to the library [${id}]`);
@@ -39,6 +40,8 @@ const Episode = ({ location }) => {
         (async () => {
             try {
                 const episode = await Spotify.getEpisodeDetails(EPISODE_ID);
+                const show = await Spotify.getShowDetails(episode.show.id);
+                const moreEpisodes = selectCorrespondingEpisodes(EPISODE_ID, show.episodes.items);
                 updateDetails({
                     name: episode.name,
                     description: episode.description,
@@ -48,15 +51,15 @@ const Episode = ({ location }) => {
                     showName: episode.show.name,
                     showId: episode.show.id,
                     releaseDate: episode.release_date,
-                    duration: episode.duration_ms,
+                    duration: episode.duration_ms
+                });
+                updateLibrary({
                     inLibrary: false,
                     addToLibraryText: 'Like',
                     removeFromLibraryText: 'Remove',
                     addToLibrary: () => handleEpisodeLike(EPISODE_ID),
                     removeFromLibrary: () => handleEpisodeRemoval(EPISODE_ID)
                 });
-                const show = await Spotify.getShowDetails(episode.show.id);
-                const moreEpisodes = selectCorrespondingEpisodes(EPISODE_ID, show.episodes.items);
                 updateEpisodes(moreEpisodes);
                 updateIsLoading(false);
             } catch(err) {
@@ -67,7 +70,7 @@ const Episode = ({ location }) => {
 
     return (
         <Fragment>
-            <Details details={details} library={{}}/>
+            <Details details={details} library={library}/>
             <Tiles title="More episodes">
                 { episodes ?
                     episodes.map(episode => {
