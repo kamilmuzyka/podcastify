@@ -13,7 +13,7 @@ const Main = styled.main`
     position: relative;
     flex: 1;
     padding: 2em;
-    max-height: calc(100vh - 80px);
+    max-height: calc(100vh - 150px - 140px);
     overflow-y: scroll;
 
     ::-webkit-scrollbar {
@@ -27,6 +27,12 @@ const Main = styled.main`
     }
 
     @media (min-width: 500px) {
+        max-height: calc(100vh - 80px - 105px);
+        padding: 3em;
+    }
+
+    @media (min-width: 1380px) {
+        max-height: calc(100vh - 80px - 100px);
         padding: 3em;
     }
 `;

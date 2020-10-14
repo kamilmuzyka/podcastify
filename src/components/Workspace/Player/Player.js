@@ -77,6 +77,7 @@ const MiddleButton = styled.div`
 
 const Episode = styled.div`
     font-size: ${({ theme }) => theme.typography.small};
+    color: ${({ theme }) => theme.colors.specific};
     &:hover {
         text-decoration: underline;
     }
@@ -116,7 +117,6 @@ const Name = styled.p`
 
 const Player = (props) => {
     const isPlaying = true;
-
     return (
         <Element>
             <Progress>
