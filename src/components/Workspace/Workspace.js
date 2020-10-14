@@ -8,7 +8,6 @@ import Episode from './Episodes/Episode/Episode';
 import Settings from './Settings/Settings';
 import SearchResults from './SearchResults/SearchResults';
 import Page404 from './Page404/Page404';
-import Player from './Player/Player';
 
 const Main = styled.main`
     position: relative;
@@ -44,7 +43,6 @@ function Workspace(props) {
                 <Route path="/search" exact component={SearchResults}/>
                 <Route component={Page404}/>
             </Switch>
-            <Player/>
         </Main>
     );
 }

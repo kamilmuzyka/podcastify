@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import Auth from '../../controllers/Auth';
 import Button from '../../UI/Button/Button';
@@ -10,7 +11,7 @@ const Backdrop = styled.div`
     width: 100%;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.75);
-    z-index: 900;
+    z-index: 1100;
     opacity: ${({ active }) => active ? '1' : '0'};
     visibility: ${({ active }) => active ? 'visible' : 'hidden'};
     transition: opacity 0.2s ease-in-out,
@@ -28,7 +29,7 @@ const Container = styled.div`
     transform: translate(-50%, -50%);
     background-color: ${({ theme }) => theme.colors.primary};
     border-radius: 1em;
-    z-index: 1000;
+    z-index: 1200;
     opacity: ${({ active }) => active ? '1' : '0'};
     visibility: ${({ active }) => active ? 'visible' : 'hidden'};
     transition: opacity 0.2s ease-in-out,
@@ -57,7 +58,7 @@ const ButtonConfirm = styled(Button)`
 `;
 
 const Logout = ({ active, close}) => {
-    return (
+    return ReactDOM.createPortal(
         <Fragment>
             <Backdrop active={active} onClick={close}/>
             <Container active={active}>
@@ -69,7 +70,8 @@ const Logout = ({ active, close}) => {
                     </Controls>
                 </Confirmation>
             </Container>
-        </Fragment>
+        </Fragment>,
+        document.getElementById('modal')
     );
 }
 

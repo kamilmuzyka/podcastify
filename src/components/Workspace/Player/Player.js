@@ -21,6 +21,14 @@ const Progress = styled.div`
     width: 100%;
     height: 5px;
     background-color: #414141;
+    @media (min-width: 1380px) {
+        position: absolute;
+        bottom: 1em;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 700px;
+        border-radius: 2.5px;
+    }
 `;
 
 const Content = styled.div`
@@ -37,9 +45,13 @@ const Content = styled.div`
 `;
 
 const Bar = styled.div`
-    width: 35%;
+    width: 35%; // Dynamic
     height: 100%;
     background-color: ${({ theme }) => theme.colors.specific};
+
+    @media (min-width: 1380px) {
+        border-radius: 2.5px;
+    }
 `;
 
 const Controls = styled.div`
@@ -49,6 +61,12 @@ const Controls = styled.div`
         order: 2;
         flex: 1;
         justify-content: center;
+    }
+    @media (min-width: 1380px) {
+        position: absolute;
+        top: 1em;
+        left: 50%;
+        transform: translateX(-50%);
     }
 `;
 

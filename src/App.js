@@ -11,6 +11,7 @@ import Header from './components/Header/Header';
 import Wrapper from './components/Wrapper/Wrapper';
 import Navigation from './components/Navigation/Navigation';
 import Workspace from './components/Workspace/Workspace';
+import Player from './components/Workspace/Player/Player';
 
 function App(props) {
   const [isAuthenticated, updateIsAuthenticated] = useState(false);
@@ -42,6 +43,7 @@ function App(props) {
                 </ModalContextProvider>
                 <Workspace/>
               </Wrapper>
+              <Player/>
             </MenuContextProvider>
             :
             <Landing/>
