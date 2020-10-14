@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const Element = styled.button`
+    padding: 0.5em;
     background: none;
     border: none;
     outline: none;
@@ -16,7 +17,7 @@ const Element = styled.button`
         cursor: pointer;
 
         svg {
-            transform: scale(1.1);
+            transform: scale(${({ scale }) => scale ? scale * 1.1 : 1.1});
         }
     }
 `;
