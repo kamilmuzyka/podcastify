@@ -29,6 +29,11 @@ const Content = styled.div`
     justify-content: center;
     align-items: center;
     padding: 1em 2em;
+
+    @media (min-width: 500px) {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
 `;
 
 const Bar = styled.div`
@@ -40,6 +45,11 @@ const Bar = styled.div`
 const Controls = styled.div`
     display: flex;
     align-items: center;
+    @media (min-width: 500px) {
+        order: 2;
+        flex: 1;
+        justify-content: center;
+    }
 `;
 
 const MiddleButton = styled.div`
@@ -47,24 +57,45 @@ const MiddleButton = styled.div`
     margin: 0 1em;
 `;
 
-const Name = styled.p`
-    margin-top: 0.25em;
+const Episode = styled.div`
     font-size: ${({ theme }) => theme.typography.small};
-`;
-
-const InternalLink = styled(Link)`
-    display: -webkit-box;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    text-decoration: none;
-    color: inherit;
     &:hover {
         text-decoration: underline;
     }
+    @media (min-width: 500px) {
+        order: 1;
+    }
 `;
+
+const InternalLink = styled(Link)`
+    text-decoration: none;
+    color: inherit;
+    @media (min-width: 500px) {
+        max-width: 250px;
+        display: flex;
+        align-items: center;
+    }
+`;
+
+const Thumbnail = styled.img`
+    display: none;
+    @media (min-width: 500px) {
+        display: block;
+        width: 50px;
+        height: 50px;
+        margin-right: 1em;
+        object-fit: cover;
+    }
+`;
+
+const Name = styled.p`
+    max-height: 3em;
+    line-height: 1.5;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    text-overflow: ellipsis;
+`;
+
 
 const Player = (props) => {
     const isPlaying = true;
@@ -86,11 +117,14 @@ const Player = (props) => {
                     </MiddleButton>
                     <SkipButton direction="forward" scale={1.25}/>
                 </Controls>
-                <Name>
+                <Episode>
                     <InternalLink to="/episodes">
-                        SPI 437: Life After Being a High-Performance CEO with Jon Oringer
+                        <Thumbnail src="https://images.pexels.com/photos/5155746/pexels-photo-5155746.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
+                        <Name>
+                            SPI 437: Life After Being a High-Performance CEO with Jon Oringer
+                        </Name>
                     </InternalLink>
-                </Name>
+                </Episode>
             </Content>
         </Element>
     );
