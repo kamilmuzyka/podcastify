@@ -23,24 +23,11 @@ const Progress = styled.div`
     background-color: #414141;
     @media (min-width: 1380px) {
         position: absolute;
-        bottom: 1em;
+        bottom: 1.5em;
         left: 50%;
         transform: translateX(-50%);
         max-width: 700px;
         border-radius: 2.5px;
-    }
-`;
-
-const Content = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1em 2em;
-
-    @media (min-width: 500px) {
-        flex-direction: row;
-        justify-content: flex-start;
     }
 `;
 
@@ -54,6 +41,19 @@ const Bar = styled.div`
     }
 `;
 
+const Content = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5em 2em;
+
+    @media (min-width: 500px) {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+`;
+
 const Controls = styled.div`
     display: flex;
     align-items: center;
@@ -64,7 +64,7 @@ const Controls = styled.div`
     }
     @media (min-width: 1380px) {
         position: absolute;
-        top: 1em;
+        top: 1.25em;
         left: 50%;
         transform: translateX(-50%);
     }
@@ -113,7 +113,6 @@ const Name = styled.p`
     overflow-wrap: anywhere;
     text-overflow: ellipsis;
 `;
-
 
 const Player = (props) => {
     const isPlaying = true;
