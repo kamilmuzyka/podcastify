@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import PlayButton from '../../../UI/PlayButton/PlayButton';
@@ -116,7 +116,16 @@ const Name = styled.p`
 `;
 
 const Player = (props) => {
-    const isPlaying = true;
+    const [isPlaying, updateIsPlaying] = useState(false);
+
+    const startPlaying = () => {
+        updateIsPlaying(true);
+    }
+
+    const stopPlaying = () => {
+        updateIsPlaying(false);
+    }
+
     return (
         <Element>
             <Progress>
@@ -127,9 +136,9 @@ const Player = (props) => {
                     <SkipButton direction="backward" scale={1.25}/>
                     <MiddleButton>
                         { isPlaying ?
-                            <PauseButton scale={1.25}/>
+                            <PauseButton scale={1.25} onClick={stopPlaying} />
                             :
-                            <PlayButton scale={1.25}/>
+                            <PlayButton scale={1.25} onClick={startPlaying} />
                         }
                     </MiddleButton>
                     <SkipButton direction="forward" scale={1.25}/>
