@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { PlayerContext } from '../../../contexts/PlayerContextProvider';
 import PlayButton from '../../../UI/PlayButton/PlayButton';
 import PauseButton from '../../../UI/PauseButton/PauseButton';
 import SkipButton from '../../../UI/SkipButton/SkipButton';
@@ -32,9 +33,10 @@ const Progress = styled.div`
 `;
 
 const Bar = styled.div`
-    width: 35%; // Dynamic
+    width: ${({ percentage }) => percentage ? percentage : 0}%; // Dynamic
     height: 100%;
     background-color: ${({ theme }) => theme.colors.specific};
+    transition: width 0.3s linear;
 
     @media (min-width: 1380px) {
         border-radius: 2.5px;
@@ -117,22 +119,46 @@ const Name = styled.p`
 
 const Player = (props) => {
     const [isPlaying, updateIsPlaying] = useState(false);
+    const [progressPercentage, updateProgressPercentage] = useState(0);
+    const [interval, updateInterval] = useState();
+    const { currentEpisode } = useContext(PlayerContext);
+    const audioRef = useRef();
+
+    useEffect(() => {
+        if(isPlaying) {
+            const id = setInterval(() => {
+                const currentTime = audioRef.current.currentTime;
+                const duration = audioRef.current.duration;
+                const progress = Math.round(currentTime / duration * 100);
+                updateProgressPercentage(progress);
+            }, 300);
+            updateInterval(id);
+        } else {
+            clearInterval(interval);
+        }
+        return () => {
+            clearInterval(interval);
+        }
+    }, [isPlaying]);
 
     const startPlaying = () => {
+        audioRef.current.play();
         updateIsPlaying(true);
     }
 
     const stopPlaying = () => {
+        audioRef.current.pause();
         updateIsPlaying(false);
     }
 
     return (
         <Element>
             <Progress>
-                <Bar/>
+                <Bar percentage={progressPercentage}/>
             </Progress>
             <Content>
                 <Controls>
+                    <audio src={currentEpisode} ref={audioRef}/>
                     <SkipButton direction="backward" scale={1.25}/>
                     <MiddleButton>
                         { isPlaying ?

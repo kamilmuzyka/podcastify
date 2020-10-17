@@ -5,6 +5,7 @@ import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import Landing from './components/Landing/Landing';
 import ThemeContextProvider from './contexts/ThemeContextProvider';
 import MenuContextProvider from './contexts/MenuContextProvider';
+import PlayerContextProvider from './contexts/PlayerContextProvider';
 import ModalContextProvider from './contexts/ModalContextProvider';
 import GlobalStyle from './styles/globalStyle';
 import Header from './components/Header/Header';
@@ -36,14 +37,16 @@ function App(props) {
           <LoadingScreen loading={isLoading.toString()}/>
           { isAuthenticated ?
             <MenuContextProvider>
-              <Header/>
-              <Wrapper>
-                <ModalContextProvider>
-                  <Navigation/>
-                </ModalContextProvider>
-                <Workspace/>
-              </Wrapper>
-              <Player/>
+              <PlayerContextProvider>
+                  <Header/>
+                  <Wrapper>
+                    <ModalContextProvider>
+                      <Navigation/>
+                    </ModalContextProvider>
+                    <Workspace/>
+                  </Wrapper>
+                  <Player/>
+              </PlayerContextProvider>
             </MenuContextProvider>
             :
             <Landing/>
