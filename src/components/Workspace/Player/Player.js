@@ -120,24 +120,27 @@ const Name = styled.p`
 const Player = (props) => {
     const [isPlaying, updateIsPlaying] = useState(false);
     const [progressPercentage, updateProgressPercentage] = useState(0);
-    const [interval, updateInterval] = useState();
+    const [progressInterval, updateProgressInterval] = useState();
     const { currentEpisode } = useContext(PlayerContext);
     const audioRef = useRef();
 
+    // Does it make sense to set and cancel intervals?
+    // Are multiple state updates better for the performance
+    // than a single interval running in the background any time?
     useEffect(() => {
         if(isPlaying) {
-            const id = setInterval(() => {
+            const intervalId = setInterval(() => {
                 const currentTime = audioRef.current.currentTime;
                 const duration = audioRef.current.duration;
                 const progress = Math.round(currentTime / duration * 100);
                 updateProgressPercentage(progress);
             }, 300);
-            updateInterval(id);
+            updateProgressInterval(intervalId);
         } else {
-            clearInterval(interval);
+            clearInterval(progressInterval);
         }
         return () => {
-            clearInterval(interval);
+            clearInterval(progressInterval);
         }
     }, [isPlaying]);
 
@@ -158,7 +161,7 @@ const Player = (props) => {
             </Progress>
             <Content>
                 <Controls>
-                    <audio src={currentEpisode} ref={audioRef}/>
+                    <audio src={currentEpisode.audio_preview_url} ref={audioRef}/>
                     <SkipButton direction="backward" scale={1.25}/>
                     <MiddleButton>
                         { isPlaying ?
@@ -170,10 +173,10 @@ const Player = (props) => {
                     <SkipButton direction="forward" scale={1.25}/>
                 </Controls>
                 <Episode>
-                    <InternalLink to="/episodes">
-                        <Thumbnail src="https://images.pexels.com/photos/5155746/pexels-photo-5155746.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
+                    <InternalLink to={`/episodes/${currentEpisode.id}`}>
+                        <Thumbnail src={currentEpisode.images[0].url}/>
                         <Name>
-                            SPI 437: Life After Being a High-Performance CEO with Jon Oringer
+                            {currentEpisode.name}
                         </Name>
                     </InternalLink>
                 </Episode>
