@@ -33,7 +33,7 @@ const EpisodesList = ({ episodes }) => {
                 <Label>Full Episode</Label>
             </Labels>
             <List>
-                { episodes ? episodes.items.map(episode => {
+                { episodes ? episodes.map(episode => {
                     return <EpisodeItem
                         key={episode.id}
                         id={episode.id}
@@ -42,7 +42,8 @@ const EpisodesList = ({ episodes }) => {
                         releaseDate={episode.release_date}
                         duration={episode.duration_ms}
                         external={episode.external_urls.spotify}
-                        preview={episode.audio_preview_url} />}) : null }
+                        preview={episode.audio_preview_url}
+                        episodes={episodes} />}) : null }
             </List>
         </Fragment>
     );

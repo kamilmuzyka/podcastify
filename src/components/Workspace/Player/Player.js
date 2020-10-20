@@ -33,7 +33,7 @@ const Progress = styled.div`
 `;
 
 const Bar = styled.div`
-    width: ${({ percentage }) => percentage ? percentage : 0}%; // Dynamic
+    width: ${({ percentage }) => percentage ? percentage : 0}%;
     height: 100%;
     background-color: ${({ theme }) => theme.colors.specific};
     transition: width 0.3s linear;
@@ -120,29 +120,25 @@ const Name = styled.p`
 const Player = (props) => {
     const [isPlaying, updateIsPlaying] = useState(false);
     const [progressPercentage, updateProgressPercentage] = useState(0);
-    const [progressInterval, updateProgressInterval] = useState();
-    const { currentEpisode } = useContext(PlayerContext);
+    const {
+        queueHead,
+        loadQueueNext,
+        loadQueuePrevious,
+        currentEpisode
+    } = useContext(PlayerContext);
     const audioRef = useRef();
 
-    // Does it make sense to set and cancel intervals?
-    // Are multiple state updates better for the performance
-    // than a single interval running in the background any time?
     useEffect(() => {
-        if(isPlaying) {
-            const intervalId = setInterval(() => {
-                const currentTime = audioRef.current.currentTime;
-                const duration = audioRef.current.duration;
-                const progress = Math.round(currentTime / duration * 100);
-                updateProgressPercentage(progress);
-            }, 300);
-            updateProgressInterval(intervalId);
-        } else {
-            clearInterval(progressInterval);
-        }
+        const intervalId = setInterval(() => {
+            const currentTime = audioRef.current.currentTime;
+            const duration = audioRef.current.duration;
+            const progress = Math.round(currentTime / duration * 100);
+            updateProgressPercentage(progress);
+        }, 300);
         return () => {
-            clearInterval(progressInterval);
+            clearInterval(intervalId);
         }
-    }, [isPlaying]);
+    }, []);
 
     const startPlaying = () => {
         audioRef.current.play();
@@ -154,6 +150,16 @@ const Player = (props) => {
         updateIsPlaying(false);
     }
 
+    const resetPlayer = () => {
+        stopPlaying();
+        audioRef.current.currentTime = 0;
+    }
+
+    useEffect(() => {
+        resetPlayer();
+        startPlaying();
+    }, [queueHead]);
+
     return (
         <Element>
             <Progress>
@@ -161,8 +167,8 @@ const Player = (props) => {
             </Progress>
             <Content>
                 <Controls>
-                    <audio src={currentEpisode.audio_preview_url} ref={audioRef}/>
-                    <SkipButton direction="backward" scale={1.25}/>
+                    <audio src={currentEpisode?.audio_preview_url} ref={audioRef}/>
+                    <SkipButton direction="backward" scale={1.25} onClick={loadQueuePrevious}/>
                     <MiddleButton>
                         { isPlaying ?
                             <PauseButton scale={1.25} onClick={stopPlaying} />
@@ -170,13 +176,13 @@ const Player = (props) => {
                             <PlayButton scale={1.25} onClick={startPlaying} />
                         }
                     </MiddleButton>
-                    <SkipButton direction="forward" scale={1.25}/>
+                    <SkipButton direction="forward" scale={1.25} onClick={loadQueueNext}/>
                 </Controls>
                 <Episode>
-                    <InternalLink to={`/episodes/${currentEpisode.id}`}>
-                        <Thumbnail src={currentEpisode.images[0].url}/>
+                    <InternalLink to={`/episodes/${currentEpisode?.id}`}>
+                        <Thumbnail src={currentEpisode?.images[0].url}/>
                         <Name>
-                            {currentEpisode.name}
+                            {currentEpisode?.name}
                         </Name>
                     </InternalLink>
                 </Episode>

@@ -40,7 +40,7 @@ const Show = ({ location }) => {
                         type: SEARCH_TYPES.show,
                         publisher: show.publisher,
                         image: show.images[1].url,
-                        episodes: show.episodes
+                        episodes: show.episodes.items
                     });
                     updateLibrary({
                         inLibrary,

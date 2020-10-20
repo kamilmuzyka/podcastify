@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { PlayerContext } from '../../../../../contexts/PlayerContextProvider';
 import Accordion from '../../../../../UI/Accordion/Accordion';
 import convertTime from '../../../../../utils/convertTime';
 import LikeButton from '../../../../../UI/LikeButton/LikeButton';
@@ -107,7 +108,8 @@ const StyledPlayButton = styled(PlayButton)`
     margin-right: 1.5em;
 `;
 
-const EpisodeItem = ({ id, name, description, releaseDate, duration, external }) => {
+const EpisodeItem = ({ id, name, description, releaseDate, duration, external, episodes }) => {
+    const { loadQueue } = useContext(PlayerContext);
     return (
         <Element>
             <Header>
@@ -128,7 +130,7 @@ const EpisodeItem = ({ id, name, description, releaseDate, duration, external })
             </div>
 
             <Controls>
-                <StyledPlayButton/>
+                <StyledPlayButton onClick={() => loadQueue(id, episodes)}/>
                 <LikeButton/>
             </Controls>
         </Element>
