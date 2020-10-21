@@ -106,8 +106,14 @@ const Thumbnail = styled.img`
         width: 50px;
         height: 50px;
         margin-right: 1em;
-        object-fit: cover;
+        background-color: transparent;
     }
+`;
+
+const Placeholder = styled.div`
+    width: 50px;
+    height: 50px;
+    background-size: cover;
 `;
 
 const Name = styled.p`
@@ -170,12 +176,16 @@ const Player = (props) => {
                     <SkipButton direction="forward" scale={1.25} onClick={playNext}/>
                 </Controls>
                 <Episode>
-                    <InternalLink to={`/episodes/${currentEpisode?.id}`}>
-                        <Thumbnail src={currentEpisode?.images[0].url}/>
-                        <Name>
-                            {currentEpisode?.name}
-                        </Name>
-                    </InternalLink>
+                    { currentEpisode ?
+                        <InternalLink to={`/episodes/${currentEpisode.id}`}>
+                            <Thumbnail src={currentEpisode.images[0].url}/>
+                            <Name>
+                                {currentEpisode.name}
+                            </Name>
+                        </InternalLink>
+                        :
+                        <Placeholder/>
+                    }
                 </Episode>
             </Content>
         </Element>
