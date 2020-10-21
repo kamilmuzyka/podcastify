@@ -2,6 +2,7 @@ import React, { useState, useContext, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { QueueContext } from '../../../contexts/QueueContextProvider';
+import { PlayerContext } from '../../../contexts/PlayerContextProvider';
 import PlayButton from '../../../UI/PlayButton/PlayButton';
 import PauseButton from '../../../UI/PauseButton/PauseButton';
 import SkipButton from '../../../UI/SkipButton/SkipButton';
@@ -118,50 +119,33 @@ const Name = styled.p`
 `;
 
 const Player = (props) => {
-    const [isPlaying, updateIsPlaying] = useState(false);
     const [progressPercentage, updateProgressPercentage] = useState(0);
+    const { currentEpisode } = useContext(QueueContext);
     const {
-        loadQueueNext,
-        loadQueuePrevious,
-        currentEpisode
-    } = useContext(QueueContext);
+        isPlaying,
+        updateAudio,
+        startPlaying,
+        stopPlaying,
+        playNext,
+        playPrevious,
+        resetPlayer
+    } = useContext(PlayerContext);
     const audioRef = useRef();
 
+    const refreshProgressBar = () => {
+        const currentTime = audioRef.current.currentTime;
+        const duration = audioRef.current.duration;
+        const progress = Math.round(currentTime / duration * 100);
+        updateProgressPercentage(progress);
+    }
+
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            const currentTime = audioRef.current.currentTime;
-            const duration = audioRef.current.duration;
-            const progress = Math.round(currentTime / duration * 100);
-            updateProgressPercentage(progress);
-        }, 300);
+        updateAudio(audioRef.current);
+        const intervalId = setInterval(refreshProgressBar, 300);
         return () => {
             clearInterval(intervalId);
         }
     }, []);
-
-    const startPlaying = () => {
-        audioRef.current.play();
-        updateIsPlaying(true);
-    }
-
-    const stopPlaying = () => {
-        audioRef.current.pause();
-        updateIsPlaying(false);
-    }
-
-    const resetPlayer = () => {
-        stopPlaying();
-        audioRef.current.currentTime = 0;
-        startPlaying();
-    }
-
-    const playNext = () => {
-        loadQueueNext();
-    }
-
-    const playPrevious = () => {
-        loadQueuePrevious();
-    }
 
     useEffect(() => {
         resetPlayer();
