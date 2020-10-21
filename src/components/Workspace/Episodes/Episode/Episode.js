@@ -16,7 +16,7 @@ const selectCorrespondingEpisodes = (currentEpisodeId, episodes) => {
     if (currentEpisodeIndex !== -1 && currentEpisodeIndex >= episodesToDisplay) {
         episodesRangeBeginningIndex = currentEpisodeIndex;
     }
-    return episodes
+    return [...episodes]
         .splice(episodesRangeBeginningIndex - episodesToDisplay, episodesToDisplay)
         .reverse();
 }

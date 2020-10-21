@@ -2,10 +2,12 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { QueueContext } from '../../../../../contexts/QueueContextProvider';
+import { PlayerContext } from '../../../../../contexts/PlayerContextProvider';
 import Accordion from '../../../../../UI/Accordion/Accordion';
 import convertTime from '../../../../../utils/convertTime';
 import LikeButton from '../../../../../UI/LikeButton/LikeButton';
 import PlayButton from '../../../../../UI/PlayButton/PlayButton';
+import PauseButton from '../../../../../UI/PauseButton/PauseButton';
 
 const Element = styled.li`
     margin-top: 0.75em;
@@ -108,10 +110,15 @@ const StyledPlayButton = styled(PlayButton)`
     margin-right: 1.5em;
 `;
 
-const EpisodeItem = ({ id, name, description, releaseDate, duration, external, episodes }) => {
-    const { loadQueue } = useContext(QueueContext);
+const StyledPauseButton = styled(PauseButton)`
+    margin-right: 1.5em;
+`;
 
-    const startPlaying = () => {
+const EpisodeItem = ({ id, name, description, releaseDate, duration, external, episodes }) => {
+    const { loadQueue, currentEpisode } = useContext(QueueContext);
+    const { isPlaying, startPlaying, stopPlaying } = useContext(PlayerContext);
+
+    const loadEpisodes = () => {
         loadQueue(id, episodes);
     }
 
@@ -135,7 +142,14 @@ const EpisodeItem = ({ id, name, description, releaseDate, duration, external, e
             </div>
 
             <Controls>
-                <StyledPlayButton onClick={startPlaying}/>
+                { !isPlaying && currentEpisode?.id === id ?
+                    <StyledPlayButton onClick={startPlaying}/>
+                    :
+                    isPlaying && currentEpisode?.id === id ?
+                        <StyledPauseButton onClick={stopPlaying}/>
+                        :
+                        <StyledPlayButton onClick={loadEpisodes}/>
+                }
                 <LikeButton/>
             </Controls>
         </Element>
