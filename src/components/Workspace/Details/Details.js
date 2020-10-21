@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react';
+import React, { useContext, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { QueueContext } from '../../../contexts/QueueContextProvider';
 import { SEARCH_TYPES } from '../../../constants';
 import capitalizeString from '../../../utils/capitalizeString';
 import convertTime from '../../../utils/convertTime';
@@ -126,6 +127,16 @@ const Duration = styled.div`
 `;
 
 const Details = ({ details, library }) => {
+    const { loadQueue } = useContext(QueueContext);
+
+    const startPlaying = () => {
+        if (details.type === SEARCH_TYPES.show) {
+            loadQueue(details.episodes[0].id, details.episodes);
+        } else {
+            loadQueue(details.id, details.episodes);
+        }
+    }
+
     return (
         <Fragment>
             <Split>
@@ -154,7 +165,7 @@ const Details = ({ details, library }) => {
                         {details.description}
                     </Description>
                     <Controls>
-                        <PlayButton type="button">
+                        <PlayButton type="button" onClick={startPlaying}>
                             Play
                         </PlayButton>
                         <Button onClick={library.inLibrary ? library.removeFromLibrary : library.addToLibrary} type="button" outline>

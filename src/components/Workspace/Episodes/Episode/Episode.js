@@ -43,6 +43,7 @@ const Episode = ({ location }) => {
                 const show = await Spotify.getShowDetails(episode.show.id);
                 const moreEpisodes = selectCorrespondingEpisodes(EPISODE_ID, show.episodes.items);
                 updateDetails({
+                    id: EPISODE_ID,
                     name: episode.name,
                     description: episode.description,
                     external: episode.external_urls.spotify,
@@ -51,7 +52,8 @@ const Episode = ({ location }) => {
                     showName: episode.show.name,
                     showId: episode.show.id,
                     releaseDate: episode.release_date,
-                    duration: episode.duration_ms
+                    duration: episode.duration_ms,
+                    episodes: show.episodes.items
                 });
                 updateLibrary({
                     inLibrary: false,
