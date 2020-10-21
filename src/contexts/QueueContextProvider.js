@@ -1,8 +1,8 @@
 import React, { createContext, useState } from 'react';
 
-export const PlayerContext = createContext();
+export const QueueContext = createContext();
 
-const PlayerContextProvider = (props) => {
+const QueueContextProvider = (props) => {
     const [queue, updateQueue] = useState([]);
     const [queueHead, updateQueueHead] = useState(0);
     const [currentEpisode, updateCurrentEpisode] = useState();
@@ -35,7 +35,7 @@ const PlayerContextProvider = (props) => {
     }
 
     return (
-        <PlayerContext.Provider value={{
+        <QueueContext.Provider value={{
             currentEpisode,
             queueHead,
             loadQueue,
@@ -43,8 +43,8 @@ const PlayerContextProvider = (props) => {
             loadQueuePrevious
         }}>
             {props.children}
-        </PlayerContext.Provider>
+        </QueueContext.Provider>
     );
 }
 
-export default PlayerContextProvider;
+export default QueueContextProvider;

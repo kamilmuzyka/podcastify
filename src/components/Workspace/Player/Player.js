@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { PlayerContext } from '../../../contexts/PlayerContextProvider';
+import { QueueContext } from '../../../contexts/QueueContextProvider';
 import PlayButton from '../../../UI/PlayButton/PlayButton';
 import PauseButton from '../../../UI/PauseButton/PauseButton';
 import SkipButton from '../../../UI/SkipButton/SkipButton';
@@ -124,7 +124,7 @@ const Player = (props) => {
         loadQueueNext,
         loadQueuePrevious,
         currentEpisode
-    } = useContext(PlayerContext);
+    } = useContext(QueueContext);
     const audioRef = useRef();
 
     useEffect(() => {
