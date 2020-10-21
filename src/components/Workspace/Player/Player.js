@@ -121,7 +121,6 @@ const Player = (props) => {
     const [isPlaying, updateIsPlaying] = useState(false);
     const [progressPercentage, updateProgressPercentage] = useState(0);
     const {
-        queueHead,
         loadQueueNext,
         loadQueuePrevious,
         currentEpisode
@@ -153,12 +152,20 @@ const Player = (props) => {
     const resetPlayer = () => {
         stopPlaying();
         audioRef.current.currentTime = 0;
+        startPlaying();
+    }
+
+    const playNext = () => {
+        loadQueueNext();
+    }
+
+    const playPrevious = () => {
+        loadQueuePrevious();
     }
 
     useEffect(() => {
         resetPlayer();
-        startPlaying();
-    }, [queueHead]);
+    }, [currentEpisode]);
 
     return (
         <Element>
@@ -168,7 +175,7 @@ const Player = (props) => {
             <Content>
                 <Controls>
                     <audio src={currentEpisode?.audio_preview_url} ref={audioRef}/>
-                    <SkipButton direction="backward" scale={1.25} onClick={loadQueuePrevious}/>
+                    <SkipButton direction="backward" scale={1.25} onClick={playPrevious}/>
                     <MiddleButton>
                         { isPlaying ?
                             <PauseButton scale={1.25} onClick={stopPlaying} />
@@ -176,7 +183,7 @@ const Player = (props) => {
                             <PlayButton scale={1.25} onClick={startPlaying} />
                         }
                     </MiddleButton>
-                    <SkipButton direction="forward" scale={1.25} onClick={loadQueueNext}/>
+                    <SkipButton direction="forward" scale={1.25} onClick={playNext}/>
                 </Controls>
                 <Episode>
                     <InternalLink to={`/episodes/${currentEpisode?.id}`}>

@@ -110,6 +110,11 @@ const StyledPlayButton = styled(PlayButton)`
 
 const EpisodeItem = ({ id, name, description, releaseDate, duration, external, episodes }) => {
     const { loadQueue } = useContext(PlayerContext);
+
+    const playShowEpisode = () => {
+        loadQueue(id, episodes);
+    }
+
     return (
         <Element>
             <Header>
@@ -130,7 +135,7 @@ const EpisodeItem = ({ id, name, description, releaseDate, duration, external, e
             </div>
 
             <Controls>
-                <StyledPlayButton onClick={() => loadQueue(id, episodes)}/>
+                <StyledPlayButton onClick={playShowEpisode}/>
                 <LikeButton/>
             </Controls>
         </Element>
