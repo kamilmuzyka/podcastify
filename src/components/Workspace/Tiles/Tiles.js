@@ -40,7 +40,8 @@ const Title = styled.h2`
 function Tiles({ title, children }) {
     return (
         <Container>
-            { (title) ? <Title>{title}</Title> : null }
+            { title ?
+            <Title>{title}</Title> : null }
             <Element>
                 { children }
             </Element>

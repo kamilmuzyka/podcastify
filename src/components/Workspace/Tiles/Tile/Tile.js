@@ -91,8 +91,6 @@ function Tile({ id, title, description, image, type}) {
             updateReference(`/episodes/${id}`);
             return;
         }
-
-        throw new Error('Wrong type provided. Should be one of \'shows\', \'episodes\'.');
     }, [id, type]);
 
     return (
