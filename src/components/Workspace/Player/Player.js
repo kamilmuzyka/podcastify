@@ -126,7 +126,7 @@ const Name = styled.p`
 
 const Player = (props) => {
     const [progressPercentage, updateProgressPercentage] = useState(0);
-    const { currentEpisode } = useContext(QueueContext);
+    const { currentEpisode, loadQueueNext } = useContext(QueueContext);
     const {
         isPlaying,
         updateAudio,
@@ -152,6 +152,12 @@ const Player = (props) => {
             clearInterval(intervalId);
         }
     }, []);
+
+    useEffect(() => {
+        if (progressPercentage === 100) {
+            loadQueueNext();
+        }
+    }, [progressPercentage])
 
     useEffect(() => {
         resetPlayer();
