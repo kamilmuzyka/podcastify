@@ -6,12 +6,16 @@ const QueueContextProvider = (props) => {
     const [queue, updateQueue] = useState([]);
     const [queueHead, updateQueueHead] = useState(0);
     const [currentEpisode, updateCurrentEpisode] = useState();
+    const [currentShow, updateCurrentShow] = useState();
 
-    const loadQueue = (currentId, episodes) => {
-      const currentIndex = episodes.findIndex(episode => episode.id === currentId) || 0;
-      updateQueue(episodes);
+    const loadQueue = (currentEpisodeId, currentShowId, currentShowEpisodes) => {
+      console.log(currentShowId);
+      const currentIndex = currentShowEpisodes
+        .findIndex(episode => episode.id === currentEpisodeId) || 0;
+      updateQueue(currentShowEpisodes);
       updateQueueHead(currentIndex);
-      updateCurrentEpisode(episodes[currentIndex]);
+      updateCurrentEpisode(currentShowEpisodes[currentIndex]);
+      updateCurrentShow(currentShowId);
     }
 
     const loadQueueNext = () => {
@@ -39,6 +43,7 @@ const QueueContextProvider = (props) => {
             queue,
             queueHead,
             currentEpisode,
+            currentShow,
             loadQueue,
             loadQueueNext,
             loadQueuePrevious

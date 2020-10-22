@@ -128,14 +128,14 @@ const Duration = styled.div`
 `;
 
 const Details = ({ details, library }) => {
-    const { queue, loadQueue, currentEpisode } = useContext(QueueContext);
+    const { loadQueue, currentEpisode, currentShow } = useContext(QueueContext);
     const { isPlaying, startPlaying, stopPlaying } = useContext(PlayerContext);
 
     const loadEpisodes = () => {
         if (details.type === SEARCH_TYPES.show) {
-            loadQueue(details.episodes[0].id, details.episodes);
+            loadQueue(details.episodes[0].id, details.id, details.episodes);
         } else {
-            loadQueue(details.id, details.episodes);
+            loadQueue(details.id, details.showId, details.episodes);
         }
     }
 
@@ -168,12 +168,12 @@ const Details = ({ details, library }) => {
                     </Description>
                     <Controls>
                         { details.type === SEARCH_TYPES.show ?
-                            !isPlaying && queue.indexOf(currentEpisode) !== -1 ?
+                            !isPlaying && details.id === currentShow ?
                             <ControlButton type="button" onClick={startPlaying}>
                                 Play
                             </ControlButton>
                             :
-                            isPlaying && queue.indexOf(currentEpisode) !== -1 ?
+                            isPlaying && details.id === currentShow ?
                                 <ControlButton type="button" onClick={stopPlaying}>
                                     Pause
                                 </ControlButton>

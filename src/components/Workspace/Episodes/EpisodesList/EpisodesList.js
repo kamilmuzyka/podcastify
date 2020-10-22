@@ -22,7 +22,7 @@ const List = styled.ul`
     list-style-type: none;
 `;
 
-const EpisodesList = ({ episodes }) => {
+const EpisodesList = ({ details }) => {
     return (
         <Fragment>
             <Labels>
@@ -33,17 +33,18 @@ const EpisodesList = ({ episodes }) => {
                 <Label>Full Episode</Label>
             </Labels>
             <List>
-                { episodes ? episodes.map(episode => {
+                { details.episodes ? details.episodes.map(episode => {
                     return <EpisodeItem
                         key={episode.id}
                         id={episode.id}
+                        show={details.id}
                         name={episode.name}
                         description={episode.description}
                         releaseDate={episode.release_date}
                         duration={episode.duration_ms}
                         external={episode.external_urls.spotify}
                         preview={episode.audio_preview_url}
-                        episodes={episodes} />}) : null }
+                        episodes={details.episodes} />}) : null }
             </List>
         </Fragment>
     );

@@ -68,7 +68,7 @@ const Show = ({ location }) => {
     return (
         <Fragment>
             <Details details={details} library={library}/>
-            <EpisodesList episodes={details.episodes}/>
+            <EpisodesList details={details}/>
             <WorkspaceLoading loading={isLoading.toString()}/>
         </Fragment>
     );
