@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { QueueContext } from '../../../contexts/QueueContextProvider';
+import { PlayerContext } from '../../../contexts/PlayerContextProvider';
 import { SEARCH_TYPES } from '../../../constants';
 import capitalizeString from '../../../utils/capitalizeString';
 import convertTime from '../../../utils/convertTime';
@@ -68,7 +69,7 @@ const Controls = styled.div`
     margin-top: 0.75em;
 `;
 
-const PlayButton = styled(Button)`
+const ControlButton = styled(Button)`
     margin-right: 0.75em;
 `;
 
@@ -127,9 +128,10 @@ const Duration = styled.div`
 `;
 
 const Details = ({ details, library }) => {
-    const { loadQueue } = useContext(QueueContext);
+    const { loadQueue, currentEpisode } = useContext(QueueContext);
+    const { isPlaying, startPlaying, stopPlaying } = useContext(PlayerContext);
 
-    const startPlaying = () => {
+    const loadEpisodes = () => {
         if (details.type === SEARCH_TYPES.show) {
             loadQueue(details.episodes[0].id, details.episodes);
         } else {
@@ -165,9 +167,22 @@ const Details = ({ details, library }) => {
                         {details.description}
                     </Description>
                     <Controls>
-                        <PlayButton type="button" onClick={startPlaying}>
-                            Play
-                        </PlayButton>
+                        {/* Episode Page */}
+                        { !isPlaying && currentEpisode?.id === details.id ?
+                            <ControlButton type="button" onClick={startPlaying}>
+                                Play
+                            </ControlButton>
+                            :
+                            isPlaying && currentEpisode?.id === details.id ?
+                                <ControlButton type="button" onClick={stopPlaying}>
+                                    Pause
+                                </ControlButton>
+                                :
+                                <ControlButton type="button" onClick={loadEpisodes}>
+                                    Play
+                                </ControlButton>
+                        }
+                        {/* Episode Page */}
                         <Button onClick={library.inLibrary ? library.removeFromLibrary : library.addToLibrary} type="button" outline>
                             {library.inLibrary ? library.removeFromLibraryText : library.addToLibraryText}
                         </Button>
