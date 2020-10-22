@@ -36,8 +36,9 @@ const QueueContextProvider = (props) => {
 
     return (
         <QueueContext.Provider value={{
-            currentEpisode,
+            queue,
             queueHead,
+            currentEpisode,
             loadQueue,
             loadQueueNext,
             loadQueuePrevious

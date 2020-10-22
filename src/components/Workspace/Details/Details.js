@@ -128,7 +128,7 @@ const Duration = styled.div`
 `;
 
 const Details = ({ details, library }) => {
-    const { loadQueue, currentEpisode } = useContext(QueueContext);
+    const { queue, loadQueue, currentEpisode } = useContext(QueueContext);
     const { isPlaying, startPlaying, stopPlaying } = useContext(PlayerContext);
 
     const loadEpisodes = () => {
@@ -167,13 +167,13 @@ const Details = ({ details, library }) => {
                         {details.description}
                     </Description>
                     <Controls>
-                        {/* Episode Page */}
-                        { !isPlaying && currentEpisode?.id === details.id ?
+                        { details.type === SEARCH_TYPES.show ?
+                            !isPlaying && queue.indexOf(currentEpisode) !== -1 ?
                             <ControlButton type="button" onClick={startPlaying}>
                                 Play
                             </ControlButton>
                             :
-                            isPlaying && currentEpisode?.id === details.id ?
+                            isPlaying && queue.indexOf(currentEpisode) !== -1 ?
                                 <ControlButton type="button" onClick={stopPlaying}>
                                     Pause
                                 </ControlButton>
@@ -181,8 +181,21 @@ const Details = ({ details, library }) => {
                                 <ControlButton type="button" onClick={loadEpisodes}>
                                     Play
                                 </ControlButton>
+                            :
+                            !isPlaying && currentEpisode?.id === details.id ?
+                                <ControlButton type="button" onClick={startPlaying}>
+                                    Play
+                                </ControlButton>
+                                :
+                                isPlaying && currentEpisode?.id === details.id ?
+                                    <ControlButton type="button" onClick={stopPlaying}>
+                                        Pause
+                                    </ControlButton>
+                                    :
+                                    <ControlButton type="button" onClick={loadEpisodes}>
+                                        Play
+                                    </ControlButton>
                         }
-                        {/* Episode Page */}
                         <Button onClick={library.inLibrary ? library.removeFromLibrary : library.addToLibrary} type="button" outline>
                             {library.inLibrary ? library.removeFromLibraryText : library.addToLibraryText}
                         </Button>
