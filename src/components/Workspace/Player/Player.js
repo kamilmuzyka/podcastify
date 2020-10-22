@@ -129,6 +129,7 @@ const Player = (props) => {
     const { currentEpisode, loadQueueNext } = useContext(QueueContext);
     const {
         isPlaying,
+        updateIsPlaying,
         updateAudio,
         startPlaying,
         stopPlaying,
@@ -163,6 +164,21 @@ const Player = (props) => {
         resetPlayer();
     }, [currentEpisode]);
 
+    useEffect(() => {
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                if (audioRef.current.paused) {
+                    audioRef.current.play();
+                    updateIsPlaying(true);
+                } else {
+                    audioRef.current.pause();
+                    updateIsPlaying(false);
+                }
+            }
+        });
+    }, []);
+
     return (
         <Element>
             <Progress>
@@ -173,7 +189,7 @@ const Player = (props) => {
                     <audio src={currentEpisode?.audio_preview_url} ref={audioRef}/>
                     <SkipButton direction="backward" scale={1.25} onClick={playPrevious}/>
                     <MiddleButton>
-                        { isPlaying ?
+                        { isPlaying && currentEpisode ?
                             <PauseButton scale={1.25} onClick={stopPlaying} />
                             :
                             <PlayButton scale={1.25} onClick={startPlaying} />

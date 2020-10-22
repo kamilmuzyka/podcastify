@@ -9,7 +9,6 @@ const QueueContextProvider = (props) => {
     const [currentShow, updateCurrentShow] = useState();
 
     const loadQueue = (currentEpisodeId, currentShowId, currentShowEpisodes) => {
-      console.log(currentShowId);
       const currentIndex = currentShowEpisodes
         .findIndex(episode => episode.id === currentEpisodeId) || 0;
       updateQueue(currentShowEpisodes);

@@ -8,25 +8,31 @@ const PlayerContextProvider = (props) => {
     const [audio, updateAudio] = useState();
     const { currentEpisode, loadQueueNext, loadQueuePrevious } = useContext(QueueContext);
 
-    const startPlaying = () => {
+    const startPlaying = async () => {
         if (audio && currentEpisode) {
-            audio.play();
             updateIsPlaying(true);
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                await playPromise;
+            }
         }
     }
 
-    const stopPlaying = () => {
+    const stopPlaying = async () => {
         if (audio && currentEpisode) {
-            audio.pause();
             updateIsPlaying(false);
+            const pausePromise = audio.pause();
+            if (pausePromise !== undefined) {
+                await pausePromise;
+            }
         }
     }
 
     const resetPlayer = () => {
         if (audio && currentEpisode) {
-            stopPlaying(audio);
+            stopPlaying();
             audio.currentTime = 0;
-            startPlaying(audio);
+            startPlaying();
         }
     }
 
@@ -41,6 +47,7 @@ const PlayerContextProvider = (props) => {
     return (
         <PlayerContext.Provider value={{
             isPlaying,
+            updateIsPlaying,
             updateAudio,
             startPlaying,
             stopPlaying,

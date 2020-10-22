@@ -114,7 +114,16 @@ const StyledPauseButton = styled(PauseButton)`
     margin-right: 1.5em;
 `;
 
-const EpisodeItem = ({ id, show, name, description, releaseDate, duration, external, episodes }) => {
+const EpisodeItem = ({
+    id,
+    show,
+    name,
+    description,
+    releaseDate,
+    duration,
+    external,
+    episodes
+}) => {
     const { loadQueue, currentEpisode } = useContext(QueueContext);
     const { isPlaying, startPlaying, stopPlaying } = useContext(PlayerContext);
 
