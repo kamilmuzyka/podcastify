@@ -27,6 +27,7 @@ const Show = ({ location }) => {
     useEffect(() => {
         (async () => {
             try {
+                // If there are no show details, fetch them
                 if(Object.keys(details).length === 0) {
                     const [show, inLibrary] = await Promise.all([
                         Spotify.getShowDetails(SHOW_ID),
@@ -43,18 +44,19 @@ const Show = ({ location }) => {
                         episodes: show.episodes.items
                     });
                     updateLibrary({
-                        inLibrary,
+                        inLibrary: inLibrary[0],
                         addToLibraryText: 'Follow',
                         removeFromLibraryText: 'Unfollow',
                         addToLibrary: () => handleShowFollow(SHOW_ID),
                         removeFromLibrary: () => handleShowUnfollow(SHOW_ID)
                     });
                 } else {
+                    // Otherwise only check whether user follows the show
                     const inLibrary = await Spotify.checkUserShow(SHOW_ID);
                     updateLibrary((prev) => {
                         return {
                             ...prev,
-                            inLibrary
+                            inLibrary: inLibrary[0]
                         }
                     });
                 }
