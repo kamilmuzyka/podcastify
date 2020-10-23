@@ -1,12 +1,9 @@
-import React, { useState, useContext, useRef, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import useKey from '../../../hooks/useKey';
 import { QueueContext } from '../../../contexts/QueueContextProvider';
 import { PlayerContext } from '../../../contexts/PlayerContextProvider';
-import PlayButton from '../../../UI/PlayButton/PlayButton';
-import PauseButton from '../../../UI/PauseButton/PauseButton';
-import SkipButton from '../../../UI/SkipButton/SkipButton';
+import Controls from './Controls/Controls';
 
 const Element = styled.div`
     position: fixed;
@@ -58,27 +55,6 @@ const Content = styled.div`
     }
 `;
 
-const Controls = styled.div`
-    display: flex;
-    align-items: center;
-    @media (min-width: 500px) {
-        order: 2;
-        flex: 1;
-        justify-content: center;
-    }
-    @media (min-width: 1380px) {
-        position: absolute;
-        top: 1.25em;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-`;
-
-const MiddleButton = styled.div`
-    display: inline-block;
-    margin: 0 1em;
-`;
-
 const Episode = styled.div`
     font-size: ${({ theme }) => theme.typography.small};
     color: ${({ theme }) => theme.colors.specific};
@@ -128,15 +104,7 @@ const Name = styled.p`
 const Player = (props) => {
     const [progressPercentage, updateProgressPercentage] = useState(0);
     const { currentEpisode, loadQueueNext } = useContext(QueueContext);
-    const {
-        isPlaying,
-        updateAudio,
-        startPlaying,
-        stopPlaying,
-        playNext,
-        playPrevious,
-        resetPlayer
-    } = useContext(PlayerContext);
+    const { updateAudio, resetPlayer } = useContext(PlayerContext);
     const audioRef = useRef();
 
     const refreshProgressBar = () => {
@@ -146,22 +114,11 @@ const Player = (props) => {
         updateProgressPercentage(progress);
     }
 
-    const handleSpaceDown = (e) => {
-        const tag = e.target.tagName;
-        if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
-            e.preventDefault();
-            if (isPlaying) {
-                stopPlaying();
-            } else {
-                startPlaying();
-            }
-        }
-    }
-
-    useKey('Space', handleSpaceDown);
-
     useEffect(() => {
         updateAudio(audioRef.current);
+    }, []);
+
+    useEffect(() => {
         const intervalId = setInterval(refreshProgressBar, 300);
         return () => {
             clearInterval(intervalId);
@@ -172,7 +129,7 @@ const Player = (props) => {
         if (progressPercentage === 100) {
             loadQueueNext();
         }
-    }, [progressPercentage])
+    }, [progressPercentage]);
 
     useEffect(() => {
         resetPlayer();
@@ -180,22 +137,12 @@ const Player = (props) => {
 
     return (
         <Element>
+            <audio src={currentEpisode?.audio_preview_url} ref={audioRef}/>
             <Progress>
                 <Bar percentage={progressPercentage}/>
             </Progress>
             <Content>
-                <Controls>
-                    <audio src={currentEpisode?.audio_preview_url} ref={audioRef}/>
-                    <SkipButton direction="backward" scale={1.25} onClick={playPrevious}/>
-                    <MiddleButton>
-                        { isPlaying && currentEpisode ?
-                            <PauseButton scale={1.25} onClick={stopPlaying} />
-                            :
-                            <PlayButton scale={1.25} onClick={startPlaying} />
-                        }
-                    </MiddleButton>
-                    <SkipButton direction="forward" scale={1.25} onClick={playNext}/>
-                </Controls>
+                <Controls/>
                 <Episode>
                     { currentEpisode ?
                         <InternalLink to={`/episodes/${currentEpisode.id}`}>
