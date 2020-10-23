@@ -146,6 +146,19 @@ const Player = (props) => {
         updateProgressPercentage(progress);
     }
 
+    const handleSpaceDown = (e) => {
+        if (e.code === 'Space') {
+            e.preventDefault();
+            if (audioRef.current.paused) {
+                audioRef.current.play();
+                updateIsPlaying(true);
+            } else {
+                audioRef.current.pause();
+                updateIsPlaying(false);
+            }
+        }
+    }
+
     useEffect(() => {
         updateAudio(audioRef.current);
         const intervalId = setInterval(refreshProgressBar, 300);
@@ -165,19 +178,13 @@ const Player = (props) => {
     }, [currentEpisode]);
 
     useEffect(() => {
-        document.addEventListener('keydown', (e) => {
-            if (e.code === 'Space') {
-                e.preventDefault();
-                if (audioRef.current.paused) {
-                    audioRef.current.play();
-                    updateIsPlaying(true);
-                } else {
-                    audioRef.current.pause();
-                    updateIsPlaying(false);
-                }
-            }
-        });
-    }, []);
+        if (currentEpisode) {
+            document.addEventListener('keydown', handleSpaceDown);
+        }
+        return () => {
+            document.removeEventListener('keydown', handleSpaceDown);
+        }
+    }, [currentEpisode]);
 
     return (
         <Element>
