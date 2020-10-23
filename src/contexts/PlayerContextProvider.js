@@ -47,7 +47,6 @@ const PlayerContextProvider = (props) => {
     return (
         <PlayerContext.Provider value={{
             isPlaying,
-            updateIsPlaying,
             updateAudio,
             startPlaying,
             stopPlaying,

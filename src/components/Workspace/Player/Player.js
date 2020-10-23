@@ -1,6 +1,7 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import useKey from '../../../hooks/useKey';
 import { QueueContext } from '../../../contexts/QueueContextProvider';
 import { PlayerContext } from '../../../contexts/PlayerContextProvider';
 import PlayButton from '../../../UI/PlayButton/PlayButton';
@@ -129,7 +130,6 @@ const Player = (props) => {
     const { currentEpisode, loadQueueNext } = useContext(QueueContext);
     const {
         isPlaying,
-        updateIsPlaying,
         updateAudio,
         startPlaying,
         stopPlaying,
@@ -147,17 +147,18 @@ const Player = (props) => {
     }
 
     const handleSpaceDown = (e) => {
-        if (e.code === 'Space') {
+        const tag = e.target.tagName;
+        if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
             e.preventDefault();
-            if (audioRef.current.paused) {
-                audioRef.current.play();
-                updateIsPlaying(true);
+            if (isPlaying) {
+                stopPlaying();
             } else {
-                audioRef.current.pause();
-                updateIsPlaying(false);
+                startPlaying();
             }
         }
     }
+
+    useKey('Space', handleSpaceDown);
 
     useEffect(() => {
         updateAudio(audioRef.current);
@@ -175,15 +176,6 @@ const Player = (props) => {
 
     useEffect(() => {
         resetPlayer();
-    }, [currentEpisode]);
-
-    useEffect(() => {
-        if (currentEpisode) {
-            document.addEventListener('keydown', handleSpaceDown);
-        }
-        return () => {
-            document.removeEventListener('keydown', handleSpaceDown);
-        }
     }, [currentEpisode]);
 
     return (
