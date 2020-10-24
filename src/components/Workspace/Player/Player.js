@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { QueueContext } from '../../../contexts/QueueContextProvider';
 import { PlayerContext } from '../../../contexts/PlayerContextProvider';
 import Controls from './Controls/Controls';
+import Progress from './Progress/Progress';
 
 const Element = styled.div`
     position: fixed;
@@ -14,31 +15,6 @@ const Element = styled.div`
     background-color: ${({ theme }) => theme.colors.tertiary};
     @media (min-width: 1024px) {
         z-index: 1000;
-    }
-`;
-
-const Progress = styled.div`
-    width: 100%;
-    height: 5px;
-    background-color: #414141;
-    @media (min-width: 1380px) {
-        position: absolute;
-        bottom: 1.5em;
-        left: 50%;
-        transform: translateX(-50%);
-        max-width: 700px;
-        border-radius: 2.5px;
-    }
-`;
-
-const Bar = styled.div`
-    width: ${({ percentage }) => percentage ? percentage : 0}%;
-    height: 100%;
-    background-color: ${({ theme }) => theme.colors.specific};
-    transition: width 0.3s linear;
-
-    @media (min-width: 1380px) {
-        border-radius: 2.5px;
     }
 `;
 
@@ -102,34 +78,13 @@ const Name = styled.p`
 `;
 
 const Player = (props) => {
-    const [progressPercentage, updateProgressPercentage] = useState(0);
-    const { currentEpisode, loadQueueNext } = useContext(QueueContext);
+    const { currentEpisode } = useContext(QueueContext);
     const { updateAudio, resetPlayer } = useContext(PlayerContext);
     const audioRef = useRef();
-
-    const refreshProgressBar = () => {
-        const currentTime = audioRef.current.currentTime;
-        const duration = audioRef.current.duration;
-        const progress = Math.round(currentTime / duration * 100);
-        updateProgressPercentage(progress);
-    }
 
     useEffect(() => {
         updateAudio(audioRef.current);
     }, []);
-
-    useEffect(() => {
-        const intervalId = setInterval(refreshProgressBar, 300);
-        return () => {
-            clearInterval(intervalId);
-        }
-    }, []);
-
-    useEffect(() => {
-        if (progressPercentage === 100) {
-            loadQueueNext();
-        }
-    }, [progressPercentage]);
 
     useEffect(() => {
         resetPlayer();
@@ -138,9 +93,7 @@ const Player = (props) => {
     return (
         <Element>
             <audio src={currentEpisode?.audio_preview_url} ref={audioRef}/>
-            <Progress>
-                <Bar percentage={progressPercentage}/>
-            </Progress>
+            <Progress audio={audioRef.current}/>
             <Content>
                 <Controls/>
                 <Episode>
