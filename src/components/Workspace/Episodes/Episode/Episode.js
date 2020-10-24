@@ -8,19 +8,6 @@ import Tiles from '../../Tiles/Tiles';
 import Tile from '../../Tiles/Tile/Tile';
 import WorkspaceLoading from '../../WorkspaceLoading/WorkspaceLoading';
 
-const selectCorrespondingEpisodes = (currentEpisodeId, episodes) => {
-    let episodesRangeBeginningIndex = 0;
-    const episodesToDisplay = 4;
-    const currentEpisodeIndex = episodes
-        .findIndex(episode => episode.id === currentEpisodeId);
-    if (currentEpisodeIndex !== -1 && currentEpisodeIndex >= episodesToDisplay) {
-        episodesRangeBeginningIndex = currentEpisodeIndex;
-    }
-    return [...episodes]
-        .splice(episodesRangeBeginningIndex - episodesToDisplay, episodesToDisplay)
-        .reverse();
-}
-
 const Episode = ({ location }) => {
     const EPISODE_ID = extractId(location.pathname);
     const [details, updateDetails] = useState({});
@@ -35,6 +22,20 @@ const Episode = ({ location }) => {
     const handleEpisodeRemoval = (id) => {
         console.log(`Episode removed from the library [${id}]`);
     };
+
+    const selectCorrespondingEpisodes = (currentEpisodeId, episodes) => {
+        let episodesRangeBeginningIndex = 0;
+        const episodesToDisplay = 4;
+        const currentEpisodeIndex = episodes
+            .findIndex(episode => episode.id === currentEpisodeId);
+
+        if (currentEpisodeIndex !== -1 && currentEpisodeIndex < episodes.length - 1) {
+            episodesRangeBeginningIndex = currentEpisodeIndex;
+        }
+
+        return [...episodes]
+            .splice(episodesRangeBeginningIndex + 1, episodesToDisplay);
+    }
 
     useEffect(() => {
         (async () => {
