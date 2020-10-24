@@ -38,14 +38,16 @@ const Header = styled.header`
     }
 `;
 
-const Lead = styled.h3``;
+const Lead = styled.h3`
+    color: ${({ current, theme }) => current ? theme.colors.attention : theme.colors.positive};
+`;
 
 const InternalLink = styled(Link)`
     display: block;
     font-size: ${({ theme }) => theme.typography.default};
     font-weight: 400;
     text-decoration: none;
-    color: ${({ theme }) => theme.colors.positive};
+    color: inherit;
     cursor: pointer;
 
     &:hover {
@@ -134,7 +136,7 @@ const EpisodeItem = ({
     return (
         <Element>
             <Header>
-                <Lead>
+                <Lead current={currentEpisode?.id === id ? true : false}>
                     <InternalLink to={`/episodes/${id}`}>{name}</InternalLink>
                 </Lead>
                 <Description>{description}</Description>

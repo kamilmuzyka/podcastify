@@ -33,11 +33,11 @@ const Progress = ({ audio }) => {
 
     const refreshProgressBar = () => {
         if (audio) {
-        const currentTime = audio.currentTime;
-        const duration = audio.duration;
-        const progress = Math.round(currentTime / duration * 100);
-        updateProgressPercentage(progress);
-    }
+            const currentTime = audio.currentTime;
+            const duration = audio.duration;
+            const progress = Math.round(currentTime / duration * 100);
+            updateProgressPercentage(progress);
+        }
     }
 
     useEffect(() => {
@@ -45,7 +45,7 @@ const Progress = ({ audio }) => {
         return () => {
             clearInterval(intervalId);
         }
-    }, []);
+    }, [audio]);
 
     useEffect(() => {
         if (progressPercentage === 100) {
