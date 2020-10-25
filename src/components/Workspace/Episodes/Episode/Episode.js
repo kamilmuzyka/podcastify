@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { SEARCH_TYPES } from '../../../../constants';
 import Spotify from '../../../../models/Spotify';
@@ -72,7 +72,7 @@ const Episode = ({ location }) => {
     }, [EPISODE_ID]);
 
     return (
-        <Fragment>
+        <>
             <Details details={details} library={library}/>
             <Tiles title="More episodes">
                 { episodes ?
@@ -87,7 +87,7 @@ const Episode = ({ location }) => {
                 }) : null}
             </Tiles>
             <WorkspaceLoading loading={isLoading.toString()}/>
-        </Fragment>
+        </>
     );
 }
 

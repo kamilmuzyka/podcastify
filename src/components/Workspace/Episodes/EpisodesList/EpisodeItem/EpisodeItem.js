@@ -39,6 +39,7 @@ const Header = styled.header`
 `;
 
 const Lead = styled.h3`
+    display: inline-block;
     color: ${({ current, theme }) => current ? theme.colors.attention : theme.colors.positive};
 `;
 
@@ -109,11 +110,11 @@ const Controls = styled.div`
 `;
 
 const StyledPlayButton = styled(PlayButton)`
-    margin-right: 1.5em;
+    margin-right: 1em;
 `;
 
 const StyledPauseButton = styled(PauseButton)`
-    margin-right: 1.5em;
+    margin-right: 1em;
 `;
 
 const EpisodeItem = ({

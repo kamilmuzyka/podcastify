@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import { QueueContext } from '../../../../contexts/QueueContextProvider';
+import { PlayerContext } from '../../../../contexts/PlayerContextProvider';
 
 const Element = styled.div`
     width: 100%;
@@ -29,7 +29,7 @@ const Bar = styled.div`
 
 const Progress = ({ audio }) => {
     const [progressPercentage, updateProgressPercentage] = useState(0);
-    const { loadQueueNext } = useContext(QueueContext);
+    const { playNext } = useContext(PlayerContext);
 
     const refreshProgressBar = () => {
         if (audio) {
@@ -49,7 +49,7 @@ const Progress = ({ audio }) => {
 
     useEffect(() => {
         if (progressPercentage === 100) {
-            loadQueueNext();
+            playNext();
         }
     }, [progressPercentage]);
 

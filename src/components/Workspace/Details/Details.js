@@ -1,4 +1,4 @@
-import React, { useContext, Fragment } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -140,7 +140,7 @@ const Details = ({ details, library }) => {
     }
 
     return (
-        <Fragment>
+        <>
             <Split>
                 <Image src={details.image} alt=""/>
                 <Content type={details.type}>
@@ -217,7 +217,7 @@ const Details = ({ details, library }) => {
                     }
                 </Content>
             </Split>
-        </Fragment>
+        </>
     );
 }
 

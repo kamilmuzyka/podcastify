@@ -41,7 +41,10 @@ function Tiles({ title, children }) {
     return (
         <Container>
             { title ?
-            <Title>{title}</Title> : null }
+                <Title>{title}</Title>
+                :
+                null
+            }
             <Element>
                 { children }
             </Element>

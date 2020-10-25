@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { SEARCH_TYPES } from '../../../constants';
 import Spotify from '../../../models/Spotify';
@@ -14,13 +14,13 @@ function SearchResults({ history }) {
 
     useEffect(() => {
         const newQuery = new URLSearchParams(history.location.search).get('query');
-        if(newQuery !== query) {
+        if (newQuery !== query) {
             updateQuery(newQuery);
         }
     }, [history.location.search, query]);
 
     useEffect(() => {
-        if(query) {
+        if (query) {
             (async () => {
                 try {
                     const { shows, episodes } = await Spotify.getSearchResults(query);
@@ -35,7 +35,7 @@ function SearchResults({ history }) {
     }, [query]);
 
     return (
-        <Fragment>
+        <>
             { (shows.length > 0) ?
                 <Tiles title="Shows">
                     { shows.map(show => {
@@ -48,7 +48,9 @@ function SearchResults({ history }) {
                             type={SEARCH_TYPES.show} />
                     })}
                 </Tiles>
-            : null }
+                :
+                null
+            }
 
             { (episodes.length) > 0 ?
                 <Tiles title="Episodes">
@@ -62,12 +64,18 @@ function SearchResults({ history }) {
                             type={SEARCH_TYPES.episode} />
                     })}
                 </Tiles>
-            : null }
+                :
+                null
+            }
 
-            { (shows.length === 0 && episodes.length === 0) ? 'No results for ' + query : null }
+            { (shows.length === 0 && episodes.length === 0) ? 
+                'No results for ' + query
+                :
+                null
+            }
 
             <WorkspaceLoading loading={isLoading.toString()}/>
-        </Fragment>
+        </>
     );
 }
 

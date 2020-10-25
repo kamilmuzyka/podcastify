@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import Auth from './controllers/Auth';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
@@ -33,7 +33,7 @@ function App(props) {
   });
 
   return (
-      <Fragment>
+      <>
         <ThemeContextProvider>
           <LoadingScreen loading={isLoading.toString()}/>
           { isAuthenticated ?
@@ -56,7 +56,7 @@ function App(props) {
           }
           <GlobalStyle/>
         </ThemeContextProvider>
-      </Fragment>
+      </>
   );
 }
 

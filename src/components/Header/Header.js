@@ -43,16 +43,16 @@ const StyledMenuButton = styled(MenuButton)`
 `;
 
 function Header(props) {
-    const [profileURL, profileUpdateURL] = useState();
-    const [profileName, profileUpdateName] = useState();
-    const [profileImage, profileUpdateImage] = useState();
+    const [profileURL, profileUpdateURL] = useState('');
+    const [profileName, profileUpdateName] = useState('');
+    const [profileImage, profileUpdateImage] = useState('');
     const [imageLoading, updateImageLoading] = useState(true);
 
     useEffect(() => {
         (async () => {
             try {
                 const profile = await Spotify.getUserProfile();
-                if(!profile) {
+                if (!profile) {
                     return;
                 }
                 profileUpdateURL(profile.external_urls.spotify);
@@ -60,7 +60,7 @@ function Header(props) {
                 profileUpdateImage(profile.images[0].url || DefaultImage);
                 updateImageLoading(false);
             } catch(err) {
-                console.error(err);
+                throw new Error(err);
             }
         })();
     }, []);

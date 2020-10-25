@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
-import EpisodeItem from './EpisodeItem/EpisodeItem';
+import React from 'react';
 import styled from 'styled-components';
+import EpisodeItem from './EpisodeItem/EpisodeItem';
 
 const Labels = styled.div`
     display: none;
@@ -24,7 +24,7 @@ const List = styled.ul`
 
 const EpisodesList = ({ details }) => {
     return (
-        <Fragment>
+        <>
             <Labels>
                 <Label style={{marginRight: '1em'}}>Preview</Label>
                 <Label>Title</Label>
@@ -46,7 +46,7 @@ const EpisodesList = ({ details }) => {
                         preview={episode.audio_preview_url}
                         episodes={details.episodes} />}) : null }
             </List>
-        </Fragment>
+        </>
     );
 }
 

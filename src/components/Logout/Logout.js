@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import Auth from '../../controllers/Auth';
@@ -59,7 +59,7 @@ const ButtonConfirm = styled(Button)`
 
 const Logout = ({ active, close}) => {
     return ReactDOM.createPortal(
-        <Fragment>
+        <>
             <Backdrop active={active} onClick={close}/>
             <Container active={active}>
                 <Confirmation>
@@ -70,7 +70,7 @@ const Logout = ({ active, close}) => {
                     </Controls>
                 </Confirmation>
             </Container>
-        </Fragment>,
+        </>,
         document.getElementById('modal')
     );
 }

@@ -11,7 +11,7 @@ const Element = styled.p`
     cursor: pointer;
 `;
 
-const Accordion = (props) => {
+const Accordion = ({ children, ...restProps}) => {
     const [isOpen, updateIsOpen] = useState(false);
 
     const toggleHandler = () => {
@@ -19,8 +19,8 @@ const Accordion = (props) => {
     }
 
     return (
-        <Element {...props} isOpen={isOpen} onClick={toggleHandler}>
-            {props.children}
+        <Element {...restProps} isOpen={isOpen} onClick={toggleHandler}>
+            {children}
         </Element>
     );
 }

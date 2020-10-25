@@ -18,16 +18,20 @@ const Element = styled.button`
                 border-color 0.1s ease-in-out;
     cursor: pointer;
 
+    @media (min-width: 500px) {
+        min-width: 130px;
+    }
+
     &:hover {
         background-color: ${({ outline, theme }) => outline ? 'auto' : theme.colors.attention};
         border-color: ${({ outline, theme }) => outline ? theme.colors.attention : 'auto'};
     }
 `;
 
-function Button(props) {
+function Button({ children, ...restProps}) {
     return (
-        <Element {...props}>
-            {props.children}
+        <Element {...restProps}>
+            {children}
         </Element>
     );
 }
