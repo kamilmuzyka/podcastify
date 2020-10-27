@@ -22,7 +22,7 @@ const Main = styled.main`
     }
 
     ::-webkit-scrollbar-thumb {
-        background-color: #414141;
+        background-color: ${({ theme }) => theme.colors.subtle};
         border-radius: 5px;
     }
 

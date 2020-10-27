@@ -12,7 +12,7 @@ import PauseButton from '../../../../../UI/PauseButton/PauseButton';
 const Element = styled.li`
     margin-top: 0.75em;
     padding-top: 0.75em;
-    border-top: 1px solid #505050;
+    border-top: 1px solid ${({ theme }) => theme.colors.subtle};
     color: ${({ theme }) => theme.colors.specific};
 
     & > * {
