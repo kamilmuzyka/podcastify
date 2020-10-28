@@ -1,17 +1,12 @@
 import express from 'express';
+import { addEpisode, removeEpisode, findEpisodes } from '../controllers/user.js';
 
 const router = express.Router();
 
-router.get('/episodes/:id', (req, res) => {
-    res.send('Return episodes');
-});
+router.post('/episodes', addEpisode);
 
-router.post('/episodes', (req, res) => {
-    res.send('Like episode');
-});
+router.delete('/episodes', removeEpisode);
 
-router.delete('/episodes', (req, res) => {
-    res.send('Remove episode');
-});
+router.get('/episodes/:id', findEpisodes);
 
 export default router;
