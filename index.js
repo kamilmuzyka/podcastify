@@ -1,5 +1,5 @@
 import express from 'express';
-import sequelize from './utils/database.js';
+import sequelize from './database/connection.js';
 import User from './models/user.js';
 import Episode from './models/episode.js';
 
