@@ -57,7 +57,6 @@ export const removeEpisode = async (req, res) => {
     let user = await User.findByPk(userId);
     let episode = await Episode.findByPk(episodeId);
 
-    // Make sure there is a user and episode in all Sequelize requests
     if (!user || !episode) {
         res.send(400);
     }
@@ -71,7 +70,7 @@ export const findEpisodes = async (req, res) => {
 
     if (!userId) {
         res.status(400).json({
-            error: 'No user ID provided in the request body'
+            error: 'No user ID provided'
         });
         return;
     }
