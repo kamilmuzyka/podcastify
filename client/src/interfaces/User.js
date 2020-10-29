@@ -1,13 +1,13 @@
 class User {
-    static async saveEpisode() {
+    async saveEpisode() {
 
     }
 
-    static async removeEpisode() {
+    async removeEpisode() {
 
     }
 
-    static async getEpisodes(id) {
+    async getEpisodes(id) {
         try {
             const response = await fetch(`/user/episodes/${id}`);
             return await response.json();
@@ -17,4 +17,4 @@ class User {
     }
 }
 
-export default User;
+export default new User();

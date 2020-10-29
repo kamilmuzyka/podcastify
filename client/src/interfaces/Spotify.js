@@ -1,5 +1,5 @@
 class Spotify {
-    static retrieveAccessToken() {
+    retrieveAccessToken() {
         const access = localStorage.getItem('access');
         if (!access) {
             throw new Error('No access token found');
@@ -10,7 +10,7 @@ class Spotify {
         return token;
     }
 
-    static async getSearchResults(query) {
+    async getSearchResults(query) {
         const token = this.retrieveAccessToken();
         try {
             const response = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=show,episode&limit=50`, {
@@ -24,7 +24,7 @@ class Spotify {
         }
     }
 
-    static async getShowDetails(id) {
+    async getShowDetails(id) {
         const token = this.retrieveAccessToken();
         try {
             const response = await fetch(`https://api.spotify.com/v1/shows/${id}`, {
@@ -38,7 +38,7 @@ class Spotify {
         }
     }
 
-    static async getEpisodeDetails(id) {
+    async getEpisodeDetails(id) {
         const token = this.retrieveAccessToken();
         try {
             const response = await fetch(`https://api.spotify.com/v1/episodes/${id}`, {
@@ -52,7 +52,7 @@ class Spotify {
         }
     }
 
-    static async getUserProfile() {
+    async getUserProfile() {
         const token = this.retrieveAccessToken();
         try {
             const response = await fetch(`https://api.spotify.com/v1/me`, {
@@ -66,7 +66,7 @@ class Spotify {
         }
     }
 
-    static async getUserShows() {
+    async getUserShows() {
         const token = this.retrieveAccessToken();
         try {
             const response = await fetch(`https://api.spotify.com/v1/me/shows?limit=50`, {
@@ -80,7 +80,7 @@ class Spotify {
         }
     }
 
-    static async checkUserShow(id) {
+    async checkUserShow(id) {
         const token = this.retrieveAccessToken();
         try {
             const response = await fetch(`https://api.spotify.com/v1/me/shows/contains?ids=${id}`, {
@@ -94,7 +94,7 @@ class Spotify {
         }
     }
 
-    static async saveUserShow(id) {
+    async saveUserShow(id) {
         const token = this.retrieveAccessToken();
         try {
             fetch(`https://api.spotify.com/v1/me/shows?ids=${id}`, {
@@ -108,7 +108,7 @@ class Spotify {
         }
     }
 
-    static async removeUserShow(id) {
+    async removeUserShow(id) {
         const token = this.retrieveAccessToken();
         try {
             fetch(`https://api.spotify.com/v1/me/shows?ids=${id}`, {
@@ -123,4 +123,4 @@ class Spotify {
     }
 }
 
-export default Spotify;
+export default new Spotify();

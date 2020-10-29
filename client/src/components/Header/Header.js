@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Profile from './Profile/Profile';
 import Search from './Search/Search';
 import MenuButton from '../../UI/MenuButton/MenuButton';
-import Spotify from '../../models/Spotify';
+import Spotify from '../../interfaces/Spotify';
 import DefaultImage from '../../assets/img/profile.png';
 
 const Element = styled.header`

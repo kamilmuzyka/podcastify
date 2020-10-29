@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { TYPES } from '../../../../constants/types';
-import Spotify from '../../../../models/Spotify';
+import Spotify from '../../../../interfaces/Spotify';
 import extractId from '../../../../utils/extractId';
 import WorkspaceLoading from '../../WorkspaceLoading/WorkspaceLoading';
 import Details from '../../Details/Details';

@@ -5,7 +5,7 @@ const settings = {
 }
 
 class Auth {
-    static logIn() {
+    logIn() {
         const params = new URLSearchParams({
             client_id: settings.clientID,
             redirect_uri: settings.redirectURI,
@@ -15,12 +15,12 @@ class Auth {
         window.location.href = 'https://accounts.spotify.com/authorize?' + params;
     }
 
-    static logOut() {
+    logOut() {
         localStorage.removeItem('access');
         window.location.href = '/';
     }
 
-    static check() {
+    check() {
         function accessDataAvailable() {
             const access = JSON.parse(localStorage.getItem('access'));
             if (access) {
@@ -59,4 +59,4 @@ class Auth {
     }
 }
 
-export default Auth;
+export default new Auth();
