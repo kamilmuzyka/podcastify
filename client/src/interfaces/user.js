@@ -3,7 +3,7 @@ import { URLs } from '../constants/urls';
 class User {
     async saveEpisode(userId, episodeId) {
         try {
-            await fetch(`${URLs.origin}/user/episodes`, {
+            fetch(`${URLs.origin}/user/episodes`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -18,8 +18,21 @@ class User {
         }
     }
 
-    async removeEpisode() {
-
+    async removeEpisode(userId, episodeId) {
+        try {
+            fetch(`${URLs.origin}/user/episodes`, {
+                method: 'DELETE',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userId,
+                    episodeId
+                })
+            });
+        } catch (err) {
+            throw new Error(err);
+        }
     }
 
     async getEpisodes(id) {

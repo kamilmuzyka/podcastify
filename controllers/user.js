@@ -58,11 +58,11 @@ export const removeEpisode = async (req, res) => {
     let episode = await Episode.findByPk(episodeId);
 
     if (!user || !episode) {
-        res.send(400);
+        res.sendStatus(400);
     }
 
     user.removeEpisode(episode);
-    res.send(200);
+    res.sendStatus(200);
 }
 
 export const findEpisodes = async (req, res) => {
