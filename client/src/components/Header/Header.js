@@ -1,5 +1,6 @@
-import React, { useState, useEffect }  from 'react';
+import React, { useState, useContext, useEffect }  from 'react';
 import styled from 'styled-components';
+import { UserContext } from '../../contexts/UserContextProvider';
 import Profile from './Profile/Profile';
 import Search from './Search/Search';
 import MenuButton from '../../UI/MenuButton/MenuButton';
@@ -47,6 +48,7 @@ function Header(props) {
     const [profileName, profileUpdateName] = useState('');
     const [profileImage, profileUpdateImage] = useState('');
     const [imageLoading, updateImageLoading] = useState(true);
+    const { updateUserId } = useContext(UserContext);
 
     useEffect(() => {
         (async () => {
@@ -59,6 +61,7 @@ function Header(props) {
                 profileUpdateName(profile.display_name);
                 profileUpdateImage(profile.images[0].url || DefaultImage);
                 updateImageLoading(false);
+                updateUserId(profile.id);
             } catch(err) {
                 throw new Error(err);
             }

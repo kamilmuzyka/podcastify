@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
+import { UserContext } from '../../../../contexts/UserContextProvider';
 import { TYPES } from '../../../../constants/types';
 import spotify from '../../../../interfaces/spotify';
+import user from '../../../../interfaces/user';
 import extractId from '../../../../utils/extractId';
 import Details from '../../Details/Details';
 import Tiles from '../../Tiles/Tiles';
@@ -14,13 +16,26 @@ const Episode = ({ location }) => {
     const [library, updateLibrary] = useState({});
     const [episodes, updateEpisodes] = useState([]);
     const [isLoading, updateIsLoading] = useState(true);
+    const { userId } = useContext(UserContext);
 
-    const handleEpisodeLike = (id) => {
-        console.log(`Episode added to the library [${id}]`);
+    const handleEpisodeLike = (userId, episodeId) => {
+        user.saveEpisode(userId, episodeId);
+        updateLibrary(prev => {
+            return {
+                ...prev,
+                inLibrary: true
+            }
+        });
     };
 
-    const handleEpisodeRemoval = (id) => {
-        console.log(`Episode removed from the library [${id}]`);
+    const handleEpisodeRemoval = (userId, episodeId) => {
+        user.removeEpisode(userId, episodeId);
+        updateLibrary(prev => {
+            return {
+                ...prev,
+                inLibrary: false
+            }
+        });
     };
 
     const selectCorrespondingEpisodes = (currentEpisodeId, episodes) => {
@@ -60,8 +75,8 @@ const Episode = ({ location }) => {
                     inLibrary: false,
                     addToLibraryText: 'Like',
                     removeFromLibraryText: 'Remove',
-                    addToLibrary: () => handleEpisodeLike(EPISODE_ID),
-                    removeFromLibrary: () => handleEpisodeRemoval(EPISODE_ID)
+                    addToLibrary: () => handleEpisodeLike(userId, EPISODE_ID),
+                    removeFromLibrary: () => handleEpisodeRemoval(userId, EPISODE_ID)
                 });
                 updateEpisodes(moreEpisodes);
                 updateIsLoading(false);
@@ -69,7 +84,7 @@ const Episode = ({ location }) => {
                 throw new Error(err);
             }
         })();
-    }, [EPISODE_ID]);
+    }, [userId, EPISODE_ID]);
 
     return (
         <>
