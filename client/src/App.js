@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import Auth from './controllers/Auth';
+import auth from './auth/auth';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import Landing from './components/Landing/Landing';
 import ThemeContextProvider from './contexts/ThemeContextProvider';
@@ -24,7 +24,7 @@ function App(props) {
   }, []);
 
   useEffect(() => {
-    if (Auth.check()) {
+    if (auth.check()) {
       updateIsAuthenticated(true);
       return;
     }

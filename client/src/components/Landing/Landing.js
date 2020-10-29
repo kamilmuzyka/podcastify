@@ -1,9 +1,9 @@
 import React from 'react';
-import Auth from '../../controllers/Auth';
+import auth from '../../auth/auth';
 
 function Landing(props) {
     return (
-        <button onClick={Auth.logIn}>Login</button>
+        <button onClick={auth.logIn}>Login</button>
     );
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-import Auth from '../../controllers/Auth';
+import auth from '../../auth/auth';
 import Button from '../../UI/Button/Button';
 
 const Backdrop = styled.div`
@@ -65,7 +65,7 @@ const Logout = ({ active, close}) => {
                 <Confirmation>
                     <Paragraph>Are you sure you want to log out?</Paragraph>
                     <Controls>
-                        <ButtonConfirm type="button" onClick={Auth.logOut}>Yes</ButtonConfirm>
+                        <ButtonConfirm type="button" onClick={auth.logOut}>Yes</ButtonConfirm>
                         <Button type="button" outline onClick={close}>No</Button>
                     </Controls>
                 </Confirmation>
