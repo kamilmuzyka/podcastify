@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Spotify from '../../../interfaces/Spotify';
+import spotify from '../../../interfaces/spotify';
 import { TYPES } from '../../../constants/types';
 import Tiles from '../Tiles/Tiles';
 import Tile from '../Tiles/Tile/Tile';
@@ -9,7 +9,7 @@ const Shows = (props) => {
 
     useEffect(() => {
         (async () => {
-            const response = await Spotify.getUserShows();
+            const response = await spotify.getUserShows();
             updateShows(
                 response.items
                     .map(item => item.show)

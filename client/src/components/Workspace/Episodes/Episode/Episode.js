@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { TYPES } from '../../../../constants/types';
-import Spotify from '../../../../interfaces/Spotify';
+import spotify from '../../../../interfaces/spotify';
 import extractId from '../../../../utils/extractId';
 import Details from '../../Details/Details';
 import Tiles from '../../Tiles/Tiles';
@@ -40,8 +40,8 @@ const Episode = ({ location }) => {
     useEffect(() => {
         (async () => {
             try {
-                const episode = await Spotify.getEpisodeDetails(EPISODE_ID);
-                const show = await Spotify.getShowDetails(episode.show.id);
+                const episode = await spotify.getEpisodeDetails(EPISODE_ID);
+                const show = await spotify.getShowDetails(episode.show.id);
                 const moreEpisodes = selectCorrespondingEpisodes(EPISODE_ID, show.episodes.items);
                 updateDetails({
                     id: EPISODE_ID,

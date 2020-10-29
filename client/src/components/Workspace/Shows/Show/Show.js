@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { TYPES } from '../../../../constants/types';
-import Spotify from '../../../../interfaces/Spotify';
+import spotify from '../../../../interfaces/spotify';
 import extractId from '../../../../utils/extractId';
 import WorkspaceLoading from '../../WorkspaceLoading/WorkspaceLoading';
 import Details from '../../Details/Details';
@@ -15,12 +15,12 @@ const Show = ({ location }) => {
     const [isLoading, updateIsLoading] = useState(true);
 
     const handleShowFollow = (id) => {
-        Spotify.saveUserShow(id);
+        spotify.saveUserShow(id);
         updateStatus((prev) => prev + 1);
     };
 
     const handleShowUnfollow = (id) => {
-        Spotify.removeUserShow(id);
+        spotify.removeUserShow(id);
         updateStatus((prev) => prev + 1);
     };
 
@@ -29,8 +29,8 @@ const Show = ({ location }) => {
             try {
                 if(Object.keys(details).length === 0) {
                     const [show, inLibrary] = await Promise.all([
-                        Spotify.getShowDetails(SHOW_ID),
-                        Spotify.checkUserShow(SHOW_ID)
+                        spotify.getShowDetails(SHOW_ID),
+                        spotify.checkUserShow(SHOW_ID)
                     ]);
                     updateDetails({
                         id: SHOW_ID,
@@ -50,7 +50,7 @@ const Show = ({ location }) => {
                         removeFromLibrary: () => handleShowUnfollow(SHOW_ID)
                     });
                 } else {
-                    const inLibrary = await Spotify.checkUserShow(SHOW_ID);
+                    const inLibrary = await spotify.checkUserShow(SHOW_ID);
                     updateLibrary((prev) => {
                         return {
                             ...prev,

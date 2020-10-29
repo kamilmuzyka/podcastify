@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Profile from './Profile/Profile';
 import Search from './Search/Search';
 import MenuButton from '../../UI/MenuButton/MenuButton';
-import Spotify from '../../interfaces/Spotify';
+import spotify from '../../interfaces/spotify';
 import DefaultImage from '../../assets/img/profile.png';
 
 const Element = styled.header`
@@ -51,7 +51,7 @@ function Header(props) {
     useEffect(() => {
         (async () => {
             try {
-                const profile = await Spotify.getUserProfile();
+                const profile = await spotify.getUserProfile();
                 if (!profile) {
                     return;
                 }

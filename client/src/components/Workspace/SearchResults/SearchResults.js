@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { TYPES } from '../../../constants/types';
-import Spotify from '../../../interfaces/Spotify';
+import spotify from '../../../interfaces/spotify';
 import WorkspaceLoading from '../WorkspaceLoading/WorkspaceLoading';
 import Tiles from '../Tiles/Tiles';
 import Tile from '../Tiles/Tile/Tile';
@@ -23,7 +23,7 @@ function SearchResults({ history }) {
         if (query) {
             (async () => {
                 try {
-                    const { shows, episodes } = await Spotify.getSearchResults(query);
+                    const { shows, episodes } = await spotify.getSearchResults(query);
                     updateShows(shows.items);
                     updateEpisodes(episodes.items);
                     updateIsLoading(false);
