@@ -1,8 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import user from '../../../../../interfaces/user';
 import { QueueContext } from '../../../../../contexts/QueueContextProvider';
 import { PlayerContext } from '../../../../../contexts/PlayerContextProvider';
+import { UserContext } from '../../../../../contexts/UserContextProvider';
 import Accordion from '../../../../../UI/Accordion/Accordion';
 import convertTime from '../../../../../utils/convertTime';
 import LikeButton from '../../../../../UI/LikeButton/LikeButton';
@@ -127,12 +129,29 @@ const EpisodeItem = ({
     external,
     episodes
 }) => {
+    const [inLibrary, updateInLibrary] = useState(false);
     const { loadQueue, currentEpisode } = useContext(QueueContext);
     const { isPlaying, startPlaying, stopPlaying } = useContext(PlayerContext);
+    const { userId } = useContext(UserContext);
 
     const loadEpisodes = () => {
         loadQueue(id, show, episodes);
     }
+
+    const handleEpisodeLike = (userId, episodeId) => {
+        user.saveEpisode(userId, episodeId);
+        updateInLibrary(true);
+    }
+
+    const handleEpisodeRemoval = (userId, episodeId) => {
+        user.removeEpisode(userId, episodeId);
+        updateInLibrary(false);
+    }
+
+    useEffect(() => {
+        // Check if episode in the library
+        // updateInLibrary()
+    }, []);
 
     return (
         <Element>
@@ -162,7 +181,11 @@ const EpisodeItem = ({
                         :
                         <StyledPlayButton onClick={loadEpisodes}/>
                 }
-                <LikeButton/>
+                { inLibrary ?
+                    <LikeButton active={true} onClick={() => handleEpisodeRemoval(userId, id)}/>
+                    :
+                    <LikeButton onClick={() => handleEpisodeLike(userId, id)}/>
+                }
             </Controls>
         </Element>
     );
