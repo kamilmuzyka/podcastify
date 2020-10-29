@@ -5,15 +5,15 @@ export const addEpisode = async (req, res) => {
     const { userId, episodeId } = req.body;
 
     if (!userId) {
-        res.status(400).send({
-            error: 'No user ID provided in the request body'
+        res.status(400).json({
+            error: 'No user ID provided'
         });
         return;
     }
 
     if (!episodeId) {
-        res.status(400).send({
-            error: 'No episode ID provided in the request body'
+        res.status(400).json({
+            error: 'No episode ID provided'
         });
         return;
     }
@@ -41,14 +41,14 @@ export const removeEpisode = async (req, res) => {
     const { userId, episodeId } = req.body;
 
     if (!userId) {
-        res.status(400).send({
-            error: 'No user ID provided in the request body'
+        res.status(400).json({
+            error: 'No user ID provided'
         });
         return;
     }
 
     if (!episodeId) {
-        res.status(400).send({
+        res.status(400).json({
             error: 'No episode ID provided'
         });
         return;
@@ -56,6 +56,12 @@ export const removeEpisode = async (req, res) => {
 
     let user = await User.findByPk(userId);
     let episode = await Episode.findByPk(episodeId);
+
+    // Make sure there is a user and episode in all Sequelize requests
+    if (!user || !episode) {
+        res.send(400);
+    }
+
     user.removeEpisode(episode);
     res.send(200);
 }
@@ -64,7 +70,7 @@ export const findEpisodes = async (req, res) => {
     const userId = req.params.id;
 
     if (!userId) {
-        res.status(400).send({
+        res.status(400).json({
             error: 'No user ID provided in the request body'
         });
         return;
@@ -72,5 +78,12 @@ export const findEpisodes = async (req, res) => {
 
     const user = await User.findByPk(userId);
     const episodes = await user.getEpisodes();
-    res.send(episodes);
+    const sanitisedEpisodes = [...episodes].map(episode => {
+        return { id: episode.UserEpisode.EpisodeId };
+    });
+
+    res.json({
+        user: user.id,
+        episodes: sanitisedEpisodes
+    });
 }

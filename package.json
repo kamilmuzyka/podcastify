@@ -3,7 +3,6 @@
   "engines": {
     "node": "15.0.1"
   },
-  "proxy": "http://localhost:3001",
   "type": "module",
   "dependencies": {
     "body-parser": "^1.19.0",

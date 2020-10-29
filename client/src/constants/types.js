@@ -1,4 +1,4 @@
-export const SEARCH_TYPES = {
+export const TYPES = {
     show: 'show',
     episode: 'episode'
 }

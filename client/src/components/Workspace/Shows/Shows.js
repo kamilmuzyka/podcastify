@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Spotify from '../../../models/Spotify';
-import { SEARCH_TYPES } from '../../../constants';
+import Spotify from '../../../interfaces/Spotify';
+import { TYPES } from '../../../constants/types';
 import Tiles from '../Tiles/Tiles';
 import Tile from '../Tiles/Tile/Tile';
 
@@ -28,7 +28,7 @@ const Shows = (props) => {
                         title={show.name}
                         description={show.description}
                         image={show.images[1].url}
-                        type={SEARCH_TYPES.show} />
+                        type={TYPES.show} />
                 })}
             </Tiles>
         : null

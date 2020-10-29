@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import { SEARCH_TYPES } from '../../../constants';
-import Spotify from '../../../models/Spotify';
+import { TYPES } from '../../../constants/types';
+import Spotify from '../../../interfaces/Spotify';
 import WorkspaceLoading from '../WorkspaceLoading/WorkspaceLoading';
 import Tiles from '../Tiles/Tiles';
 import Tile from '../Tiles/Tile/Tile';
@@ -45,7 +45,7 @@ function SearchResults({ history }) {
                             title={show.name}
                             description={show.description}
                             image={show.images[1].url}
-                            type={SEARCH_TYPES.show} />
+                            type={TYPES.show} />
                     })}
                 </Tiles>
                 :
@@ -61,14 +61,14 @@ function SearchResults({ history }) {
                             title={episode.name}
                             description={episode.description}
                             image={episode.images[1].url}
-                            type={SEARCH_TYPES.episode} />
+                            type={TYPES.episode} />
                     })}
                 </Tiles>
                 :
                 null
             }
 
-            { (shows.length === 0 && episodes.length === 0) ? 
+            { (shows.length === 0 && episodes.length === 0) ?
                 'No results for ' + query
                 :
                 null

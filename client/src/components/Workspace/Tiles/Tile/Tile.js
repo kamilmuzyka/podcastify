@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { SEARCH_TYPES } from '../../../../constants';
+import { TYPES } from '../../../../constants/types';
 import styled from 'styled-components';
 
 const Item = styled.li`
@@ -82,12 +82,12 @@ function Tile({ id, title, description, image, type}) {
     const [reference, updateReference] = useState('');
 
     useEffect(() => {
-        if (type === SEARCH_TYPES.show) {
+        if (type === TYPES.show) {
             updateReference(`/shows/${id}`);
             return;
         }
 
-        if (type === SEARCH_TYPES.episode) {
+        if (type === TYPES.episode) {
             updateReference(`/episodes/${id}`);
             return;
         }

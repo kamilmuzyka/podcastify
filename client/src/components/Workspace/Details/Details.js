@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { QueueContext } from '../../../contexts/QueueContextProvider';
 import { PlayerContext } from '../../../contexts/PlayerContextProvider';
-import { SEARCH_TYPES } from '../../../constants';
+import { TYPES } from '../../../constants/types';
 import capitalizeString from '../../../utils/capitalizeString';
 import convertTime from '../../../utils/convertTime';
 import Accordion from '../../../UI/Accordion/Accordion';
@@ -132,7 +132,7 @@ const Details = ({ details, library }) => {
     const { isPlaying, startPlaying, stopPlaying } = useContext(PlayerContext);
 
     const loadEpisodes = () => {
-        if (details.type === SEARCH_TYPES.show) {
+        if (details.type === TYPES.show) {
             loadQueue(details.episodes[0].id, details.id, details.episodes);
         } else {
             loadQueue(details.id, details.showId, details.episodes);
@@ -151,7 +151,7 @@ const Details = ({ details, library }) => {
                         <Lead>
                             {details.name}
                         </Lead>
-                        {details.type === SEARCH_TYPES.show ?
+                        {details.type === TYPES.show ?
                             <Publisher>
                                 By {details.publisher}
                             </Publisher>
@@ -167,7 +167,7 @@ const Details = ({ details, library }) => {
                         {details.description}
                     </Description>
                     <Controls>
-                        { details.type === SEARCH_TYPES.show ?
+                        { details.type === TYPES.show ?
                             !isPlaying && details.id === currentShow ?
                             <ControlButton type="button" onClick={startPlaying}>
                                 Play
@@ -205,7 +205,7 @@ const Details = ({ details, library }) => {
                             </ExternalLink>
                         </Links>
                     </Controls>
-                    {details.type === SEARCH_TYPES.episode ?
+                    {details.type === TYPES.episode ?
                         <Time>
                             <Date dateTime={details.releaseDate}>
                                 {details.releaseDate}
@@ -222,7 +222,7 @@ const Details = ({ details, library }) => {
 }
 
 Details.propTypes = {
-    type: PropTypes.oneOf([SEARCH_TYPES.show, SEARCH_TYPES.episode])
+    type: PropTypes.oneOf([TYPES.show, TYPES.episode])
 }
 
 export default Details;

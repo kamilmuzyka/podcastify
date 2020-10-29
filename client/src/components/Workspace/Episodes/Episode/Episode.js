@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import { SEARCH_TYPES } from '../../../../constants';
-import Spotify from '../../../../models/Spotify';
+import { TYPES } from '../../../../constants/types';
+import Spotify from '../../../../interfaces/Spotify';
 import extractId from '../../../../utils/extractId';
 import Details from '../../Details/Details';
 import Tiles from '../../Tiles/Tiles';
@@ -48,7 +48,7 @@ const Episode = ({ location }) => {
                     name: episode.name,
                     description: episode.description,
                     external: episode.external_urls.spotify,
-                    type: SEARCH_TYPES.episode,
+                    type: TYPES.episode,
                     image: episode.images[1].url,
                     showName: episode.show.name,
                     showId: episode.show.id,
@@ -83,7 +83,7 @@ const Episode = ({ location }) => {
                             title={episode.name}
                             description={episode.description}
                             image={episode.images[1].url}
-                            type={SEARCH_TYPES.episode} />
+                            type={TYPES.episode} />
                 }) : null}
             </Tiles>
             <WorkspaceLoading loading={isLoading.toString()}/>
