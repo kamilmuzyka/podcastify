@@ -82,6 +82,21 @@ class Spotify {
         }
     }
 
+    async getUserEpisodes(ids) {
+        const token = this.retrieveAccessToken();
+        const params = ids.join(',');
+        try {
+            const response = await fetch(`${URLs.spotify}/episodes?ids=${params}`, {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            });
+            return await response.json();
+        } catch (err) {
+            throw new Error(err);
+        }
+    }
+
     async checkUserShow(id) {
         const token = this.retrieveAccessToken();
         try {
