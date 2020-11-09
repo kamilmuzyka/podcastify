@@ -49,7 +49,7 @@ function Header(props) {
     const [profileName, profileUpdateName] = useState('');
     const [profileImage, profileUpdateImage] = useState('');
     const [imageLoading, updateImageLoading] = useState(true);
-    const { userId, updateUserId, updateUserLibrary } = useContext(UserContext);
+    const { userId, userLibraryRefresher, updateUserId, updateUserLibrary } = useContext(UserContext);
 
     useEffect(() => {
         (async () => {
@@ -74,6 +74,10 @@ function Header(props) {
             (async () => {
                 try {
                     const { episodes } = await user.getEpisodes(userId);
+                    if (episodes.length === 0) {
+                        updateUserLibrary([]);
+                        return;
+                    }
                     const ids = episodes.map(episode => episode.id);
                     const userEpisodes = await spotify.getUserEpisodes(ids);
                     updateUserLibrary({
@@ -84,7 +88,7 @@ function Header(props) {
                 }
             })();
         }
-    }, [userId]);
+    }, [userId, userLibraryRefresher]);
 
     return (
         <Element>

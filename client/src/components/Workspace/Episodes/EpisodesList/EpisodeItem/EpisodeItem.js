@@ -132,7 +132,7 @@ const EpisodeItem = ({
     const [inLibrary, updateInLibrary] = useState(false);
     const { loadQueue, currentEpisode } = useContext(QueueContext);
     const { isPlaying, startPlaying, stopPlaying } = useContext(PlayerContext);
-    const { userId } = useContext(UserContext);
+    const { userId, userLibrary, updateUserLibraryRefresher} = useContext(UserContext);
 
     const loadEpisodes = () => {
         loadQueue(id, show, episodes);
@@ -140,17 +140,21 @@ const EpisodeItem = ({
 
     const handleEpisodeLike = (userId, episodeId) => {
         user.saveEpisode(userId, episodeId);
+        updateUserLibraryRefresher(Math.random());
         updateInLibrary(true);
     }
 
     const handleEpisodeRemoval = (userId, episodeId) => {
         user.removeEpisode(userId, episodeId);
+        updateUserLibraryRefresher(Math.random());
         updateInLibrary(false);
     }
 
     useEffect(() => {
-        // Check if episode in the library
-        // updateInLibrary()
+        const ids = userLibrary.episodes.map(episode => episode.id);
+        if (ids.includes(id)) {
+            updateInLibrary(true);
+        }
     }, []);
 
     return (
