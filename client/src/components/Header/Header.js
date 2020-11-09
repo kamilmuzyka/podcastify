@@ -5,6 +5,7 @@ import Profile from './Profile/Profile';
 import Search from './Search/Search';
 import MenuButton from '../../UI/MenuButton/MenuButton';
 import spotify from '../../interfaces/spotify';
+import user from '../../interfaces/user';
 import DefaultImage from '../../assets/img/profile.png';
 
 const Element = styled.header`
@@ -48,7 +49,7 @@ function Header(props) {
     const [profileName, profileUpdateName] = useState('');
     const [profileImage, profileUpdateImage] = useState('');
     const [imageLoading, updateImageLoading] = useState(true);
-    const { updateUserId } = useContext(UserContext);
+    const { userId, updateUserId, updateUserLibrary } = useContext(UserContext);
 
     useEffect(() => {
         (async () => {
@@ -67,6 +68,23 @@ function Header(props) {
             }
         })();
     }, []);
+
+    useEffect(() => {
+        if (userId) {
+            (async () => {
+                try {
+                    const { episodes } = await user.getEpisodes(userId);
+                    const ids = episodes.map(episode => episode.id);
+                    const userEpisodes = await spotify.getUserEpisodes(ids);
+                    updateUserLibrary({
+                        episodes: userEpisodes.episodes.reverse()
+                    });
+                } catch (err) {
+                    throw new Error(err);
+                }
+            })();
+        }
+    }, [userId]);
 
     return (
         <Element>

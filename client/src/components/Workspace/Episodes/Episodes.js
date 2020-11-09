@@ -14,20 +14,11 @@ const Title = styled.h2`
 
 function Episodes(props) {
     const [details, updateDetails] = useState({});
-    const { userId } = useContext(UserContext);
+    const { userLibrary } = useContext(UserContext);
 
     useEffect(() => {
-        if (userId) {
-            (async () => {
-                const { episodes } = await user.getEpisodes(userId);
-                const ids = episodes.map(episode => episode.id);
-                const userEpisodes = await spotify.getUserEpisodes(ids);
-                updateDetails({
-                    episodes: userEpisodes.episodes.reverse()
-                });
-            })();
-        }
-    }, [userId]);
+        updateDetails(userLibrary);
+    }, [userLibrary]);
 
     return (
         <>
