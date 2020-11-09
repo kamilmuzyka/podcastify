@@ -151,11 +151,13 @@ const EpisodeItem = ({
     }
 
     useEffect(() => {
-        const ids = userLibrary.episodes.map(episode => episode.id);
-        if (ids.includes(id)) {
-            updateInLibrary(true);
+        if (userLibrary.episodes) {
+            const ids = userLibrary.episodes.map(episode => episode.id);
+            if (ids.includes(id)) {
+                updateInLibrary(true);
+            }
         }
-    }, []);
+    }, [userLibrary]);
 
     return (
         <Element>
