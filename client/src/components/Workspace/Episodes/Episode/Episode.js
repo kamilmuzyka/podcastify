@@ -84,7 +84,6 @@ const Episode = ({ location }) => {
 
     useEffect(() => {
         updateLibrary({
-            inLibrary: false,
             addToLibraryText: 'Like',
             removeFromLibraryText: 'Remove',
             addToLibrary: () => handleEpisodeLike(userId, EPISODE_ID),

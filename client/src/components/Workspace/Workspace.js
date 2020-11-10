@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
+import { ROUTES } from '../../constants/routes';
 import Shows from './Shows/Shows';
 import Show from './Shows/Show/Show';
 import Episodes from './Episodes/Episodes';
@@ -41,12 +42,12 @@ function Workspace(props) {
     return (
         <Main>
             <Switch>
-                <Route path="/" exact component={Shows}/>
-                <Route path="/shows/:id" exact component={Show}/>
-                <Route path="/episodes" exact component={Episodes}/>
-                <Route path="/episodes/:id" exact component={Episode}/>
-                <Route path="/settings" exact component={Settings}/>
-                <Route path="/search" exact component={SearchResults}/>
+                <Route path={ROUTES.shows} exact component={Shows}/>
+                <Route path={ROUTES.show} exact component={Show}/>
+                <Route path={ROUTES.episodes} exact component={Episodes}/>
+                <Route path={ROUTES.episode} exact component={Episode}/>
+                <Route path={ROUTES.settings} exact component={Settings}/>
+                <Route path={ROUTES.search} exact component={SearchResults}/>
                 <Route component={Page404}/>
             </Switch>
         </Main>

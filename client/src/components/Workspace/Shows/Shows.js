@@ -10,11 +10,13 @@ const Shows = (props) => {
     useEffect(() => {
         (async () => {
             const response = await spotify.getUserShows();
-            updateShows(
-                response.items
-                    .map(item => item.show)
-                    .reverse()
-            );
+            if (response.items) {
+                updateShows(
+                    response.items
+                        .map(item => item.show)
+                        .reverse()
+                );
+            }
         })();
     }, []);
 

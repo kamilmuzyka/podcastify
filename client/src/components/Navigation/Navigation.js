@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { ROUTES } from '../../constants/routes';
 import { NavLink } from 'react-router-dom';
 import { MenuContext } from '../../contexts/MenuContextProvider';
 import { ModalContext } from '../../contexts/ModalContextProvider';
@@ -104,13 +105,13 @@ function Navigation(props) {
         <Element isActive={isActive}>
             <List>
                 <Item>
-                    <Link onClick={toggleMenu} to="/" activeClassName="active" exact>Shows</Link>
+                    <Link onClick={toggleMenu} to={ROUTES.shows} activeClassName="active" exact>Shows</Link>
                 </Item>
                 <Item>
-                    <Link onClick={toggleMenu} to="/episodes" activeClassName="active" exact>Episodes</Link>
+                    <Link onClick={toggleMenu} to={ROUTES.episodes} activeClassName="active" exact>Episodes</Link>
                 </Item>
                 <Item>
-                    <Link onClick={toggleMenu} to="/settings" activeClassName="active" exact>Settings</Link>
+                    <Link onClick={toggleMenu} to={ROUTES.settings} activeClassName="active" exact>Settings</Link>
                 </Item>
                 <Item>
                     <Button type="button" onClick={() => openModal()}>Log Out</Button>
