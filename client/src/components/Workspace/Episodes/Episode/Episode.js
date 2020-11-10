@@ -5,6 +5,7 @@ import { TYPES } from '../../../../constants/types';
 import spotify from '../../../../interfaces/spotify';
 import user from '../../../../interfaces/user';
 import extractId from '../../../../utils/extractId';
+import checkUserLibrary from '../../../../utils/checkUserLibrary';
 import Details from '../../Details/Details';
 import Tiles from '../../Tiles/Tiles';
 import Tile from '../../Tiles/Tile/Tile';
@@ -16,10 +17,11 @@ const Episode = ({ location }) => {
     const [library, updateLibrary] = useState({});
     const [episodes, updateEpisodes] = useState([]);
     const [isLoading, updateIsLoading] = useState(true);
-    const { userId } = useContext(UserContext);
+    const { userId, userLibrary, updateUserLibraryRefresher } = useContext(UserContext);
 
     const handleEpisodeLike = (userId, episodeId) => {
         user.saveEpisode(userId, episodeId);
+        updateUserLibraryRefresher(Math.random());
         updateLibrary(prev => {
             return {
                 ...prev,
@@ -30,6 +32,7 @@ const Episode = ({ location }) => {
 
     const handleEpisodeRemoval = (userId, episodeId) => {
         user.removeEpisode(userId, episodeId);
+        updateUserLibraryRefresher(Math.random());
         updateLibrary(prev => {
             return {
                 ...prev,
@@ -71,13 +74,6 @@ const Episode = ({ location }) => {
                     duration: episode.duration_ms,
                     episodes: show.episodes.items
                 });
-                updateLibrary({
-                    inLibrary: false,
-                    addToLibraryText: 'Like',
-                    removeFromLibraryText: 'Remove',
-                    addToLibrary: () => handleEpisodeLike(userId, EPISODE_ID),
-                    removeFromLibrary: () => handleEpisodeRemoval(userId, EPISODE_ID)
-                });
                 updateEpisodes(moreEpisodes);
                 updateIsLoading(false);
             } catch(err) {
@@ -85,6 +81,26 @@ const Episode = ({ location }) => {
             }
         })();
     }, [userId, EPISODE_ID]);
+
+    useEffect(() => {
+        updateLibrary({
+            inLibrary: false,
+            addToLibraryText: 'Like',
+            removeFromLibraryText: 'Remove',
+            addToLibrary: () => handleEpisodeLike(userId, EPISODE_ID),
+            removeFromLibrary: () => handleEpisodeRemoval(userId, EPISODE_ID)
+        });
+    }, [EPISODE_ID]);
+
+    useEffect(() => {
+        const inUserLibrary = checkUserLibrary(userLibrary, EPISODE_ID);
+        updateLibrary(prev => {
+            return {
+                ...prev,
+                inLibrary: inUserLibrary
+            }
+        });
+    }, [userLibrary, EPISODE_ID]);
 
     return (
         <>

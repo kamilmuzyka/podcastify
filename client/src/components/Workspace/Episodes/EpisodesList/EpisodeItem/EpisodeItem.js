@@ -7,6 +7,7 @@ import { PlayerContext } from '../../../../../contexts/PlayerContextProvider';
 import { UserContext } from '../../../../../contexts/UserContextProvider';
 import Accordion from '../../../../../UI/Accordion/Accordion';
 import convertTime from '../../../../../utils/convertTime';
+import checkUserLibrary from '../../../../../utils/checkUserLibrary';
 import LikeButton from '../../../../../UI/LikeButton/LikeButton';
 import PlayButton from '../../../../../UI/PlayButton/PlayButton';
 import PauseButton from '../../../../../UI/PauseButton/PauseButton';
@@ -151,11 +152,9 @@ const EpisodeItem = ({
     }
 
     useEffect(() => {
-        if (userLibrary.episodes) {
-            const ids = userLibrary.episodes.map(episode => episode.id);
-            if (ids.includes(id)) {
-                updateInLibrary(true);
-            }
+        const inUserLibrary = checkUserLibrary(userLibrary, id);
+        if (inUserLibrary) {
+            updateInLibrary(true);
         }
     }, [userLibrary]);
 
