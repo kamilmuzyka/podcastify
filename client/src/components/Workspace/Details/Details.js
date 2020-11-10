@@ -163,7 +163,7 @@ const Details = ({ details, library }) => {
                             </Show>
                         }
                     </Header>
-                    <Description>
+                    <Description lines={4}>
                         {details.description}
                     </Description>
                     <Controls>
