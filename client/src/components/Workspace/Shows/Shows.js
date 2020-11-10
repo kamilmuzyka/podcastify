@@ -19,9 +19,9 @@ const Shows = (props) => {
     }, []);
 
     return (
-        (shows.length > 0) ?
-            <Tiles title="Followed Shows">
-                { shows.map(show => {
+        <Tiles title="Followed Shows">
+            { (shows.length > 0) ?
+                shows.map(show => {
                     return <Tile
                         key={show.id}
                         id={show.id}
@@ -29,9 +29,11 @@ const Shows = (props) => {
                         description={show.description}
                         image={show.images[1].url}
                         type={TYPES.show} />
-                })}
-            </Tiles>
-        : null
+                })
+                :
+                null
+            }
+        </Tiles>
     );
 }
 

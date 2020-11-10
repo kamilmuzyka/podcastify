@@ -10,8 +10,8 @@ const port = process.env.PORT ?? 3001;
 app.use(bodyParser.json());
 app.use('/user', userRoutes);
 
-User.belongsToMany(Episode, { through: 'UserEpisode', timestamps: false });
-Episode.belongsToMany(User, { through: 'UserEpisode', timestamps: false });
+User.belongsToMany(Episode, { through: 'UserEpisode' });
+Episode.belongsToMany(User, { through: 'UserEpisode' });
 
 try {
     await sequelize.sync({

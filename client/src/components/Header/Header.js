@@ -60,7 +60,7 @@ function Header(props) {
                 }
                 profileUpdateURL(profile.external_urls.spotify);
                 profileUpdateName(profile.display_name);
-                profileUpdateImage(profile.images[0].url || DefaultImage);
+                profileUpdateImage(profile.images[0]?.url || DefaultImage);
                 updateImageLoading(false);
                 updateUserId(profile.id);
             } catch(err) {
@@ -81,7 +81,7 @@ function Header(props) {
                     const ids = episodes.map(episode => episode.id);
                     const userEpisodes = await spotify.getUserEpisodes(ids);
                     updateUserLibrary({
-                        episodes: userEpisodes.episodes.reverse()
+                        episodes: userEpisodes.episodes
                     });
                 } catch (err) {
                     throw new Error(err);

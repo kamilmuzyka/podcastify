@@ -1,3 +1,4 @@
+import Sequelize from 'sequelize';
 import User from '../models/user.js';
 import Episode from '../models/episode.js';
 
@@ -76,7 +77,14 @@ export const findEpisodes = async (req, res) => {
     }
 
     const user = await User.findByPk(userId);
-    const episodes = await user.getEpisodes();
+
+    if (!user) {
+        return;
+    }
+
+    const episodes = await user.getEpisodes({
+        order: [[Sequelize.literal('"UserEpisode.createdAt"'), 'DESC']]
+    });
     const sanitisedEpisodes = [...episodes].map(episode => {
         return { id: episode.UserEpisode.EpisodeId };
     });
