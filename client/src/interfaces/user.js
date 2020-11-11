@@ -6,7 +6,8 @@ class User {
             fetch(`${URLs.origin}/user/episodes`, {
                 method: 'POST',
                 headers: {
-                    'content-type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify({
                     userId,
@@ -23,7 +24,8 @@ class User {
             fetch(`${URLs.origin}/user/episodes`, {
                 method: 'DELETE',
                 headers: {
-                    'content-type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify({
                     userId,
@@ -37,7 +39,11 @@ class User {
 
     async getEpisodes(id) {
         try {
-            const response = await fetch(`${URLs.origin}/user/episodes/${id}`);
+            const response = await fetch(`${URLs.origin}/user/episodes/${id}`, {
+                headers: {
+                    'Accept': 'application/json'
+                },
+            });
             return await response.json();
         } catch (err) {
             throw new Error(err);

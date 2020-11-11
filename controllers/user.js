@@ -60,6 +60,7 @@ export const removeEpisode = async (req, res) => {
 
     if (!user || !episode) {
         res.sendStatus(400);
+        return;
     }
 
     user.removeEpisode(episode);

@@ -196,9 +196,18 @@ const Details = ({ details, library }) => {
                                         Play
                                     </ControlButton>
                         }
-                        <Button onClick={library.inLibrary ? library.removeFromLibrary : library.addToLibrary} type="button" outline>
+                        {/* <Button onClick={library.inLibrary ? library.removeFromLibrary : library.addToLibrary} type="button" outline>
                             {library.inLibrary ? library.removeFromLibraryText : library.addToLibraryText}
-                        </Button>
+                        </Button> */}
+                        { library.inLibrary ?
+                            <Button onClick={library.removeFromLibrary} type="button" outline>
+                                {library.removeFromLibraryText}
+                            </Button>
+                            :
+                            <Button onClick={library.addToLibrary} type="button" outline>
+                                {library.addToLibraryText}
+                            </Button>
+                        }
                         <Links>
                             <ExternalLink href={details.external}>
                                 Listen on Spotify
