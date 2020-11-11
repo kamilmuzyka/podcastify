@@ -15,6 +15,7 @@ const Episode = ({ location }) => {
     const EPISODE_ID = extractId(location.pathname);
     const [details, updateDetails] = useState({});
     const [library, updateLibrary] = useState({});
+    const [inLibrary, updateInLibrary] = useState(null);
     const [episodes, updateEpisodes] = useState([]);
     const [isLoading, updateIsLoading] = useState(true);
     const { userId, userLibrary, updateUserLibraryRefresher } = useContext(UserContext);
@@ -22,23 +23,11 @@ const Episode = ({ location }) => {
     const handleEpisodeLike = (userId, episodeId) => {
         user.saveEpisode(userId, episodeId);
         updateUserLibraryRefresher(Math.random());
-        updateLibrary(prev => {
-            return {
-                ...prev,
-                inLibrary: true
-            }
-        });
     };
 
     const handleEpisodeRemoval = (userId, episodeId) => {
         user.removeEpisode(userId, episodeId);
         updateUserLibraryRefresher(Math.random());
-        updateLibrary(prev => {
-            return {
-                ...prev,
-                inLibrary: false
-            }
-        });
     };
 
     const selectCorrespondingEpisodes = (currentEpisodeId, episodes) => {
@@ -89,21 +78,16 @@ const Episode = ({ location }) => {
             addToLibrary: () => handleEpisodeLike(userId, EPISODE_ID),
             removeFromLibrary: () => handleEpisodeRemoval(userId, EPISODE_ID)
         });
-    }, [EPISODE_ID]);
+    }, [userId, EPISODE_ID]);
 
     useEffect(() => {
         const inUserLibrary = checkUserLibrary(userLibrary, EPISODE_ID);
-        updateLibrary(prev => {
-            return {
-                ...prev,
-                inLibrary: inUserLibrary
-            }
-        });
+        updateInLibrary(inUserLibrary);
     }, [userLibrary, EPISODE_ID]);
 
     return (
         <>
-            <Details details={details} library={library}/>
+            <Details details={details} library={library} inLibrary={inLibrary}/>
             <Tiles title="More episodes">
                 { episodes ?
                     episodes.map(episode => {

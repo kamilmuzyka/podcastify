@@ -6,14 +6,14 @@ export const addEpisode = async (req, res) => {
     const { userId, episodeId } = req.body;
 
     if (!userId) {
-        res.sendStatus(400).json({
+        res.status(400).json({
             error: 'No user ID provided'
         });
         return;
     }
 
     if (!episodeId) {
-        res.sendStatus(400).json({
+        res.status(400).json({
             error: 'No episode ID provided'
         });
         return;
@@ -42,14 +42,14 @@ export const removeEpisode = async (req, res) => {
     const { userId, episodeId } = req.body;
 
     if (!userId) {
-        res.sendStatus(400).json({
+        res.status(400).json({
             error: 'No user ID provided'
         });
         return;
     }
 
     if (!episodeId) {
-        res.sendStatus(400).json({
+        res.status(400).json({
             error: 'No episode ID provided'
         });
         return;
@@ -71,7 +71,7 @@ export const findEpisodes = async (req, res) => {
     const userId = req.params.id;
 
     if (!userId) {
-        res.sendStatus(400).json({
+        res.status(400).json({
             error: 'No user ID provided'
         });
         return;
@@ -90,7 +90,7 @@ export const findEpisodes = async (req, res) => {
         return { id: episode.UserEpisode.EpisodeId };
     });
 
-    res.json({
+    res.status(200).json({
         user: user.id,
         episodes: sanitisedEpisodes
     });

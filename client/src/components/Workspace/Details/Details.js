@@ -127,7 +127,7 @@ const Duration = styled.div`
     }
 `;
 
-const Details = ({ details, library }) => {
+const Details = ({ details, library, inLibrary }) => {
     const { loadQueue, currentEpisode, currentShow } = useContext(QueueContext);
     const { isPlaying, startPlaying, stopPlaying } = useContext(PlayerContext);
 
@@ -199,7 +199,7 @@ const Details = ({ details, library }) => {
                         {/* <Button onClick={library.inLibrary ? library.removeFromLibrary : library.addToLibrary} type="button" outline>
                             {library.inLibrary ? library.removeFromLibraryText : library.addToLibraryText}
                         </Button> */}
-                        { library.inLibrary ?
+                        { inLibrary ?
                             <Button onClick={library.removeFromLibrary} type="button" outline>
                                 {library.removeFromLibraryText}
                             </Button>
