@@ -14,7 +14,7 @@ import WorkspaceLoading from '../../WorkspaceLoading/WorkspaceLoading';
 const Episode = ({ location }) => {
     const EPISODE_ID = extractId(location.pathname);
     const [details, updateDetails] = useState({});
-    const [library, updateLibrary] = useState({});
+    const [libraryActions, updateLibraryActions] = useState({});
     const [inLibrary, updateInLibrary] = useState(null);
     const [episodes, updateEpisodes] = useState([]);
     const [isLoading, updateIsLoading] = useState(true);
@@ -72,7 +72,7 @@ const Episode = ({ location }) => {
     }, [userId, EPISODE_ID]);
 
     useEffect(() => {
-        updateLibrary({
+        updateLibraryActions({
             addToLibraryText: 'Like',
             removeFromLibraryText: 'Remove',
             addToLibrary: () => handleEpisodeLike(userId, EPISODE_ID),
@@ -87,7 +87,7 @@ const Episode = ({ location }) => {
 
     return (
         <>
-            <Details details={details} library={library} inLibrary={inLibrary}/>
+            <Details details={details} libraryActions={libraryActions} inLibrary={inLibrary}/>
             <Tiles title="More episodes">
                 { episodes ?
                     episodes.map(episode => {

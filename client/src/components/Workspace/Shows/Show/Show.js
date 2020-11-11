@@ -10,7 +10,7 @@ import EpisodesList from '../../Episodes/EpisodesList/EpisodesList';
 const Show = ({ location }) => {
     const SHOW_ID = extractId(location.pathname);
     const [details, updateDetails] = useState({});
-    const [library, updateLibrary] = useState({});
+    const [libraryActions, updateLibraryActions] = useState({});
     const [inLibrary, updateInLibrary] = useState(null);
     const [refresher, updateRefresher] = useState(null);
     const [isLoading, updateIsLoading] = useState(true);
@@ -44,7 +44,7 @@ const Show = ({ location }) => {
                         image: show.images[1].url,
                         episodes: show.episodes.items
                     });
-                    updateLibrary({
+                    updateLibraryActions({
                         addToLibraryText: 'Follow',
                         removeFromLibraryText: 'Unfollow',
                         addToLibrary: () => handleShowFollow(SHOW_ID),
@@ -64,7 +64,7 @@ const Show = ({ location }) => {
 
     return (
         <>
-            <Details details={details} library={library} inLibrary={inLibrary}/>
+            <Details details={details} libraryActions={libraryActions} inLibrary={inLibrary}/>
             <EpisodesList details={details}/>
             <WorkspaceLoading loading={isLoading.toString()}/>
         </>
