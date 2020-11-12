@@ -1,0 +1,5 @@
+{
+    "env": {
+        "DATABASE_URL": "postgres://kamil.muzyka:@localhost:5432/podcastify"
+    }
+}
