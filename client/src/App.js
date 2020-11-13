@@ -20,18 +20,20 @@ function App(props) {
   const [isAuthenticated, updateIsAuthenticated] = useState(false);
   const [isLoading, updateIsLoading] = useState(true);
 
-  useEffect(() => {
-    updateIsLoading(false);
-  }, []);
-
-  useEffect(() => {
+  const checkAuthentication = () => {
     if (auth.check()) {
       updateIsAuthenticated(true);
       return;
     }
-
     updateIsAuthenticated(false);
-  });
+  }
+
+  useEffect(() => {
+    checkAuthentication();
+    const interval = setInterval(checkAuthentication, 5000);
+    updateIsLoading(false);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
       <>
