@@ -8,7 +8,7 @@ const Element = styled.h2`
     font-weight: 700;
 
     &:not(:first-child) {
-        margin-top: 2em;
+        margin-top: 1em;
     }
 `;
 

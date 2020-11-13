@@ -29,22 +29,9 @@ const Element = styled.ul`
     }
 `;
 
-const Title = styled.h2`
-    margin-bottom: 1em;
-    padding-bottom: 0.5em;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.subtle};
-    font-size: 2em;
-    font-weight: 700;
-`;
-
-function Tiles({ title, children }) {
+function Tiles({ children }) {
     return (
         <Container>
-            { title ?
-                <Title>{title}</Title>
-                :
-                null
-            }
             <Element>
                 { children }
             </Element>

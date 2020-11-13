@@ -7,6 +7,7 @@ import user from '../../../../interfaces/user';
 import extractId from '../../../../utils/extractId';
 import checkUserLibrary from '../../../../utils/checkUserLibrary';
 import Details from '../../Details/Details';
+import Title from '../../../../UI/Title/Title';
 import Tiles from '../../Tiles/Tiles';
 import Tile from '../../Tiles/Tile/Tile';
 import WorkspaceLoading from '../../WorkspaceLoading/WorkspaceLoading';
@@ -101,7 +102,8 @@ const Episode = ({ location }) => {
     return (
         <>
             <Details details={details} libraryActions={libraryActions} inLibrary={inLibrary}/>
-            <Tiles title="More episodes">
+            <Title>More Episodes</Title>
+            <Tiles>
                 { episodes ?
                     episodes.map(episode => {
                         return <Tile
