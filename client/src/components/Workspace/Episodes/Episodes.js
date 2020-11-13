@@ -1,14 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import styled from 'styled-components';
 import { UserContext } from '../../../contexts/UserContextProvider';
+import Title from '../../../UI/Title/Title';
 import EpisodesList from './EpisodesList/EpisodesList';
-
-const Title = styled.h2`
-    margin-bottom: 1em;
-    padding-bottom: 0.5em;
-    font-size: 2em;
-    font-weight: 700;
-`;
+import Message from '../../../UI/Message/Message';
 
 function Episodes(props) {
     const [details, updateDetails] = useState({});
@@ -21,10 +15,12 @@ function Episodes(props) {
     return (
         <>
             <Title>Liked Episodes</Title>
-            { (details.length !== 0) ?
+            { (details.episodes && details.episodes.length !== 0) ?
                 <EpisodesList details={details}/>
                 :
-                null
+                <Message>
+                    Your episodes library is empty! Browse and like episodes to see them here.
+                </Message>
             }
         </>
     );
