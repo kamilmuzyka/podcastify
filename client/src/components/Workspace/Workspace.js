@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { ROUTES } from '../../constants/routes';
@@ -38,9 +38,16 @@ const Main = styled.main`
     }
 `;
 
+
 function Workspace(props) {
+    const mainRef = useRef();
+
+    useEffect(() => {
+        mainRef.current.scrollTo(0, 0);
+    });
+
     return (
-        <Main>
+        <Main ref={mainRef}>
             <Switch>
                 <Route path={ROUTES.shows} exact component={Shows}/>
                 <Route path={ROUTES.show} exact component={Show}/>

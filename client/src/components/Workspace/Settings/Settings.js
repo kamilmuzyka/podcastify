@@ -1,8 +1,9 @@
 import React from 'react';
+import Title from '../../../UI/Title/Title';
 
 function Settings(props) {
     return (
-        <div>Settings</div>
+        <Title>Settings</Title>
     );
 }
 
