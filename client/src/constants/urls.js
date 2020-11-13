@@ -1,4 +1,4 @@
 export const URLs = {
-    origin: '',
+    origin: '/api',
     spotify: 'https://api.spotify.com/v1'
 }
