@@ -4,8 +4,8 @@ export const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
     const [userId, updateUserId] = useState('');
-    const [userLibrary, updateUserLibrary] = useState('');
-    const [userLibraryRefresher, updateUserLibraryRefresher] = useState(null);
+    const [userLibrary, updateUserLibrary] = useState({});
+    const [userLibraryRefresher, updateUserLibraryRefresher] = useState(0);
 
     return (
         <UserContext.Provider value={{

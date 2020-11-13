@@ -133,7 +133,7 @@ const EpisodeItem = ({
     const [inLibrary, updateInLibrary] = useState(false);
     const { loadQueue, currentEpisode } = useContext(QueueContext);
     const { isPlaying, startPlaying, stopPlaying } = useContext(PlayerContext);
-    const { userId, userLibrary, updateUserLibraryRefresher} = useContext(UserContext);
+    const { userId, userLibrary, updateUserLibrary, updateUserLibraryRefresher} = useContext(UserContext);
 
     const loadEpisodes = () => {
         loadQueue(id, show, episodes);
@@ -147,7 +147,13 @@ const EpisodeItem = ({
 
     const handleEpisodeRemoval = (userId, episodeId) => {
         user.removeEpisode(userId, episodeId);
-        updateUserLibraryRefresher(Math.random());
+        const toRemoveIndex = userLibrary.episodes
+            .findIndex(episode => episode.id === episodeId);
+        const newUserLibrary = [...userLibrary.episodes];
+        newUserLibrary.splice(toRemoveIndex, 1);
+        updateUserLibrary({
+            episodes: newUserLibrary
+        });
         updateInLibrary(false);
     }
 
