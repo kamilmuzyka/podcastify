@@ -18,11 +18,17 @@ const Episode = ({ location }) => {
     const [inLibrary, updateInLibrary] = useState(null);
     const [episodes, updateEpisodes] = useState([]);
     const [isLoading, updateIsLoading] = useState(true);
-    const { userId, userLibrary, updateUserLibrary, updateUserLibraryRefresher } = useContext(UserContext);
+    const {
+        userId,
+        userLibrary,
+        updateUserLibrary,
+        updateUserLibraryRefresher
+    } = useContext(UserContext);
 
     const handleEpisodeLike = (userId, episodeId) => {
         user.saveEpisode(userId, episodeId);
         updateUserLibraryRefresher(Math.random());
+        updateInLibrary(true);
     };
 
     const handleEpisodeRemoval = (userId, episodeId) => {
@@ -34,6 +40,7 @@ const Episode = ({ location }) => {
         updateUserLibrary({
             episodes: newUserLibrary
         });
+        updateInLibrary(false);
     };
 
     const selectCorrespondingEpisodes = (currentEpisodeId, episodes) => {
@@ -84,7 +91,7 @@ const Episode = ({ location }) => {
             addToLibrary: () => handleEpisodeLike(userId, EPISODE_ID),
             removeFromLibrary: () => handleEpisodeRemoval(userId, EPISODE_ID)
         });
-    }, [userId, EPISODE_ID]);
+    }, [userId, userLibrary, EPISODE_ID]);
 
     useEffect(() => {
         const inUserLibrary = checkUserLibrary(userLibrary, EPISODE_ID);
