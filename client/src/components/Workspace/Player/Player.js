@@ -84,7 +84,7 @@ const Player = (props) => {
 
     useEffect(() => {
         updateAudio(audioRef.current);
-    }, []);
+    }, [updateAudio]);
 
     useEffect(() => {
         resetPlayer();

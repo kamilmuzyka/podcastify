@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
 import { UserContext } from '../../../../contexts/UserContextProvider';
 import { TYPES } from '../../../../constants/types';
@@ -25,13 +25,13 @@ const Episode = ({ location }) => {
         updateUserLibraryRefresher
     } = useContext(UserContext);
 
-    const handleEpisodeLike = (userId, episodeId) => {
+    const handleEpisodeLike = useCallback((userId, episodeId) => {
         user.saveEpisode(userId, episodeId);
         updateUserLibraryRefresher(Math.random());
         updateInLibrary(true);
-    };
+    }, [updateUserLibraryRefresher]);
 
-    const handleEpisodeRemoval = (userId, episodeId) => {
+    const handleEpisodeRemoval = useCallback((userId, episodeId) => {
         user.removeEpisode(userId, episodeId);
         const toRemoveIndex = userLibrary.episodes
             .findIndex(episode => episode.id === episodeId);
@@ -41,7 +41,7 @@ const Episode = ({ location }) => {
             episodes: newUserLibrary
         });
         updateInLibrary(false);
-    };
+    }, [userLibrary, updateUserLibrary]);
 
     const selectCorrespondingEpisodes = (currentEpisodeId, episodes) => {
         let episodesRangeBeginningIndex = 0;
@@ -91,7 +91,7 @@ const Episode = ({ location }) => {
             addToLibrary: () => handleEpisodeLike(userId, EPISODE_ID),
             removeFromLibrary: () => handleEpisodeRemoval(userId, EPISODE_ID)
         });
-    }, [userId, userLibrary, EPISODE_ID]);
+    }, [userId, userLibrary, EPISODE_ID, handleEpisodeLike, handleEpisodeRemoval]);
 
     useEffect(() => {
         const inUserLibrary = checkUserLibrary(userLibrary, EPISODE_ID);

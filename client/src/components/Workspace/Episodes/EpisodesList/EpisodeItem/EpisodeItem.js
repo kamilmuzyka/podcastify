@@ -162,7 +162,7 @@ const EpisodeItem = ({
         if (inUserLibrary) {
             updateInLibrary(true);
         }
-    }, [userLibrary]);
+    }, [userLibrary, id]);
 
     return (
         <Element>

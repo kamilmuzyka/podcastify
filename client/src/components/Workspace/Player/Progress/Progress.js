@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import styled from 'styled-components';
 import { PlayerContext } from '../../../../contexts/PlayerContextProvider';
 
@@ -31,27 +31,27 @@ const Progress = ({ audio }) => {
     const [progressPercentage, updateProgressPercentage] = useState(0);
     const { playNext } = useContext(PlayerContext);
 
-    const refreshProgressBar = () => {
+    const refreshProgressBar = useCallback(() => {
         if (audio) {
             const currentTime = audio.currentTime;
             const duration = audio.duration;
             const progress = Math.round(currentTime / duration * 100);
             updateProgressPercentage(progress);
         }
-    }
+    }, [audio]);
 
     useEffect(() => {
         const intervalId = setInterval(refreshProgressBar, 300);
         return () => {
             clearInterval(intervalId);
         }
-    }, [audio]);
+    }, [refreshProgressBar]);
 
     useEffect(() => {
         if (progressPercentage === 100) {
             playNext();
         }
-    }, [progressPercentage]);
+    }, [progressPercentage, playNext]);
 
     return (
         <Element>

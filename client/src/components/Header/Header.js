@@ -67,7 +67,7 @@ function Header(props) {
                 throw new Error(err);
             }
         })();
-    }, []);
+    }, [updateUserId]);
 
     useEffect(() => {
         if (userId) {
@@ -88,7 +88,7 @@ function Header(props) {
                 }
             })();
         }
-    }, [userId, userLibraryRefresher]);
+    }, [userId, updateUserLibrary, userLibraryRefresher]);
 
     return (
         <Element>
