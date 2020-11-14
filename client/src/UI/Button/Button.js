@@ -8,7 +8,7 @@ const Element = styled.button`
     border: ${({ outline, theme }) => outline ? '2px solid' + theme.colors.accent : 'none'};
     background-color: ${({ outline, theme }) => outline ? 'transparent' : theme.colors.accent};
     font-size: ${({ theme }) => theme.typography.small};
-    color: ${({ theme }) => theme.colors.positive};
+    color: ${({ outline, theme }) => outline ? theme.colors.positive : '#FFFFFF'};
     font-family: inherit;
     letter-spacing: 1px;
     box-sizing: border-box;

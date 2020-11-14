@@ -15,22 +15,24 @@ const darkTheme = {
         negative: '#000000',
         specific: '#AAAAAA',
         attention: '#5AD54F',
-        accent: '#4BB043'
+        accent: '#4BB043',
+        touch: '#414141'
     }
 }
 
 const lightTheme = {
     typography,
     colors: {
-        primary: '#E1E1E1',
-        secondary: '#ECECEC',
-        tertiary: '#F0F0F0',
+        primary: '#FFFFFF',
+        secondary: '#F7F8F9',
+        tertiary: '#EBECEF',
         subtle: '#CCCCCC',
         positive: '#000000',
         negative: '#FFFFFF',
         specific: '#555555',
-        attention: '#5AD54F',
-        accent: '#4BB043'
+        attention: '#232323',
+        accent: '#000000',
+        touch: '#BABABA'
     }
 }
 

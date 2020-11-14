@@ -9,6 +9,12 @@ const Element = styled.button`
     background-color: transparent;
     border: none;
 
+    #menu-rect-1,
+    #menu-rect-2,
+    #menu-rect-3 {
+        fill: ${({ theme }) => theme.colors.positive};
+    }
+
     @media (min-width: 1024px) {
         display: none;
     }
@@ -20,10 +26,10 @@ const MenuButton= (props) => {
     return (
         <Element onClick={toggleMenu} {...props}>
             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="14" viewBox="0 0 26 14">
-            <g id="Fill" transform="translate(29 23) rotate(180)">
-                <rect id="Rectangle_1" data-name="Rectangle 1" width="22" height="2" transform="translate(3 15)" fill="#fff"/>
-                <rect id="Rectangle_2" data-name="Rectangle 2" width="26" height="2" transform="translate(3 21)" fill="#fff"/>
-                <rect id="Rectangle_3" data-name="Rectangle 3" width="26" height="2" transform="translate(3 9)" fill="#fff"/>
+            <g transform="translate(29 23) rotate(180)">
+                <rect id="menu-rect-1" width="22" height="2" transform="translate(3 15)"/>
+                <rect id="menu-rect-2" width="26" height="2" transform="translate(3 21)"/>
+                <rect id="menu-rect-3" width="26" height="2" transform="translate(3 9)"/>
             </g>
             </svg>
         </Element>

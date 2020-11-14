@@ -5,7 +5,7 @@ import { PlayerContext } from '../../../../contexts/PlayerContextProvider';
 const Element = styled.div`
     width: 100%;
     height: 5px;
-    background-color: #414141;
+    background-color: ${({ theme }) => theme.colors.touch};
     @media (min-width: 1380px) {
         position: absolute;
         bottom: 1.5em;

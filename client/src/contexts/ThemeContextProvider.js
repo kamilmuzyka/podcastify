@@ -5,7 +5,7 @@ import { darkTheme, lightTheme } from '../styles/theme';
 export const ThemeContext = createContext();
 
 const ThemeContextProvider = (props) => {
-    const [currentTheme, updateCurrentTheme] = useState('dark');
+    const [currentTheme, updateCurrentTheme] = useState('light');
 
     const toggleTheme = () => {
         currentTheme === 'dark' ? updateCurrentTheme('dark') : updateCurrentTheme('light');
