@@ -1,4 +1,5 @@
 import React from 'react';
+import Particles from 'react-particles-js';
 import styled from 'styled-components';
 import auth from '../../auth/auth';
 import Button from '../../UI/Button/Button';
@@ -22,10 +23,6 @@ const Content = styled.div`
     align-items: center;
     padding: 32px;
 
-    @media (min-width: 800px) {
-        flex-basis: 67%;
-    }
-
     @media (min-width: 1024px) {
         font-size: 20px;
         flex-basis: 50%;
@@ -35,12 +32,8 @@ const Content = styled.div`
 const Decoration = styled.div`
     display none;
 
-    @media (min-width: 800px) {
-        display: block;
-        flex-basis: 33%;
-    }
-
     @media (min-width: 1024px) {
+        display: block;
         flex-basis: 50%;
     }
 `;
@@ -137,7 +130,13 @@ function Landing(props) {
                 </div>
             </Content>
             <Decoration>
-
+                <Particles width="100%" height="100vh" params={{
+                    particles: {
+                        number: {
+                            value: 80
+                        }
+                    }
+                }}/>
             </Decoration>
         </Container>
     );
