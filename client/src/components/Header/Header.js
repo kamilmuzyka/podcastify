@@ -6,7 +6,6 @@ import Search from './Search/Search';
 import MenuButton from '../../UI/MenuButton/MenuButton';
 import spotify from '../../interfaces/spotify';
 import user from '../../interfaces/user';
-import DefaultImage from '../../assets/img/profile.png';
 
 const Element = styled.header`
     position: relative;
@@ -60,7 +59,7 @@ function Header(props) {
                 }
                 profileUpdateURL(profile.external_urls.spotify);
                 profileUpdateName(profile.display_name);
-                profileUpdateImage(profile.images[0]?.url || DefaultImage);
+                profileUpdateImage(profile.images[0]?.url);
                 updateImageLoading(false);
                 updateUserId(profile.id);
             } catch(err) {
