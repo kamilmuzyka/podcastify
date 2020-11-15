@@ -96,6 +96,7 @@ export const findEpisodes = async (req, res) => {
     const episodes = await user.getEpisodes({
         order: [[Sequelize.literal('"UserEpisode.createdAt"'), 'DESC']]
     });
+
     const sanitisedEpisodes = [...episodes].map(episode => {
         return { id: episode.UserEpisode.EpisodeId };
     });

@@ -19,7 +19,7 @@ const Point = styled.span`
     width: 0.8em;
     height: 0.8em;
     border-radius: 50%;
-    background: ${({ theme }) => theme.colors.positive};
+    background-color: #FFFFFF;
     @keyframes bounce {
         100% {
             opacity: 0;
