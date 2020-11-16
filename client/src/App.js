@@ -31,7 +31,7 @@ function App(props) {
   useEffect(() => {
     checkAuthentication();
     const interval = setInterval(checkAuthentication, 5000);
-    updateIsLoading(false);
+    setTimeout(() => updateIsLoading(false), 100);
     return () => clearInterval(interval);
   }, []);
 

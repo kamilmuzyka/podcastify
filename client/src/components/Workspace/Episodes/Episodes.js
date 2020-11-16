@@ -3,6 +3,7 @@ import { UserContext } from '../../../contexts/UserContextProvider';
 import Title from '../../../UI/Title/Title';
 import EpisodesList from './EpisodesList/EpisodesList';
 import Message from '../../../UI/Message/Message';
+import WorkspaceLoading from '../WorkspaceLoading/WorkspaceLoading';
 
 function Episodes(props) {
     const [details, updateDetails] = useState({});
@@ -15,12 +16,15 @@ function Episodes(props) {
     return (
         <>
             <Title>Liked Episodes</Title>
-            { (details.episodes && details.episodes.length !== 0) ?
-                <EpisodesList details={details}/>
+            { (details.episodes) ?
+                (details.episodes.length !== 0) ?
+                    <EpisodesList details={details}/>
+                    :
+                    <Message>
+                        Your episodes library is empty! Browse and like episodes to see them here.
+                    </Message>
                 :
-                <Message>
-                    Your episodes library is empty! Browse and like episodes to see them here.
-                </Message>
+                <WorkspaceLoading loading={true}/>
             }
         </>
     );
