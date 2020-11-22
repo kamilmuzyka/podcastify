@@ -16,13 +16,20 @@ const Form = styled.form`
 `;
 
 const StyledButton = styled(Button)`
+        padding: 0.5em 1em;
+        width: 40%;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         font-size: 0.9em;
+
+        @media (min-width: 1024px) {
+            width: auto;
+            padding: 0.5em 2em;
+        }
 `;
 
 const Input = styled.input`
-    flex: 1;
+    width: 60%;
     padding: 0.5em 0 0.5em 1em;
     font: inherit;
     font-size: 0.9em;
@@ -32,6 +39,7 @@ const Input = styled.input`
     outline: none;
 
     @media (min-width: 1024px) {
+        width: auto;
         min-width: 225px;
     }
 `;

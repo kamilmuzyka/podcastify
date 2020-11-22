@@ -7,6 +7,7 @@ const ExternalLink = styled.a`
     align-items: center;
     align-self: flex-start;
     position: relative;
+    margin-right: 2em;
     text-decoration: none;
     font: inherit;
     color: inherit;
