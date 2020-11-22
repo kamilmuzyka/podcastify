@@ -8,13 +8,19 @@ import Progress from './Progress/Progress';
 
 const Element = styled.div`
     position: fixed;
-    bottom: 0;
+    transform: translateY(calc(100% - 5px)); // Player Closed
+    bottom 0;
     left: 0;
     z-index: 700;
     width: 100%;
     background-color: ${({ theme }) => theme.colors.tertiary};
+
     @media (min-width: 1024px) {
         z-index: 1000;
+    }
+
+    @media (min-width: 1380px) {
+        transform: translateY(0);
     }
 `;
 
@@ -32,12 +38,14 @@ const Content = styled.div`
 `;
 
 const Episode = styled.div`
+    margin-top: 1em;
     font-size: ${({ theme }) => theme.typography.small};
     color: ${({ theme }) => theme.colors.specific};
     &:hover {
         text-decoration: underline;
     }
     @media (min-width: 500px) {
+        margin-top: 0;
         order: 1;
     }
 `;

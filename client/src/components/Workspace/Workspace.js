@@ -14,7 +14,7 @@ const Main = styled.main`
     position: relative;
     flex: 1;
     padding: 2em;
-    max-height: calc(100vh - 150px - 137px);
+    max-height: calc(100vh - 150px - 5px); // calc(100vh - Header Height - Player Height)
     overflow-y: scroll;
 
     ::-webkit-scrollbar {
@@ -28,7 +28,7 @@ const Main = styled.main`
     }
 
     @media (min-width: 500px) {
-        max-height: calc(100vh - 83px - 103px);
+        max-height: calc(100vh - 83px - 5px);
         padding: 3em;
     }
 

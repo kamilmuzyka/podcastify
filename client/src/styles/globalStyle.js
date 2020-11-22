@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
         width: 100%;
         min-height: 100vh;
         position: relative;
+        overflow: hidden;
         background-color: ${({ theme }) => theme.colors.primary};
         font-family: ${({ theme }) => theme.typography.family};
         font-size: ${({ theme }) => theme.typography.default};
