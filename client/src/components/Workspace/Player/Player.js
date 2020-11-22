@@ -8,7 +8,7 @@ import Progress from './Progress/Progress';
 
 const Element = styled.div`
     position: fixed;
-    transform: translateY(calc(100% - 5px)); // Player Closed
+    transform: translateY(calc(100% - 7px));
     bottom 0;
     left: 0;
     z-index: 700;

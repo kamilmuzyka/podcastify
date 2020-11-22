@@ -4,12 +4,13 @@ import { PlayerContext } from '../../../../contexts/PlayerContextProvider';
 
 const Element = styled.div`
     width: 100%;
-    height: 5px;
+    height: 7px;
     background-color: ${({ theme }) => theme.colors.touch};
     @media (min-width: 1380px) {
         position: absolute;
         bottom: 1.5em;
         left: 50%;
+        height: 5px;
         transform: translateX(-50%);
         max-width: 700px;
         border-radius: 2.5px;
