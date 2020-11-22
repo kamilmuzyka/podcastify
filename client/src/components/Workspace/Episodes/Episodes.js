@@ -24,7 +24,7 @@ function Episodes(props) {
                         Your episodes library is empty! Browse and like episodes to see them here.
                     </Message>
                 :
-                <WorkspaceLoading loading={true}/>
+                <WorkspaceLoading loading={true.toString()}/>
             }
         </>
     );

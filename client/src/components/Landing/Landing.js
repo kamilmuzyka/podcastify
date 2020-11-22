@@ -120,7 +120,7 @@ function Landing(props) {
                         Browse podcasts, follow shows and save episodes that you fancy. All synchronised with your Spotify account.
                     </Description>
                     <Buttons>
-                        <StyledButton onClick={auth.logIn}>
+                        <StyledButton type="button" onClick={auth.logIn}>
                             Continue with Spotify
                         </StyledButton>
                         <ExternalLink href="https://www.spotify.com/ie/signup/">

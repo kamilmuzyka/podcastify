@@ -8,9 +8,9 @@ const Labels = styled.div`
     @media (min-width: 1380px) {
         display: grid;
         grid-template-rows: auto;
-        grid-template-columns: 1fr 15fr 3fr 3fr 3fr;
+        grid-template-columns: 105px 15fr 3fr 3fr 3fr;
         gap: 1em;
-        margin-top: 3em;
+        margin: 3em 0 1.5em 0;
     }
 `;
 
@@ -26,7 +26,7 @@ const EpisodesList = ({ details }) => {
     return (
         <>
             <Labels>
-                <Label style={{marginRight: '1em'}}>Preview</Label>
+                <Label>Preview</Label>
                 <Label>Title</Label>
                 <Label>Release Date</Label>
                 <Label>Duration</Label>
