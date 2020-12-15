@@ -6,26 +6,26 @@ import Message from '../../../UI/Message/Message';
 import WorkspaceLoading from '../WorkspaceLoading/WorkspaceLoading';
 
 function Episodes(props) {
+    const [isLoading, updateIsLoading] = useState(true);
     const [details, updateDetails] = useState({});
     const { userLibrary } = useContext(UserContext);
 
     useEffect(() => {
         updateDetails(userLibrary);
+        updateIsLoading(false);
     }, [userLibrary]);
 
     return (
         <>
             <Title>Liked Episodes</Title>
-            { (details.episodes) ?
-                (details.episodes.length !== 0) ?
-                    <EpisodesList details={details}/>
-                    :
-                    <Message>
-                        Your episodes library is empty! Browse and like episodes to see them here.
-                    </Message>
+            { (details.episodes && details.episodes.length !== 0) ?
+                <EpisodesList details={details}/>
                 :
-                <WorkspaceLoading loading={true.toString()}/>
+                <Message>
+                    Your episodes library is empty! Browse and like episodes to see them here.
+                </Message>
             }
+            <WorkspaceLoading loading={isLoading.toString()}/>
         </>
     );
 }
